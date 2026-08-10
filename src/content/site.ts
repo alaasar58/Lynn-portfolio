@@ -32,6 +32,23 @@ export const site = {
   ],
 } as const
 
+/*
+ * =============================================================================
+ *  FOLLOWER COUNTS — edit these two numbers and nothing else
+ * =============================================================================
+ *  Written as plain numbers, not text. The site formats them per language and
+ *  uses them in two places: the figure in the hero strip ("27K" / "27 Tsd." /
+ *  "27 ألف") and the audience list under About ("~27,000 followers").
+ *
+ *  Instagram and TikTok give no public way for a website to read a follower
+ *  count on its own — see README, "Keeping the follower counts current".
+ * =============================================================================
+ */
+export const socialStats = {
+  instagramFollowers: 27000,
+  tiktokFollowers: 1000,
+}
+
 /** Section anchors. Labels come from `nav` in the dictionaries. */
 export const nav = [
   { key: 'work', href: '#work' },
@@ -42,13 +59,22 @@ export const nav = [
   { key: 'pricing', href: '#pricing' },
 ] as const
 
-/** Figures in the hero credibility strip. Labels come from `hero.proof`. */
-export const heroProof = [
-  { key: 'community', value: '27K' },
+/**
+ * Figures in the hero credibility strip. Labels come from `hero.proof`.
+ * The community figure has no `value` — it is derived from `socialStats` so the
+ * follower count only ever lives in one place.
+ */
+export type ProofStat = {
+  key: 'community' | 'languages' | 'categories' | 'reply'
+  value?: string
+}
+
+export const heroProof: ProofStat[] = [
+  { key: 'community' },
   { key: 'languages', value: '3' },
   { key: 'categories', value: '5' },
   { key: 'reply', value: '48h' },
-] as const
+]
 
 /* -------------------------------------------------------------------------- */
 /*  FEATURED INSTAGRAM REELS                                                  */
@@ -57,17 +83,26 @@ export const heroProof = [
 export type Reel = {
   /** The shortcode from the Reel URL: instagram.com/reel/<code>/ */
   code: string
-  /**
-   * Optional cover image — save a still into `public/media/reels/` and set the
-   * path here, e.g. '/media/reels/DabNET8N0QF.jpg'.
-   */
+  /** Cover image shown on the card. See the note below. */
   poster?: string
 }
 
+/*
+ * Instagram does not let a website read a Reel's thumbnail without an approved
+ * API token, so each cover has to be an image we host ourselves.
+ *
+ * The files below are placeholders in the site palette. To use the real ones:
+ * take a still from each Reel (a screenshot of the best frame is fine), and
+ * overwrite the matching file keeping the same name —
+ *
+ *     public/media/reels/DabNET8N0QF.jpg
+ *
+ * No code change needed. Export at 1080 × 1920, vertical, around 200 KB.
+ */
 export const featuredReels: Reel[] = [
-  { code: 'DabNET8N0QF' },
-  { code: 'DZ5mjgghM2X' },
-  { code: 'DZDj6BZttNH' },
+  { code: 'DabNET8N0QF', poster: '/media/reels/DabNET8N0QF.jpg' },
+  { code: 'DZ5mjgghM2X', poster: '/media/reels/DZ5mjgghM2X.jpg' },
+  { code: 'DZDj6BZttNH', poster: '/media/reels/DZDj6BZttNH.jpg' },
 ]
 
 export const reelUrl = (code: string) => `https://www.instagram.com/reel/${code}/`

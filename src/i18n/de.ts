@@ -177,12 +177,16 @@ export const de: Dictionary = {
       },
     ],
     audienceTitle: 'Zielgruppe',
-    audience: [
-      { label: 'Instagram', value: '~27.000 Follower' },
-      { label: 'TikTok', value: '~1.000 Follower' },
-      { label: 'Zielgruppe', value: '~98 % Frauen, überwiegend 18–35' },
-      { label: 'Reichweite', value: 'Deutschland & arabischsprachige Märkte' },
-    ],
+    audience: {
+      instagram: 'Instagram',
+      tiktok: 'TikTok',
+      followers: 'Follower',
+      approx: '~',
+      audienceLabel: 'Zielgruppe',
+      audienceValue: '~98 % Frauen, überwiegend 18–35',
+      reachLabel: 'Reichweite',
+      reachValue: 'Deutschland & arabischsprachige Märkte',
+    },
   },
 
   process: {

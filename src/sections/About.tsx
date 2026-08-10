@@ -1,12 +1,26 @@
 import { Section } from '../components/Section'
+import { socialStats } from '../content/site'
 import { useI18n } from '../i18n'
+import { formatCount } from '../lib/format'
 
 /**
  * About. Personal but brief — positioning, languages and audience credibility,
  * with the values statement kept professional and understated.
  */
 export function About() {
-  const { t } = useI18n()
+  const { t, lang } = useI18n()
+
+  // Follower figures are built from the single source in site.ts, so updating a
+  // count means editing one number rather than six strings across three files.
+  const followers = (count: number) =>
+    `${t.about.audience.approx}${formatCount(count, lang)} ${t.about.audience.followers}`
+
+  const audience = [
+    { label: t.about.audience.instagram, value: followers(socialStats.instagramFollowers) },
+    { label: t.about.audience.tiktok, value: followers(socialStats.tiktokFollowers) },
+    { label: t.about.audience.audienceLabel, value: t.about.audience.audienceValue },
+    { label: t.about.audience.reachLabel, value: t.about.audience.reachValue },
+  ]
 
   return (
     <Section id="about" tone="sand" eyebrow={t.about.eyebrow} title={t.about.title}>
@@ -45,7 +59,7 @@ export function About() {
               {t.about.audienceTitle}
             </h3>
             <dl className="mt-4 space-y-3">
-              {t.about.audience.map((entry) => (
+              {audience.map((entry) => (
                 <div key={entry.label} className="flex justify-between gap-6 text-sm">
                   <dt className="text-ink-muted">{entry.label}</dt>
                   <dd className="text-end text-ink">{entry.value}</dd>

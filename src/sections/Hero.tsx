@@ -1,5 +1,6 @@
-import { heroProof } from '../content/site'
+import { heroProof, socialStats } from '../content/site'
 import { useI18n } from '../i18n'
+import { formatCompact } from '../lib/format'
 import { FeaturedReels } from '../components/FeaturedReels'
 
 /**
@@ -8,7 +9,7 @@ import { FeaturedReels } from '../components/FeaturedReels'
  * watching, not reading.
  */
 export function Hero() {
-  const { t } = useI18n()
+  const { t, lang } = useI18n()
 
   return (
     <section id="top" className="relative overflow-hidden pt-28 sm:pt-36">
@@ -48,7 +49,12 @@ export function Hero() {
             <div key={stat.key}>
               <dt className="sr-only">{t.hero.proof[stat.key]}</dt>
               <dd>
-                <span className="block font-display text-3xl">{stat.value}</span>
+                <span className="block font-display text-3xl">
+                  {/* The community figure is derived from socialStats. */}
+                  {stat.key === 'community'
+                    ? formatCompact(socialStats.instagramFollowers, lang)
+                    : stat.value}
+                </span>
                 <span className="mt-1 block text-xs uppercase tracking-[0.14em] text-ink-muted">
                   {t.hero.proof[stat.key]}
                 </span>

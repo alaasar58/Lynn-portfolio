@@ -76,6 +76,41 @@ Cards autoplay muted when scrolled into view, loop, pause when they scroll away,
 and carry a sound toggle. Video is only fetched once a card is near the
 viewport, so a full grid stays fast on mobile.
 
+### Keeping the follower counts current
+
+Both figures come from **one place** — `socialStats` in `src/content/site.ts`:
+
+```ts
+export const socialStats = {
+  instagramFollowers: 27000,
+  tiktokFollowers: 1000,
+}
+```
+
+Change the number and it updates everywhere: the hero figure (`27K` / `27 Tsd.`
+/ `27 ألف`) and the audience list under About (`~27,000 followers`), correctly
+formatted in all three languages.
+
+**Can it update itself?** Not on its own. Neither Instagram nor TikTok lets a
+website read a follower count without an authenticated API call, and this is a
+static site with no server, so there is nothing running to make that call.
+
+There are two honest options:
+
+1. **Update it by hand** (recommended). The number is supporting credibility,
+   not a live counter — a rounded figure revisited every few months reads
+   exactly the same to a brand, and costs nothing to maintain.
+2. **Automate it.** A scheduled GitHub Action can fetch the count and commit the
+   new value, which redeploys the site. That needs, on the Instagram side: a
+   Business or Creator account linked to a Facebook Page, a Meta app, and a
+   long-lived access token stored as a repository secret — and that token has to
+   be refreshed roughly every 60 days. TikTok needs its own OAuth app. It is a
+   real amount of setup and ongoing upkeep for a number that changes slowly.
+
+If you want option 2, the account and token setup has to be done by you (it
+requires logging into your Meta account); the workflow to consume it can be
+added afterwards.
+
 ### Design
 
 All colours, fonts and radii are defined once at the top of `src/index.css` in

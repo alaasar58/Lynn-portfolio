@@ -180,12 +180,16 @@ export const ar: Dictionary = {
       },
     ],
     audienceTitle: 'الجمهور',
-    audience: [
-      { label: 'إنستغرام', value: '~27,000 متابع' },
-      { label: 'تيك توك', value: '~1,000 متابع' },
-      { label: 'الجمهور', value: '~98% نساء، غالبًا 18–35' },
-      { label: 'الانتشار', value: 'ألمانيا والأسواق الناطقة بالعربية' },
-    ],
+    audience: {
+      instagram: 'إنستغرام',
+      tiktok: 'تيك توك',
+      followers: 'متابع',
+      approx: '~',
+      audienceLabel: 'الجمهور',
+      audienceValue: '~98% نساء، غالبًا 18–35',
+      reachLabel: 'الانتشار',
+      reachValue: 'ألمانيا والأسواق الناطقة بالعربية',
+    },
   },
 
   process: {

@@ -181,12 +181,18 @@ export const en = {
       },
     ],
     audienceTitle: 'Audience',
-    audience: [
-      { label: 'Instagram', value: '~27,000 followers' },
-      { label: 'TikTok', value: '~1,000 followers' },
-      { label: 'Audience', value: '~98% women, mainly 18–35' },
-      { label: 'Reach', value: 'Germany & Arabic-speaking markets' },
-    ],
+    audience: {
+      instagram: 'Instagram',
+      tiktok: 'TikTok',
+      /* Follower counts come from `socialStats` in src/content/site.ts and are
+         formatted per language, so the number lives in exactly one place. */
+      followers: 'followers',
+      approx: '~',
+      audienceLabel: 'Audience',
+      audienceValue: '~98% women, mainly 18–35',
+      reachLabel: 'Reach',
+      reachValue: 'Germany & Arabic-speaking markets',
+    },
   },
 
   process: {
