@@ -135,9 +135,15 @@ A hidden honeypot field filters out basic spam bots.
 
 ### GitHub Pages (no custom domain needed)
 
-`.github/workflows/deploy.yml` builds and publishes on every push to `main`.
-Enable it once, under **Settings → Pages → Source → GitHub Actions**. The site
-is then live at `https://<user>.github.io/<repo>/`.
+The site is live at **https://alaasar58.github.io/Lynn-portfolio/**
+
+`.github/workflows/deploy.yml` builds and publishes automatically on every push.
+
+One thing worth knowing: GitHub only accepts a Pages deployment from the branch
+configured as the Pages **source** (Settings → Pages). Right now that is
+`claude/lifestyle-creator-portfolio-ehmgc6`, so the workflow triggers on that
+branch as well as `main`. If the source is later changed to `main`, drop the
+other branch from the `on: push: branches:` list.
 
 ### Connecting a custom domain later
 
