@@ -104,12 +104,12 @@ export function VideoCard({ item, priority = false }: VideoCardProps) {
             className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
           />
         ) : (
+          // The caption below already names the category, so the placeholder
+          // stays purely tonal rather than repeating it behind the text.
           <div
             aria-hidden="true"
-            className={`flex h-full w-full items-end bg-gradient-to-br ${placeholderFor(item.id)}`}
-          >
-            <span className="p-5 font-display text-lg text-ink/35">{item.category}</span>
-          </div>
+            className={`h-full w-full bg-gradient-to-br ${placeholderFor(item.id)}`}
+          />
         )}
 
         {/* Tap target for touch devices, where hover never fires. */}

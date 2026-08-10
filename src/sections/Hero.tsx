@@ -1,5 +1,5 @@
-import { hero, site, work } from '../content/site'
-import { VideoCard } from '../components/VideoCard'
+import { hero, site } from '../content/site'
+import { FeaturedReels } from '../components/FeaturedReels'
 
 /**
  * Opening screen: positioning statement, the two calls to action, and the
@@ -7,8 +7,6 @@ import { VideoCard } from '../components/VideoCard'
  * the client watching, not reading.
  */
 export function Hero() {
-  const featured = work.slice(0, 3)
-
   return (
     <section id="top" className="relative overflow-hidden pt-32 sm:pt-40">
       {/* Soft tonal wash behind the headline. */}
@@ -38,12 +36,8 @@ export function Hero() {
         </div>
 
         {/* Selected work, straight away. */}
-        <div className="mt-16 grid grid-cols-1 gap-4 sm:grid-cols-3 sm:gap-5">
-          {featured.map((item, index) => (
-            <div key={item.id} className={index === 0 ? 'sm:mt-0' : 'sm:mt-10'}>
-              <VideoCard item={item} priority />
-            </div>
-          ))}
+        <div className="mt-16">
+          <FeaturedReels />
         </div>
 
         <dl className="mt-16 grid grid-cols-2 gap-y-8 border-t border-line pt-10 sm:grid-cols-4">

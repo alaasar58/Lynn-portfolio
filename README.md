@@ -30,6 +30,7 @@ Almost everything you would want to change lives in **one file**:
 | ---------------------------------- | ---------------------- |
 | Name, email, social links          | `site`                 |
 | Headline and hero text             | `hero`                 |
+| Featured Instagram Reels           | `featuredReels`        |
 | Portfolio pieces and categories    | `work`, `workCategories` |
 | Brands / products listed under Work | `experienceBrands`     |
 | Services                           | `services`             |
@@ -42,10 +43,42 @@ Almost everything you would want to change lives in **one file**:
 Anything still needing a real value is marked `// TODO` in that file. Before
 going live, the ones that matter are:
 
-- `site.email` — the professional inquiry address
-- `site.socials` — real Instagram and TikTok links
-- `site.url` and the URLs in `index.html` — the final address
-- `pricing.tiers[].price` — the starting prices (currently `€XXX`)
+- `featuredReels[].title` / `.note` — rename each Reel to describe the video
+- `pricing.tiers[].price` — the starting prices (currently the `€XXX` placeholder)
+- `site.url` and the URLs in `index.html` — only if a custom domain is added
+
+### Featured Instagram Reels
+
+The three published Reels shown at the top of the portfolio and in the hero are
+listed in `featuredReels`. Each entry needs only the shortcode from the Reel
+URL — `instagram.com/reel/DabNET8N0QF/` → `code: 'DabNET8N0QF'`.
+
+Clicking a card opens the Reel in a lightbox using Instagram's official embed,
+with a direct link to the original post always visible underneath. Instagram can
+refuse to be framed (ad blockers, some privacy settings), and a cross-origin
+frame cannot be inspected to detect that — hence the permanent link rather than
+a hidden fallback.
+
+If the embed ever proves unreliable, switch one value in `src/content/site.ts`:
+
+```ts
+export const reelDisplay: 'embed' | 'link' = 'link'
+```
+
+Cards then open the original Instagram post directly instead. Nothing else
+changes.
+
+To give a Reel a cover image, save a still into `public/media/reels/` and set
+`poster: '/media/reels/<code>.jpg'`. Without one the card shows a warm tonal
+panel, which still looks intentional.
+
+### Pricing
+
+All three tiers live in the `pricing` object in `src/content/site.ts` and
+nowhere else — prices are never hard-coded in a component. Each tier has a
+`price` (currently the `€XXX` placeholder), a `unit` line such as
+"starting from", a description and its bullet points. Edit them there and the
+Pricing section updates.
 
 ### Adding portfolio videos
 

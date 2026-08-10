@@ -39,7 +39,7 @@ export function Footer() {
                 rel="noreferrer noopener"
                 className="text-sm text-bone/60 transition-colors hover:text-bone"
               >
-                {social.label}
+                {social.label} <span className="text-bone/40">{social.handle}</span>
               </a>
             ))}
             <a

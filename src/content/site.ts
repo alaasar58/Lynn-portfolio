@@ -13,15 +13,21 @@
 export const site = {
   name: 'Lynn',
   role: 'Lifestyle & Product Content Creator',
-  // TODO: replace with the professional inquiry address.
-  email: 'hello@example.com',
+  email: 'lynnkawqge.ads@gmail.com',
   location: 'Germany · Working with brands worldwide',
   // TODO: set to the deployed URL (used for SEO / social share tags).
-  url: 'https://alaasar58.github.io/lynn-portfolio/',
+  url: 'https://alaasar58.github.io/Lynn-portfolio/',
   socials: [
-    // TODO: replace with the real profile handles/links.
-    { label: 'Instagram', handle: '@lynn', href: 'https://instagram.com/' },
-    { label: 'TikTok', handle: '@lynn', href: 'https://tiktok.com/' },
+    {
+      label: 'Instagram',
+      handle: '@lynn_kawqge',
+      href: 'https://www.instagram.com/lynn_kawqge/',
+    },
+    {
+      label: 'TikTok',
+      handle: '@lynn.kawqge',
+      href: 'https://www.tiktok.com/@lynn.kawqge',
+    },
   ],
 } as const
 
@@ -48,6 +54,68 @@ export const hero = {
     { value: '48h', label: 'Typical reply time' },
   ],
 }
+
+/* -------------------------------------------------------------------------- */
+/*  FEATURED INSTAGRAM REELS                                                  */
+/* -------------------------------------------------------------------------- */
+
+export type Reel = {
+  /** The shortcode from the Reel URL: instagram.com/reel/<code>/ */
+  code: string
+  /** Card headline. TODO: rename each one to describe the actual video. */
+  title: string
+  /** One short supporting line under the title. */
+  note: string
+  /**
+   * Optional cover image — save a still from the Reel into
+   * `public/media/reels/<code>.jpg` and set the path here. Without one the card
+   * shows a warm tonal panel, which still looks intentional.
+   */
+  poster?: string
+}
+
+/**
+ * How a Reel card behaves when clicked.
+ *
+ *   'embed'  Opens the Reel in a lightbox using Instagram's official embed, so
+ *            the visitor stays on the site. A direct link to the original post
+ *            sits underneath in case the embed is blocked (ad blockers and some
+ *            privacy settings refuse it).
+ *   'link'   Skips the lightbox and opens the original Instagram post directly.
+ *
+ * Switch to 'link' if the embed ever proves unreliable — no other change needed.
+ */
+export const reelDisplay: 'embed' | 'link' = 'embed'
+
+/**
+ * Published Reels shown as featured work. Each card opens the real Instagram
+ * post — embedded in a lightbox on the site, with a direct link to the original
+ * always available.
+ */
+export const featuredReels: Reel[] = [
+  {
+    code: 'DabNET8N0QF',
+    title: 'Featured Reel',
+    note: 'Watch on Instagram',
+  },
+  {
+    code: 'DZ5mjgghM2X',
+    title: 'Featured Reel',
+    note: 'Watch on Instagram',
+  },
+  {
+    code: 'DZDj6BZttNH',
+    title: 'Featured Reel',
+    note: 'Watch on Instagram',
+  },
+]
+
+/** Canonical public URL for a Reel. */
+export const reelUrl = (code: string) => `https://www.instagram.com/reel/${code}/`
+
+/** Instagram's official embed endpoint, used inside the lightbox. */
+export const reelEmbedUrl = (code: string) =>
+  `https://www.instagram.com/reel/${code}/embed/captioned/`
 
 /* -------------------------------------------------------------------------- */
 /*  WORK                                                                      */
@@ -88,7 +156,13 @@ export type WorkItem = {
 }
 
 /*
+ * Category portfolio, shown below the featured Reels.
+ *
  * Order matters — the strongest pieces should sit first, they carry the page.
+ * These are open slots waiting for media: each one renders as a styled
+ * placeholder until a `video` / `poster` path is added, so the grid always
+ * looks finished. Delete any slot that is not needed.
+ *
  * TODO: add video + poster paths as the files become available.
  */
 export const work: WorkItem[] = [

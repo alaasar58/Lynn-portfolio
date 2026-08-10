@@ -1,7 +1,9 @@
 import { useMemo, useState } from 'react'
 import { Section } from '../components/Section'
 import { VideoCard } from '../components/VideoCard'
-import { experienceBrands, work, workCategories } from '../content/site'
+import { FeaturedReels } from '../components/FeaturedReels'
+import { InstagramGlyph } from '../components/InstagramGlyph'
+import { experienceBrands, site, work, workCategories } from '../content/site'
 import type { WorkCategory } from '../content/site'
 
 type Filter = WorkCategory | 'All'
@@ -12,6 +14,7 @@ type Filter = WorkCategory | 'All'
  */
 export function Work() {
   const [filter, setFilter] = useState<Filter>('All')
+  const instagram = site.socials.find((social) => social.label === 'Instagram')
 
   const filtered = useMemo(
     () => (filter === 'All' ? work : work.filter((item) => item.category === filter)),
@@ -26,8 +29,27 @@ export function Work() {
       tone="sand"
       eyebrow="Selected Work"
       title="Product content that looks like real life."
-      lede="A selection of lifestyle and product pieces across the categories I work in most."
+      lede="Published Reels first, then the categories I work across."
     >
+      {/* Published Reels lead the section — real work before open slots. */}
+      <div className="mb-16">
+        <div className="mb-6 flex flex-wrap items-baseline justify-between gap-3">
+          <h3 className="font-display text-2xl">Featured on Instagram</h3>
+          <a
+            href={instagram?.href}
+            target="_blank"
+            rel="noreferrer noopener"
+            className="inline-flex items-center gap-2 text-sm text-ink-soft underline-offset-4 hover:text-ink hover:underline"
+          >
+            <InstagramGlyph />
+            View profile <span className="text-ink-muted">{instagram?.handle}</span>
+          </a>
+        </div>
+        <FeaturedReels showProfileLink={false} />
+      </div>
+
+      <h3 className="mb-6 font-display text-2xl">By category</h3>
+
       <div className="flex flex-wrap gap-2" role="group" aria-label="Filter work by category">
         {filters.map((entry) => {
           const active = filter === entry
