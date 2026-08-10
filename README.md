@@ -22,95 +22,69 @@ npm run lint
 
 ## Editing the site
 
-Almost everything you would want to change lives in **one file**:
+Text and data are kept apart, so translating and re-styling never collide.
 
-### `src/content/site.ts`
+### Text — `src/i18n/`
 
-| What you want to change            | Where in the file      |
-| ---------------------------------- | ---------------------- |
-| Name, email, social links          | `site`                 |
-| Headline and hero text             | `hero`                 |
-| Featured Instagram Reels           | `featuredReels`        |
-| Portfolio pieces and categories    | `work`, `workCategories` |
-| Brands / products listed under Work | `experienceBrands`     |
-| Services                           | `services`             |
-| About text, languages, audience    | `about`                |
-| The 5 process steps                | `process`              |
-| Collaboration models               | `partnerships`         |
-| Prices and quote factors           | `pricing`              |
-| Contact form dropdown options      | `contact`              |
+The site is in **English, German and Arabic**. All visible text lives in three
+files with an identical shape:
 
-Anything still needing a real value is marked `// TODO` in that file. Before
-going live, the ones that matter are:
-
-- `featuredReels[].title` / `.note` — rename each Reel to describe the video
-- `pricing.tiers[].price` — the starting prices (currently the `€XXX` placeholder)
-- `site.url` and the URLs in `index.html` — only if a custom domain is added
-
-### Featured Instagram Reels
-
-The three published Reels shown at the top of the portfolio and in the hero are
-listed in `featuredReels`. Each entry needs only the shortcode from the Reel
-URL — `instagram.com/reel/DabNET8N0QF/` → `code: 'DabNET8N0QF'`.
-
-Clicking a card opens the Reel in a lightbox using Instagram's official embed,
-with a direct link to the original post always visible underneath. Instagram can
-refuse to be framed (ad blockers, some privacy settings), and a cross-origin
-frame cannot be inspected to detect that — hence the permanent link rather than
-a hidden fallback.
-
-If the embed ever proves unreliable, switch one value in `src/content/site.ts`:
-
-```ts
-export const reelDisplay: 'embed' | 'link' = 'link'
+```
+src/i18n/en.ts    English — the reference file
+src/i18n/de.ts    German
+src/i18n/ar.ts    Arabic (rendered right-to-left)
 ```
 
-Cards then open the original Instagram post directly instead. Nothing else
-changes.
+To change wording, edit the same key in each file. TypeScript will tell you if a
+key is missing or misspelled in a translation, so the three cannot drift apart.
 
-To give a Reel a cover image, save a still into `public/media/reels/` and set
-`poster: '/media/reels/<code>.jpg'`. Without one the card shows a warm tonal
-panel, which still looks intentional.
+Visitors choose their language once, in a modal on first visit; the choice is
+stored in their browser and can be changed any time from the switcher in the
+header. Arabic switches the whole layout to RTL and swaps in a typeface that
+covers Arabic properly.
 
-### Pricing
+### Data — `src/content/site.ts`
 
-All three tiers live in the `pricing` object in `src/content/site.ts` and
-nowhere else — prices are never hard-coded in a component. Each tier has a
-`price` (currently the `€XXX` placeholder), a `unit` line such as
-"starting from", a description and its bullet points. Edit them there and the
-Pricing section updates.
+Everything language-independent:
 
-### Adding portfolio videos
+| What you want to change             | Where in the file  |
+| ----------------------------------- | ------------------ |
+| Email, Instagram and TikTok links   | `site`             |
+| Featured Instagram Reels            | `featuredReels`    |
+| Portfolio items and their media     | `work`             |
+| Portfolio categories                | `categoryKeys`     |
+| Brands listed under Work            | `experienceBrands` |
+| Prices                              | `pricingTiers`     |
+| Hero figures (27K, 3, 5, 48h)       | `heroProof`        |
 
-Put files in `public/media/work/`, then point a work item at them:
+Anything still needing a real value is marked `// TODO`.
 
-```ts
-{
-  id: 'baby-feeding-set',
-  title: 'Baby feeding set',
-  category: 'Family & Baby',
-  note: 'Product demonstration · voiceover',
-  video: '/media/work/baby-feeding-set.mp4',
-  poster: '/media/work/baby-feeding-set.jpg',
-  paid: true,            // only for confirmed paid collaborations
-  brand: 'Brand name',   // shown as a badge when `paid` is set
-}
+### Portfolio media
+
+Portfolio videos and covers are named after each item's `id`:
+
+```
+public/media/work/morning-light.mp4
+public/media/work/morning-light.jpg
 ```
 
-Items without media show a styled placeholder, so the grid always looks
-finished. See `public/media/README.md` for export settings.
+**Overwrite the file keeping the same name and the site picks it up** — no code
+change. The files currently there are generated placeholders in the site's
+palette. See `public/media/README.md` for export settings and how to add items.
 
-The order of the `work` array is the order on the page — strongest pieces first.
+Cards autoplay muted when scrolled into view, loop, pause when they scroll away,
+and carry a sound toggle. Video is only fetched once a card is near the
+viewport, so a full grid stays fast on mobile.
 
-### Changing the look
+### Design
 
 All colours, fonts and radii are defined once at the top of `src/index.css` in
 the `@theme` block. Change them there and the whole site follows.
 
-The current palette is a warm editorial neutral (bone / sand / warm ink) with a
-muted clay accent, chosen to sit behind natural-light lifestyle photography
-without competing with it. If the Instagram identity should drive the palette
-more closely, adjust `--color-*` values there — no component changes needed.
+The palette is a warm editorial neutral (bone / sand / warm ink) with a muted
+clay tone and a **dusty blush accent** used selectively — buttons, hover states,
+selected filters and small highlights. The neutrals stay dominant by design; if
+you want more or less pink, adjust `--color-blush*` in that one block.
 
 ---
 
@@ -165,22 +139,32 @@ publish directory `dist`.
 
 ```
 src/
-  content/site.ts     all site copy and data — the main file to edit
-  components/         Header, Footer, Section, VideoCard
+  i18n/               en.ts / de.ts / ar.ts — all visible text
+                      index.tsx — language state, storage, RTL
+  content/site.ts     links, media paths, prices, portfolio structure
+  components/         Header, Footer, Section, VideoCard,
+                      FeaturedReels, ReelLightbox,
+                      LanguageModal, LanguageSwitcher
   sections/           Hero, Work, Services, About, Process,
                       Partnerships, Pricing, Contact
   lib/useReveal.ts    scroll-in animation hook
   index.css           design tokens + shared utility classes
 public/
-  media/work/         portfolio videos and posters
+  media/work/         portfolio videos and covers
+  media/reels/        optional Reel covers
 ```
 
 ## Performance & accessibility notes
 
-- Videos are never fetched on page load — a card only attaches its source once
-  it is near the viewport, and plays on hover or tap.
-- Fonts are self-hosted and subset, so there is no third-party request.
+- Videos are never fetched on page load — a card attaches its source only once
+  it is near the viewport, plays muted while on screen, and pauses when it
+  scrolls away. If a browser refuses unattended playback, the cover stays and a
+  play button appears, so a tile is never dead.
+- Fonts are self-hosted and subset (Latin and Arabic), so there is no
+  third-party request.
 - Motion respects `prefers-reduced-motion`; reveal animations are skipped
   entirely for users who ask for that.
 - Semantic landmarks, a skip link, visible focus rings, labelled form fields
-  and a `aria-live` region for submission status.
+  and an `aria-live` region for submission status.
+- `lang` and `dir` are set on the document from the chosen language, and layout
+  uses logical properties so RTL mirrors correctly rather than being patched.

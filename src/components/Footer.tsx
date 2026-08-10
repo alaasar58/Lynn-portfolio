@@ -1,6 +1,9 @@
 import { nav, site } from '../content/site'
+import { useI18n } from '../i18n'
 
 export function Footer() {
+  const { t } = useI18n()
+
   return (
     <footer className="bg-ink text-bone">
       <div className="shell py-16">
@@ -8,12 +11,15 @@ export function Footer() {
           <div>
             <p className="font-display text-3xl">
               {site.name}
-              <span className="text-clay">.</span>
+              <span className="text-blush-mid">.</span>
             </p>
-            <p className="mt-2 text-sm text-bone/60">{site.role}</p>
+            <p className="mt-2 text-sm text-bone/60">{t.footer.rights}</p>
           </div>
-          <a href="#contact" className="btn self-start bg-bone text-ink hover:bg-clay hover:text-bone">
-            Work With Me
+          <a
+            href="#contact"
+            className="btn self-start bg-bone text-ink hover:bg-blush-deep hover:text-bone"
+          >
+            {t.footer.cta}
           </a>
         </div>
 
@@ -25,7 +31,7 @@ export function Footer() {
                 href={entry.href}
                 className="text-sm text-bone/60 transition-colors hover:text-bone"
               >
-                {entry.label}
+                {t.nav[entry.key]}
               </a>
             ))}
           </nav>
@@ -46,13 +52,13 @@ export function Footer() {
               href={`mailto:${site.email}`}
               className="text-sm text-bone/60 transition-colors hover:text-bone"
             >
-              Email
+              {t.footer.email}
             </a>
           </div>
         </div>
 
         <p className="mt-10 text-xs text-bone/40">
-          © {new Date().getFullYear()} {site.name}. {site.role}.
+          © {new Date().getFullYear()} {site.name}. {t.footer.rights}.
         </p>
       </div>
     </footer>

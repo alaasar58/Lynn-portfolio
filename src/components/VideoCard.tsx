@@ -1,89 +1,140 @@
 import { useEffect, useRef, useState } from 'react'
 import type { WorkItem } from '../content/site'
-
-/*
- * Deterministic placeholder gradients. Until real media is dropped into
- * `public/media/work/`, each card renders a warm tonal panel instead of a
- * broken video element — the layout is final, only the footage is pending.
- */
-const placeholders = [
-  'from-sand-deep via-sand to-bone',
-  'from-clay/35 via-sand to-bone',
-  'from-sage/30 via-sand to-sand-deep',
-  'from-ink/15 via-sand-deep to-sand',
-]
-
-function placeholderFor(id: string) {
-  let hash = 0
-  for (let i = 0; i < id.length; i++) hash = (hash * 31 + id.charCodeAt(i)) >>> 0
-  return placeholders[hash % placeholders.length]
-}
+import { useI18n } from '../i18n'
 
 type VideoCardProps = {
   item: WorkItem
-  /** Larger cards lead the grid; used for the strongest pieces. */
+  /** Skips lazy loading for the first cards, which are visible immediately. */
   priority?: boolean
 }
 
 /**
- * A single portfolio tile.
+ * A portfolio tile that plays itself.
  *
- * Video is never fetched on page load: the `<source>` is only attached once the
- * card is near the viewport, and playback starts on hover (desktop) or on tap
- * (touch), so a page full of video stays fast on mobile data.
+ * Behaviour follows how short-form video works on social platforms:
+ *
+ *  - The source is attached only once the card approaches the viewport, so a
+ *    page full of video costs nothing on load.
+ *  - Playback starts automatically, muted and looping, when the card is
+ *    actually on screen, and pauses again when it scrolls away — off-screen
+ *    video should never burn battery or bandwidth.
+ *  - `playsInline` keeps iOS from hijacking the video into fullscreen.
+ *  - A sound toggle sits on the card, so audio is always one tap away.
+ *
+ * Browsers only permit unattended playback while muted. If a play attempt is
+ * refused anyway (some power-saving and data-saver modes), the poster stays put
+ * and a play button appears — the visitor is never left with a dead tile.
  */
 export function VideoCard({ item, priority = false }: VideoCardProps) {
-  const containerRef = useRef<HTMLDivElement>(null)
+  const { t } = useI18n()
+  const containerRef = useRef<HTMLElement>(null)
   const videoRef = useRef<HTMLVideoElement>(null)
-  const [nearViewport, setNearViewport] = useState(false)
-  const [playing, setPlaying] = useState(false)
 
+  const [attached, setAttached] = useState(priority)
+  const [onScreen, setOnScreen] = useState(false)
+  const [muted, setMuted] = useState(true)
+  const [autoplayRefused, setAutoplayRefused] = useState(false)
+
+  const labels = t.work.items[item.id as keyof typeof t.work.items]
+  const title = labels?.title ?? item.id
+  const note = labels?.note ?? ''
+
+  // Attach the source early, then track whether the card is actually visible.
   useEffect(() => {
     const el = containerRef.current
     if (!el || !item.video) return
     if (!('IntersectionObserver' in window)) {
-      setNearViewport(true)
+      setAttached(true)
+      setOnScreen(true)
       return
     }
 
-    const observer = new IntersectionObserver(
+    const preload = new IntersectionObserver(
       (entries) => {
-        if (entries.some((e) => e.isIntersecting)) {
-          setNearViewport(true)
-          observer.disconnect()
+        if (entries.some((entry) => entry.isIntersecting)) {
+          setAttached(true)
+          preload.disconnect()
         }
       },
-      // Start loading a little before the card is actually on screen.
-      { rootMargin: '300px 0px' },
+      { rootMargin: '400px 0px' },
     )
-    observer.observe(el)
-    return () => observer.disconnect()
+
+    // A card counts as "on screen" once a quarter of it is showing, which
+    // avoids starting playback for tiles only just clipping the edge.
+    const visibility = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) setOnScreen(entry.isIntersecting)
+      },
+      { threshold: 0.25 },
+    )
+
+    preload.observe(el)
+    visibility.observe(el)
+    return () => {
+      preload.disconnect()
+      visibility.disconnect()
+    }
   }, [item.video])
 
-  const play = () => {
+  // Drive playback from visibility.
+  useEffect(() => {
+    const video = videoRef.current
+    if (!video || !attached) return
+
+    if (onScreen) {
+      const attempt = video.play()
+      if (attempt) {
+        attempt.then(() => setAutoplayRefused(false)).catch(() => setAutoplayRefused(true))
+      }
+    } else {
+      video.pause()
+      // Muting again on exit means a card never starts talking unprompted the
+      // next time it scrolls back into view.
+      if (!video.muted) {
+        video.muted = true
+        setMuted(true)
+      }
+    }
+  }, [onScreen, attached])
+
+  const toggleSound = () => {
     const video = videoRef.current
     if (!video) return
-    void video.play().then(() => setPlaying(true)).catch(() => setPlaying(false))
+    const next = !video.muted
+    video.muted = next
+    setMuted(next)
+    // Unmuting counts as a user gesture, so this is also the moment a refused
+    // autoplay can finally start.
+    if (!next) void video.play().catch(() => undefined)
   }
 
-  const pause = () => {
+  const manualPlay = () => {
     const video = videoRef.current
     if (!video) return
-    video.pause()
-    setPlaying(false)
+    void video
+      .play()
+      .then(() => setAutoplayRefused(false))
+      .catch(() => undefined)
   }
-
-  const toggle = () => (playing ? pause() : play())
 
   return (
     <figure
       ref={containerRef}
-      className="group relative overflow-hidden rounded-card bg-sand-deep"
-      onMouseEnter={play}
-      onMouseLeave={pause}
+      className="group relative h-full overflow-hidden rounded-card bg-sand-deep"
     >
-      <div className="relative aspect-[9/16] w-full overflow-hidden">
-        {item.video ? (
+      <div className="relative h-full w-full overflow-hidden">
+        {item.poster && (
+          <img
+            src={item.poster}
+            alt=""
+            aria-hidden="true"
+            loading={priority ? 'eager' : 'lazy'}
+            decoding="async"
+            className="absolute inset-0 h-full w-full object-cover"
+          />
+        )}
+
+        {item.video && (
           <video
             ref={videoRef}
             poster={item.poster}
@@ -91,56 +142,99 @@ export function VideoCard({ item, priority = false }: VideoCardProps) {
             loop
             playsInline
             preload={priority ? 'metadata' : 'none'}
-            className="h-full w-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.03]"
+            aria-label={title}
+            className="relative h-full w-full object-cover transition-transform duration-[1.2s] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.04]"
           >
-            {nearViewport && <source src={item.video} type="video/mp4" />}
+            {attached && <source src={item.video} type="video/mp4" />}
           </video>
-        ) : item.poster ? (
-          <img
-            src={item.poster}
-            alt={item.title}
-            loading={priority ? 'eager' : 'lazy'}
-            decoding="async"
-            className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
-          />
-        ) : (
-          // The caption below already names the category, so the placeholder
-          // stays purely tonal rather than repeating it behind the text.
-          <div
-            aria-hidden="true"
-            className={`h-full w-full bg-gradient-to-br ${placeholderFor(item.id)}`}
-          />
         )}
 
-        {/* Tap target for touch devices, where hover never fires. */}
-        {item.video && (
+        {/* Legibility wash for the caption. */}
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-3/5 bg-gradient-to-t from-ink/80 via-ink/25 to-transparent" />
+
+        {/* Only shown when the browser refused unattended playback. */}
+        {autoplayRefused && item.video && (
           <button
             type="button"
-            onClick={toggle}
-            className="absolute inset-0 h-full w-full cursor-pointer"
+            onClick={manualPlay}
+            className="absolute inset-0 flex h-full w-full items-center justify-center"
           >
             <span className="sr-only">
-              {playing ? `Pause ${item.title}` : `Play ${item.title}`}
+              {t.work.play} — {title}
+            </span>
+            <span
+              aria-hidden="true"
+              className="flex h-14 w-14 items-center justify-center rounded-full bg-bone/85 text-ink shadow-sm transition-transform duration-500 group-hover:scale-110"
+            >
+              <svg viewBox="0 0 24 24" fill="currentColor" className="ms-0.5 h-5 w-5">
+                <path d="M8 5.5v13l11-6.5-11-6.5Z" />
+              </svg>
             </span>
           </button>
         )}
 
-        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-2/5 bg-gradient-to-t from-ink/75 to-transparent opacity-90" />
-
-        {item.paid && item.brand && (
-          <span className="absolute left-4 top-4 rounded-full bg-bone/90 px-3 py-1 text-[0.65rem] font-medium uppercase tracking-[0.14em] text-ink">
-            {item.brand}
-          </span>
+        {item.video && !autoplayRefused && (
+          <button
+            type="button"
+            onClick={toggleSound}
+            className="absolute end-3 top-3 flex h-9 w-9 items-center justify-center rounded-full bg-ink/45 text-bone backdrop-blur-sm transition-colors duration-300 hover:bg-blush-deep focus-visible:opacity-100 sm:opacity-0 sm:group-hover:opacity-100"
+          >
+            <span className="sr-only">{muted ? t.work.unmute : t.work.mute}</span>
+            <SoundGlyph muted={muted} />
+          </button>
         )}
+
+        {/*
+          A confirmed brand collaboration always carries its badge — that
+          distinction matters. The neutral "portfolio work" label is hidden on
+          the narrowest tiles, where it would collide with the sound toggle.
+        */}
+        <span
+          className={`absolute start-3 top-3 max-w-[60%] truncate rounded-full px-3 py-1 text-[0.62rem] font-medium uppercase tracking-[0.14em] ${
+            item.paid
+              ? 'bg-blush-deep text-bone'
+              : 'hidden bg-bone/85 text-ink-soft sm:inline-block'
+          }`}
+        >
+          {item.paid ? (item.brand ?? t.work.collaborationBadge) : t.work.portfolioBadge}
+        </span>
       </div>
 
       <figcaption className="pointer-events-none absolute inset-x-0 bottom-0 p-5">
-        <p className="text-[0.65rem] font-medium uppercase tracking-[0.16em] text-bone/70">
-          {item.category}
+        <p className="text-[0.62rem] font-medium uppercase tracking-[0.16em] text-blush">
+          {t.work.categories[item.category]}
         </p>
-        <h3 className="mt-1 text-lg text-bone">{item.title}</h3>
-        <p className="mt-1 text-xs leading-relaxed text-bone/70">{item.note}</p>
+        <h3 className="mt-1.5 text-lg leading-snug text-bone">{title}</h3>
+        <p className="mt-1 text-xs leading-relaxed text-bone/75">{note}</p>
       </figcaption>
     </figure>
+  )
+}
+
+function SoundGlyph({ muted }: { muted: boolean }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.7"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+      className="h-4 w-4"
+    >
+      <path d="M11 5 6.5 9H3v6h3.5L11 19V5Z" />
+      {muted ? (
+        <>
+          <path d="m16 9.5 4 5" />
+          <path d="m20 9.5-4 5" />
+        </>
+      ) : (
+        <>
+          <path d="M15.5 9.2a4 4 0 0 1 0 5.6" />
+          <path d="M18.2 6.8a7.5 7.5 0 0 1 0 10.4" />
+        </>
+      )}
+    </svg>
   )
 }

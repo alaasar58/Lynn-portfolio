@@ -3,54 +3,63 @@ import { Section } from '../components/Section'
 import { VideoCard } from '../components/VideoCard'
 import { FeaturedReels } from '../components/FeaturedReels'
 import { InstagramGlyph } from '../components/InstagramGlyph'
-import { experienceBrands, site, work, workCategories } from '../content/site'
-import type { WorkCategory } from '../content/site'
+import { categoryKeys, experienceBrands, site, work } from '../content/site'
+import type { CategoryKey } from '../content/site'
+import { useI18n } from '../i18n'
 
-type Filter = WorkCategory | 'All'
+type Filter = CategoryKey | 'all'
 
 /**
- * The portfolio. Filterable by category, video-led, and deliberately light on
- * copy — the work is meant to carry this section on its own.
+ * The portfolio: published Reels first, then the category work.
+ *
+ * The grid mixes tile sizes — items marked `featured` take a double-width slot
+ * — so the section reads as a curated body of work rather than a uniform sheet
+ * of thumbnails.
  */
 export function Work() {
-  const [filter, setFilter] = useState<Filter>('All')
+  const { t } = useI18n()
+  const [filter, setFilter] = useState<Filter>('all')
   const instagram = site.socials.find((social) => social.label === 'Instagram')
 
   const filtered = useMemo(
-    () => (filter === 'All' ? work : work.filter((item) => item.category === filter)),
+    () => (filter === 'all' ? work : work.filter((item) => item.category === filter)),
     [filter],
   )
 
-  const filters: Filter[] = ['All', ...workCategories]
+  const filters: Filter[] = ['all', ...categoryKeys]
 
   return (
     <Section
       id="work"
       tone="sand"
-      eyebrow="Selected Work"
-      title="Product content that looks like real life."
-      lede="Published Reels first, then the categories I work across."
+      eyebrow={t.work.eyebrow}
+      title={t.work.title}
+      lede={t.work.lede}
     >
-      {/* Published Reels lead the section — real work before open slots. */}
+      {/* Published Reels lead the section — real work before portfolio pieces. */}
       <div className="mb-16">
         <div className="mb-6 flex flex-wrap items-baseline justify-between gap-3">
-          <h3 className="font-display text-2xl">Featured on Instagram</h3>
-          <a
-            href={instagram?.href}
-            target="_blank"
-            rel="noreferrer noopener"
-            className="inline-flex items-center gap-2 text-sm text-ink-soft underline-offset-4 hover:text-ink hover:underline"
-          >
-            <InstagramGlyph />
-            View profile <span className="text-ink-muted">{instagram?.handle}</span>
-          </a>
+          <h3 className="font-display text-2xl">{t.work.featuredHeading}</h3>
+          {instagram && (
+            <a
+              href={instagram.href}
+              target="_blank"
+              rel="noreferrer noopener"
+              className="inline-flex items-center gap-2 text-sm text-ink-soft underline-offset-4 hover:text-blush-deep hover:underline"
+            >
+              <InstagramGlyph />
+              {t.work.viewProfile}
+              <span className="text-ink-muted">{instagram.handle}</span>
+            </a>
+          )}
         </div>
         <FeaturedReels showProfileLink={false} />
       </div>
 
-      <h3 className="mb-6 font-display text-2xl">By category</h3>
+      <h3 className="mb-5 font-display text-2xl">{t.work.byCategory}</h3>
 
-      <div className="flex flex-wrap gap-2" role="group" aria-label="Filter work by category">
+      {/* Scrolls horizontally on narrow screens, wraps on wider ones. */}
+      <div className="rail" role="group" aria-label={t.work.filterLabel}>
         {filters.map((entry) => {
           const active = filter === entry
           return (
@@ -59,31 +68,46 @@ export function Work() {
               type="button"
               onClick={() => setFilter(entry)}
               aria-pressed={active}
-              className={`rounded-full border px-4 py-2 text-sm transition-all duration-300 ${
+              className={`shrink-0 snap-start whitespace-nowrap rounded-full border px-4 py-2 text-sm transition-all duration-300 ${
                 active
                   ? 'border-ink bg-ink text-bone'
-                  : 'border-line bg-transparent text-ink-soft hover:border-ink/40 hover:text-ink'
+                  : 'border-line bg-transparent text-ink-soft hover:border-blush-mid hover:bg-blush/40 hover:text-ink'
               }`}
             >
-              {entry}
+              {entry === 'all' ? t.work.all : t.work.categories[entry]}
             </button>
           )
         })}
       </div>
 
-      <div className="mt-10 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+      {/*
+        `key` on the grid restarts the entry animation whenever the filter
+        changes, so switching categories reads as a deliberate transition.
+      */}
+      <div
+        key={filter}
+        className="mt-8 grid auto-rows-[15rem] grid-cols-2 gap-3 sm:auto-rows-[22rem] sm:gap-4 lg:auto-rows-[26rem] lg:grid-cols-4 lg:gap-5"
+      >
         {filtered.map((item, index) => (
-          <VideoCard key={item.id} item={item} priority={index < 3} />
+          <div
+            key={item.id}
+            style={{ animationDelay: `${Math.min(index, 8) * 45}ms` }}
+            className={`tile-in ${
+              item.featured ? 'col-span-2 row-span-1' : 'col-span-1'
+            } ${item.featured ? 'sm:row-span-1' : ''}`}
+          >
+            <VideoCard item={item} priority={index < 4} />
+          </div>
         ))}
       </div>
 
-      {filtered.length === 0 && (
-        <p className="mt-10 text-ink-muted">More work in this category is coming soon.</p>
-      )}
+      {filtered.length === 0 && <p className="mt-10 text-ink-muted">{t.work.empty}</p>}
 
-      <div className="mt-14 border-t border-line pt-8">
+      <p className="mt-6 text-xs text-ink-muted">{t.work.placeholderNote}</p>
+
+      <div className="mt-12 border-t border-line pt-8">
         <p className="text-xs uppercase tracking-[0.16em] text-ink-muted">
-          Products &amp; brands I have created content around
+          {t.work.brandsHeading}
         </p>
         <ul className="mt-4 flex flex-wrap gap-x-8 gap-y-3">
           {experienceBrands.map((brand) => (
@@ -93,8 +117,7 @@ export function Work() {
           ))}
         </ul>
         <p className="mt-5 max-w-xl text-sm leading-relaxed text-ink-muted">
-          Selected portfolio and personal product content. Not all pieces shown were paid
-          collaborations — brand partnerships are labelled where they apply.
+          {t.work.disclaimer}
         </p>
       </div>
     </Section>

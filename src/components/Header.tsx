@@ -1,12 +1,15 @@
 import { useEffect, useState } from 'react'
 import { nav, site } from '../content/site'
+import { useI18n } from '../i18n'
+import { LanguageSwitcher } from './LanguageSwitcher'
 
 /**
  * Fixed site header. Transparent over the hero, then settles into a solid,
- * blurred bar once the page scrolls — so navigation is always reachable
- * without covering the opening image.
+ * blurred bar once the page scrolls — so navigation and the primary CTA are
+ * always reachable without covering the opening image.
  */
 export function Header() {
+  const { t } = useI18n()
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
 
@@ -33,31 +36,33 @@ export function Header() {
           : 'border-b border-transparent'
       }`}
     >
-      <div className="shell flex h-20 items-center justify-between gap-6">
+      <div className="shell flex h-20 items-center justify-between gap-4">
         <a
           href="#top"
           className="font-display text-xl tracking-tight"
           onClick={() => setOpen(false)}
         >
           {site.name}
-          <span className="text-clay">.</span>
+          <span className="text-blush-deep">.</span>
         </a>
 
-        <nav aria-label="Primary" className="hidden items-center gap-8 lg:flex">
+        <nav aria-label="Primary" className="hidden items-center gap-7 lg:flex">
           {nav.map((entry) => (
             <a
               key={entry.href}
               href={entry.href}
-              className="text-sm text-ink-soft transition-colors duration-200 hover:text-ink"
+              className="text-sm text-ink-soft transition-colors duration-200 hover:text-blush-deep"
             >
-              {entry.label}
+              {t.nav[entry.key]}
             </a>
           ))}
         </nav>
 
-        <div className="flex items-center gap-3">
-          <a href="#contact" className="btn-primary hidden sm:inline-flex">
-            Work With Me
+        <div className="flex items-center gap-2 sm:gap-3">
+          <LanguageSwitcher className="hidden sm:flex" />
+
+          <a href="#contact" className="btn-primary hidden px-5 sm:inline-flex">
+            {t.hero.primaryCta}
           </a>
 
           <button
@@ -67,15 +72,15 @@ export function Header() {
             aria-controls="mobile-nav"
             className="flex h-11 w-11 items-center justify-center rounded-full border border-line lg:hidden"
           >
-            <span className="sr-only">{open ? 'Close menu' : 'Open menu'}</span>
+            <span className="sr-only">{open ? t.nav.menuClose : t.nav.menuOpen}</span>
             <span aria-hidden="true" className="relative block h-3 w-5">
               <span
-                className={`absolute left-0 block h-px w-5 bg-ink transition-transform duration-300 ${
+                className={`absolute start-0 block h-px w-5 bg-ink transition-transform duration-300 ${
                   open ? 'top-1.5 rotate-45' : 'top-0'
                 }`}
               />
               <span
-                className={`absolute left-0 block h-px w-5 bg-ink transition-transform duration-300 ${
+                className={`absolute start-0 block h-px w-5 bg-ink transition-transform duration-300 ${
                   open ? 'top-1.5 -rotate-45' : 'top-3'
                 }`}
               />
@@ -85,29 +90,24 @@ export function Header() {
       </div>
 
       {/* Mobile navigation */}
-      <div
-        id="mobile-nav"
-        hidden={!open}
-        className="border-t border-line bg-bone lg:hidden"
-      >
-        <nav aria-label="Primary mobile" className="shell flex flex-col py-6">
+      <div id="mobile-nav" hidden={!open} className="border-t border-line bg-bone lg:hidden">
+        <nav aria-label="Primary mobile" className="shell flex flex-col py-5">
           {nav.map((entry) => (
             <a
               key={entry.href}
               href={entry.href}
               onClick={() => setOpen(false)}
-              className="border-b border-line/70 py-4 font-display text-2xl"
+              className="border-b border-line/70 py-3.5 font-display text-2xl"
             >
-              {entry.label}
+              {t.nav[entry.key]}
             </a>
           ))}
-          <a
-            href="#contact"
-            onClick={() => setOpen(false)}
-            className="btn-primary mt-6 w-full"
-          >
-            Work With Me
+
+          <a href="#contact" onClick={() => setOpen(false)} className="btn-primary mt-5 w-full">
+            {t.hero.primaryCta}
           </a>
+
+          <LanguageSwitcher className="mt-4 self-start sm:hidden" />
         </nav>
       </div>
     </header>

@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { reelEmbedUrl, reelUrl } from '../content/site'
+import { useI18n } from '../i18n'
 import type { Reel } from '../content/site'
 import { InstagramGlyph } from './InstagramGlyph'
 
@@ -19,6 +20,7 @@ type ReelLightboxProps = {
  * happens to the embed, the visitor can still reach the Reel in one click.
  */
 export function ReelLightbox({ reel, onClose }: ReelLightboxProps) {
+  const { t } = useI18n()
   const [loaded, setLoaded] = useState(false)
   const closeRef = useRef<HTMLButtonElement>(null)
 
@@ -46,7 +48,7 @@ export function ReelLightbox({ reel, onClose }: ReelLightboxProps) {
     <div
       role="dialog"
       aria-modal="true"
-      aria-label={`${reel.title} — Instagram Reel`}
+      aria-label={`${t.work.reelBadge} — Instagram`}
       className="fixed inset-0 z-[70] flex items-center justify-center p-4 sm:p-8"
     >
       {/* Backdrop — clicking anywhere outside the player closes it. */}
@@ -55,19 +57,19 @@ export function ReelLightbox({ reel, onClose }: ReelLightboxProps) {
         onClick={onClose}
         className="absolute inset-0 h-full w-full cursor-default bg-ink/80 backdrop-blur-sm"
       >
-        <span className="sr-only">Close</span>
+        <span className="sr-only">{t.nav.menuClose}</span>
       </button>
 
       <div className="relative flex max-h-full w-full max-w-[420px] flex-col">
         <div className="mb-3 flex items-center justify-between gap-4">
-          <p className="text-sm text-bone/80">{reel.title}</p>
+          <p className="text-sm text-bone/80">{t.work.reelBadge}</p>
           <button
             ref={closeRef}
             type="button"
             onClick={onClose}
             className="flex h-9 w-9 items-center justify-center rounded-full border border-bone/30 text-bone transition-colors hover:bg-bone hover:text-ink"
           >
-            <span className="sr-only">Close</span>
+            <span className="sr-only">{t.nav.menuClose}</span>
             <span aria-hidden="true" className="text-lg leading-none">
               ×
             </span>
@@ -77,12 +79,12 @@ export function ReelLightbox({ reel, onClose }: ReelLightboxProps) {
         <div className="relative overflow-hidden rounded-card bg-bone">
           {!loaded && (
             <div className="absolute inset-0 flex items-center justify-center">
-              <span className="text-sm text-ink-muted">Loading Reel…</span>
+              <span className="text-sm text-ink-muted">{t.work.loadingReel}</span>
             </div>
           )}
           <iframe
             src={reelEmbedUrl(reel.code)}
-            title={`${reel.title} — Instagram Reel`}
+            title={`${t.work.reelBadge} ${reel.code}`}
             loading="lazy"
             allow="autoplay; clipboard-write; encrypted-media; picture-in-picture"
             allowFullScreen
@@ -95,13 +97,13 @@ export function ReelLightbox({ reel, onClose }: ReelLightboxProps) {
           href={reelUrl(reel.code)}
           target="_blank"
           rel="noreferrer noopener"
-          className="btn mt-3 w-full bg-bone text-ink hover:bg-clay hover:text-bone"
+          className="btn mt-3 w-full bg-bone text-ink hover:bg-blush-deep hover:text-bone"
         >
           <InstagramGlyph />
-          Open on Instagram
+          {t.work.openOnInstagram}
         </a>
         <p className="mt-2 text-center text-xs text-bone/50">
-          Not loading? Open the Reel on Instagram.
+          {t.work.embedFallback}
         </p>
       </div>
     </div>
