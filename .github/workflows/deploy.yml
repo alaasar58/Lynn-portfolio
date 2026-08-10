@@ -36,7 +36,11 @@ jobs:
           VITE_FORM_ENDPOINT: ${{ secrets.VITE_FORM_ENDPOINT }}
         run: npm run build
 
+      # `enablement` turns GitHub Pages on for the repository if it is not
+      # already enabled, so the first deploy needs no manual setup step.
       - uses: actions/configure-pages@v5
+        with:
+          enablement: true
 
       - uses: actions/upload-pages-artifact@v3
         with:
