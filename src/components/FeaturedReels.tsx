@@ -3,6 +3,7 @@ import { featuredReels, reelDisplay, reelUrl, site } from '../content/site'
 import type { Reel } from '../content/site'
 import { useI18n } from '../i18n'
 import { InstagramGlyph } from './InstagramGlyph'
+import { asset } from '../lib/asset'
 import { ReelLightbox } from './ReelLightbox'
 
 /*
@@ -38,13 +39,14 @@ type ReelCardProps = {
 
 function ReelCard({ reel, index, onOpen }: ReelCardProps) {
   const { t } = useI18n()
+  const posterUrl = asset(reel.poster)
 
   return (
     <figure className="group relative overflow-hidden rounded-card bg-sand-deep">
       <div className="relative aspect-[9/16] w-full overflow-hidden">
-        {reel.poster ? (
+        {posterUrl ? (
           <img
-            src={reel.poster}
+            src={posterUrl}
             alt=""
             aria-hidden="true"
             loading="lazy"

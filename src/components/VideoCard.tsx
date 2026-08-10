@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import type { WorkItem } from '../content/site'
 import { useI18n } from '../i18n'
+import { asset } from '../lib/asset'
 
 type VideoCardProps = {
   item: WorkItem
@@ -35,6 +36,8 @@ export function VideoCard({ item, priority = false }: VideoCardProps) {
   const [muted, setMuted] = useState(true)
   const [autoplayRefused, setAutoplayRefused] = useState(false)
 
+  const posterUrl = asset(item.poster)
+  const videoUrl = asset(item.video)
   const labels = t.work.items[item.id as keyof typeof t.work.items]
   const title = labels?.title ?? item.id
   const note = labels?.note ?? ''
@@ -123,9 +126,9 @@ export function VideoCard({ item, priority = false }: VideoCardProps) {
       className="group relative h-full overflow-hidden rounded-card bg-sand-deep"
     >
       <div className="relative h-full w-full overflow-hidden">
-        {item.poster && (
+        {posterUrl && (
           <img
-            src={item.poster}
+            src={posterUrl}
             alt=""
             aria-hidden="true"
             loading={priority ? 'eager' : 'lazy'}
@@ -137,7 +140,7 @@ export function VideoCard({ item, priority = false }: VideoCardProps) {
         {item.video && (
           <video
             ref={videoRef}
-            poster={item.poster}
+            poster={posterUrl}
             muted
             loop
             playsInline
@@ -145,7 +148,7 @@ export function VideoCard({ item, priority = false }: VideoCardProps) {
             aria-label={title}
             className="relative h-full w-full object-cover transition-transform duration-[1.2s] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.04]"
           >
-            {attached && <source src={item.video} type="video/mp4" />}
+            {attached && <source src={videoUrl} type="video/mp4" />}
           </video>
         )}
 
