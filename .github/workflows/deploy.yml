@@ -2,7 +2,14 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: [main]
+    # GitHub only accepts a Pages deployment from the branch configured as the
+    # Pages source (Settings → Pages). That is currently the working branch, so
+    # both are listed: whichever one is the configured source will publish, and
+    # the other run is rejected harmlessly. Trim this list once the source
+    # branch is settled.
+    branches:
+      - main
+      - claude/lifestyle-creator-portfolio-ehmgc6
   workflow_dispatch:
 
 permissions:
