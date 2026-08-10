@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#faf7f3" />
+      <stop offset="60%" stop-color="#f2ebe3" />
+      <stop offset="100%" stop-color="#e7ddd2" />
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)" />
+  <circle cx="1060" cy="120" r="180" fill="#b98a70" opacity="0.16" />
+  <text x="90" y="250" font-family="Georgia, serif" font-size="40" fill="#9c6f57" letter-spacing="6">
+    LIFESTYLE &amp; PRODUCT CONTENT
+  </text>
+  <text x="90" y="360" font-family="Georgia, serif" font-size="76" fill="#221f1c">
+    Content for brands that
+  </text>
+  <text x="90" y="450" font-family="Georgia, serif" font-size="76" fill="#221f1c">
+    looks like real life.
+  </text>
+  <text x="90" y="540" font-family="Helvetica, Arial, sans-serif" font-size="28" fill="#7d746b">
+    Arabic · English · German
+  </text>
+</svg>

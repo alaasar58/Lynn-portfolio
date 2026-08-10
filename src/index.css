@@ -1,0 +1,163 @@
+@import '@fontsource-variable/fraunces';
+@import '@fontsource-variable/inter';
+@import 'tailwindcss';
+
+/*
+  ---------------------------------------------------------------------------
+  BRAND TOKENS
+  ---------------------------------------------------------------------------
+  This is the single place to retune the visual identity. Every colour, font
+  and radius used across the site resolves back to a token below, so the whole
+  look can be shifted from here without touching components.
+
+  The palette is a warm, editorial neutral base (sand / bone / warm ink) with a
+  muted clay accent and a soft sage secondary — built to sit alongside natural
+  light lifestyle photography rather than compete with it.
+*/
+@theme {
+  --color-bone: #faf7f3;
+  --color-sand: #f2ebe3;
+  --color-sand-deep: #e7ddd2;
+  --color-ink: #221f1c;
+  --color-ink-soft: #4a443e;
+  --color-ink-muted: #7d746b;
+  --color-clay: #b98a70;
+  --color-clay-deep: #9c6f57;
+  --color-sage: #8c9484;
+  --color-line: #e2d8cc;
+
+  --font-display: 'Fraunces Variable', 'Iowan Old Style', Georgia, serif;
+  --font-sans: 'Inter Variable', ui-sans-serif, system-ui, sans-serif;
+
+  --radius-card: 1.25rem;
+
+  --ease-soft: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    /* keeps anchored sections clear of the fixed header */
+    scroll-padding-top: 6rem;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--color-bone);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-synthesis-weight: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    font-variation-settings: 'SOFT' 0, 'WONK' 0, 'opsz' 40;
+  }
+
+  ::selection {
+    background-color: var(--color-clay);
+    color: var(--color-bone);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-clay-deep);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  input,
+  textarea,
+  select {
+    font-family: inherit;
+  }
+}
+
+/*
+  Shared building blocks. Declared with `@utility` so they can be composed with
+  `@apply` and overridden by regular utilities at the call site.
+*/
+
+/* Section eyebrow — small caps label above every section heading. */
+@utility eyebrow {
+  @apply text-[0.7rem] font-medium uppercase tracking-[0.22em] text-clay-deep;
+}
+
+/* Page gutter + max width, shared by every section. */
+@utility shell {
+  @apply mx-auto w-full max-w-[76rem] px-5 sm:px-8;
+}
+
+@utility btn {
+  @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3
+    text-sm font-medium tracking-wide transition-all duration-300
+    disabled:cursor-not-allowed disabled:opacity-60;
+  transition-timing-function: var(--ease-soft);
+}
+
+@utility btn-primary {
+  @apply btn bg-ink text-bone hover:bg-clay-deep;
+}
+
+@utility btn-secondary {
+  @apply btn border border-line bg-transparent text-ink hover:border-ink hover:bg-sand;
+}
+
+@utility field {
+  @apply w-full rounded-xl border border-line bg-bone px-4 py-3 text-sm text-ink
+    transition-colors duration-200 placeholder:text-ink-muted/70
+    focus:border-clay focus:outline-none;
+}
+
+@utility field-label {
+  @apply mb-2 block text-xs font-medium uppercase tracking-[0.12em] text-ink-soft;
+}
+
+/* Scroll reveal — opt-in via the useReveal hook, disabled for reduced motion. */
+@layer utilities {
+  .reveal {
+    opacity: 0;
+    transform: translateY(18px);
+    transition:
+      opacity 0.7s var(--ease-soft),
+      transform 0.7s var(--ease-soft);
+  }
+
+  .reveal-in {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Reveal state must never hide content when printing or saving to PDF. */
+@media print {
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
