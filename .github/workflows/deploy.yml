@@ -36,19 +36,15 @@ jobs:
           VITE_FORM_ENDPOINT: ${{ secrets.VITE_FORM_ENDPOINT }}
         run: npm run build
 
-      # A repository can already have Pages switched on with a *branch* source.
-      # `configure-pages` only creates a missing site, it never changes an
-      # existing one — and with a branch source the deploy job below is
-      # rejected before it starts. Setting build_type=workflow first makes the
-      # source GitHub Actions, whether or not Pages already existed.
-      - name: Point Pages at GitHub Actions
+      # Prints how Pages is currently configured. If `build_type` is not
+      # "workflow", publishing is rejected before the deploy job starts and the
+      # source has to be switched under Settings → Pages → Source. GITHUB_TOKEN
+      # is not permitted to change that setting, so this only reports it.
+      - name: Report Pages configuration
+        continue-on-error: true
         env:
           GH_TOKEN: ${{ github.token }}
-        run: |
-          gh api --method PUT "repos/${{ github.repository }}/pages" \
-            -f build_type=workflow ||
-          gh api --method POST "repos/${{ github.repository }}/pages" \
-            -f build_type=workflow
+        run: gh api "repos/${{ github.repository }}/pages"
 
       - uses: actions/configure-pages@v5
 
