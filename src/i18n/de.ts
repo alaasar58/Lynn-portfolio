@@ -27,13 +27,12 @@ export const de: Dictionary = {
   },
 
   hero: {
-    role: 'Mom- & Lifestyle-Creator',
+    role: 'Digital Creator',
     location: 'Hamburg, Deutschland',
-    title: 'Mutterschaft, Beauty und',
-    titleAccent: 'alles dazwischen.',
-    lede: 'Ich bin Lynn — Mom- und Lifestyle-Creator aus Hamburg. Ich mache ästhetischen Short-Form-Content rund um Mutterschaft, Skincare, Get Ready With Me, Unboxing und Reisen.',
-    primaryCta: 'Zusammenarbeiten',
-    secondaryCta: 'Arbeiten ansehen',
+    tagline: 'Echte Produkte. Echtes Leben. Mit Bedacht gemacht.',
+    ctaWork: 'Arbeiten ansehen',
+    ctaContact: 'Zusammenarbeiten',
+    credLanguages: ['Arabisch', 'Englisch', 'Deutsch'],
     pillarsLabel: 'Was ich erstelle',
     pillars: [
       'Mutterschaft',
@@ -43,12 +42,6 @@ export const de: Dictionary = {
       'Reisen',
       'Ästhetischer Lifestyle',
     ],
-    proof: {
-      community: 'Instagram-Community',
-      languages: 'Sprachen vor der Kamera & im Text',
-      categories: 'Content-Kategorien',
-      reply: 'Übliche Antwortzeit',
-    },
   },
 
   work: {
@@ -376,6 +369,6 @@ export const de: Dictionary = {
   footer: {
     cta: 'Zusammenarbeiten',
     email: 'E-Mail',
-    rights: 'Mom- & Lifestyle-Creator',
+    rights: 'Digital Creator',
   },
 }

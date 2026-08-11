@@ -2,6 +2,7 @@ import { LanguageProvider, useI18n } from './i18n'
 import { Header } from './components/Header'
 import { Footer } from './components/Footer'
 import { LanguageModal } from './components/LanguageModal'
+import { Pillars } from './components/Pillars'
 import { Hero } from './sections/Hero'
 import { Work } from './sections/Work'
 import { Services } from './sections/Services'
@@ -31,6 +32,7 @@ function Site() {
 
       <main>
         <Hero />
+        <Pillars />
         <Work />
         <Services />
         <About />

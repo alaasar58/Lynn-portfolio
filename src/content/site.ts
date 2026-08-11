@@ -34,17 +34,27 @@ export const site = {
   ],
 } as const
 
-/**
- * The hero portrait.
+/*
+ * =============================================================================
+ *  IMAGES — every one of these is a temporary file you replace
+ * =============================================================================
+ *  Overwrite the file at the path below, keeping the same name, and the site
+ *  picks it up. No code change, ever.
  *
- * `public/media/portrait.jpg` is currently a soft placeholder wash, not a
- * photograph. Drop a real portrait in at the same path — same filename — and
- * the hero picks it up with no code change.
+ *      public/media/hero/portrait.jpg     the large hero image
+ *      public/media/about/portrait.jpg    the image beside the About text
+ *      public/media/work/<id>.jpg|mp4     portfolio covers and clips
+ *      public/media/reels/<code>.jpg      covers for the featured Reels
  *
- * The frame is a tall arch, so a 4:5 portrait crop with the face in the upper
- * half works best. Around 1000 × 1250 is plenty.
+ *  What is there now was generated for this site: warm, soft-focus scenes in
+ *  the palette, so nothing reads as an empty box before your photos arrive.
+ *  Both portraits are 4:5 — a 4:5 crop replaces them cleanly.
+ * =============================================================================
  */
-export const portrait = '/media/portrait.jpg'
+export const images = {
+  heroPortrait: '/media/hero/portrait.jpg',
+  aboutPortrait: '/media/about/portrait.jpg',
+}
 
 /*
  * =============================================================================
@@ -72,23 +82,6 @@ export const nav = [
   { key: 'partnerships', href: '#partnerships' },
   { key: 'pricing', href: '#pricing' },
 ] as const
-
-/**
- * Figures in the hero credibility strip. Labels come from `hero.proof`.
- * The community figure has no `value` — it is derived from `socialStats` so the
- * follower count only ever lives in one place.
- */
-export type ProofStat = {
-  key: 'community' | 'languages' | 'categories' | 'reply'
-  value?: string
-}
-
-export const heroProof: ProofStat[] = [
-  { key: 'community' },
-  { key: 'languages', value: '3' },
-  { key: 'categories', value: '6' },
-  { key: 'reply', value: '48h' },
-]
 
 /* -------------------------------------------------------------------------- */
 /*  FEATURED INSTAGRAM REELS                                                  */

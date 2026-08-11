@@ -1,7 +1,8 @@
 import { Section } from '../components/Section'
-import { socialStats } from '../content/site'
+import { images, socialStats } from '../content/site'
 import { useI18n } from '../i18n'
 import { formatCount } from '../lib/format'
+import { asset } from '../lib/asset'
 
 /**
  * About. Personal but brief — positioning, languages and audience credibility,
@@ -39,6 +40,18 @@ export function About() {
         </div>
 
         <div className="space-y-10 lg:col-span-5">
+          {/* Replace public/media/about/portrait.jpg to change this image. */}
+          <img
+            src={asset(images.aboutPortrait)}
+            alt=""
+            aria-hidden="true"
+            width={900}
+            height={1125}
+            loading="lazy"
+            decoding="async"
+            className="aspect-[5/4] w-full rounded-card object-cover"
+          />
+
           <div>
             <h3 className="text-xs font-medium uppercase tracking-[0.16em] text-ink-muted">
               {t.about.languagesTitle}

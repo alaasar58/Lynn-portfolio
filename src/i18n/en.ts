@@ -31,14 +31,14 @@ export const en = {
   },
 
   hero: {
-    role: 'Mom & Lifestyle Digital Creator',
+    role: 'Digital Creator',
     location: 'Hamburg, Germany',
-    /* The headline is set in two parts so the second can be styled in italic. */
-    title: 'Motherhood, beauty, and',
-    titleAccent: 'everything in between.',
-    lede: "I'm Lynn — a mom and lifestyle creator in Hamburg, making aesthetic short-form content around motherhood, skincare, getting ready, unboxing and travel.",
-    primaryCta: 'Work With Me',
-    secondaryCta: 'View My Work',
+    tagline: 'Real products. Real life. Thoughtfully created.',
+    /* ctaWork opens the portfolio; ctaContact is the inquiry CTA, reused by the
+       header button so the two never drift apart. */
+    ctaWork: 'View My Work',
+    ctaContact: 'Work With Me',
+    credLanguages: ['Arabic', 'English', 'German'],
     pillarsLabel: 'What I create',
     pillars: [
       'Motherhood',
@@ -48,12 +48,6 @@ export const en = {
       'Travel',
       'Aesthetic lifestyle',
     ],
-    proof: {
-      community: 'Instagram community',
-      languages: 'Languages on camera & in text',
-      categories: 'Content categories',
-      reply: 'Typical reply time',
-    },
   },
 
   work: {
@@ -378,7 +372,7 @@ export const en = {
   footer: {
     cta: 'Work With Me',
     email: 'Email',
-    rights: 'Mom & Lifestyle Digital Creator',
+    rights: 'Digital Creator',
   },
 }
 

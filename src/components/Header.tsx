@@ -62,7 +62,7 @@ export function Header() {
           <LanguageSwitcher className="hidden sm:flex" />
 
           <a href="#contact" className="btn-primary hidden px-5 sm:inline-flex">
-            {t.hero.primaryCta}
+            {t.hero.ctaContact}
           </a>
 
           <button
@@ -104,7 +104,7 @@ export function Header() {
           ))}
 
           <a href="#contact" onClick={() => setOpen(false)} className="btn-primary mt-5 w-full">
-            {t.hero.primaryCta}
+            {t.hero.ctaContact}
           </a>
 
           <LanguageSwitcher className="mt-4 self-start sm:hidden" />

@@ -1,7 +1,7 @@
-# Lynn — Lifestyle & Product Content Creator
+# Lynn Kawqge — Digital Creator
 
-Portfolio and inquiry site for a multilingual lifestyle and product content
-creator, aimed at consumer brands, e-commerce companies and agencies.
+Portfolio and inquiry site for a multilingual digital creator, aimed at consumer
+brands, e-commerce companies and agencies.
 
 Built with **React + TypeScript + Vite + Tailwind CSS v4**. Static output — it
 runs on GitHub Pages, Netlify, Vercel or any static host, with no server needed.
@@ -55,18 +55,24 @@ Everything language-independent:
 | Portfolio categories                | `categoryKeys`     |
 | Brands listed under Work            | `experienceBrands` |
 | Prices                              | `pricingTiers`     |
-| Hero figures (27K, 3, 5, 48h)       | `heroProof`        |
+| Hero and About images               | `images`           |
+| Follower counts                     | `socialStats`      |
 
 Anything still needing a real value is marked `// TODO`.
 
-### Portfolio media
+### Images and video
 
-Portfolio videos and covers are named after each item's `id`:
+Every visual is a file under `public/media/`, grouped by where it appears:
 
 ```
-public/media/work/morning-light.mp4
-public/media/work/morning-light.jpg
+public/media/hero/portrait.jpg     the large hero image
+public/media/about/portrait.jpg    image beside the About text
+public/media/work/<id>.mp4|.jpg    portfolio clip and cover
+public/media/reels/<code>.jpg      cover for a featured Reel
 ```
+
+No component references an image by URL. The paths sit in `images`, `work` and
+`featuredReels` in `src/content/site.ts` and nowhere else.
 
 **Overwrite the file keeping the same name and the site picks it up** — no code
 change. The files currently there are generated placeholders in the site's
@@ -177,7 +183,7 @@ src/
   i18n/               en.ts / de.ts / ar.ts — all visible text
                       index.tsx — language state, storage, RTL
   content/site.ts     links, media paths, prices, portfolio structure
-  components/         Header, Footer, Section, VideoCard,
+  components/         Header, Footer, Section, VideoCard, Pillars,
                       FeaturedReels, ReelLightbox,
                       LanguageModal, LanguageSwitcher
   sections/           Hero, Work, Services, About, Process,
@@ -185,8 +191,10 @@ src/
   lib/useReveal.ts    scroll-in animation hook
   index.css           design tokens + shared utility classes
 public/
+  media/hero/         the large hero image
+  media/about/        image beside the About text
   media/work/         portfolio videos and covers
-  media/reels/        optional Reel covers
+  media/reels/        covers for the featured Reels
 ```
 
 ## Performance & accessibility notes

@@ -78,6 +78,12 @@
     line-height: 1.35;
   }
 
+  /* The hero divider is drawn for a left-to-right composition; RTL mirrors the
+     grid, so the line has to mirror with it. */
+  [dir='rtl'] .hero-divider {
+    transform: scaleX(-1);
+  }
+
   /* Latin-derived tracking looks wrong on Arabic labels and eyebrows. */
   html[lang='ar'] .eyebrow,
   html[lang='ar'] [class*='tracking-['] {
