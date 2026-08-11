@@ -15,6 +15,8 @@
 
 export const site = {
   name: 'Lynn',
+  /** Full name, used in the hero wordmark and the footer. */
+  fullName: 'Lynn Kawqge',
   email: 'lynnkawqge.ads@gmail.com',
   // TODO: only needs changing if a custom domain is added.
   url: 'https://alaasar58.github.io/Lynn-portfolio/',
@@ -31,6 +33,18 @@ export const site = {
     },
   ],
 } as const
+
+/**
+ * The hero portrait.
+ *
+ * `public/media/portrait.jpg` is currently a soft placeholder wash, not a
+ * photograph. Drop a real portrait in at the same path — same filename — and
+ * the hero picks it up with no code change.
+ *
+ * The frame is a tall arch, so a 4:5 portrait crop with the face in the upper
+ * half works best. Around 1000 × 1250 is plenty.
+ */
+export const portrait = '/media/portrait.jpg'
 
 /*
  * =============================================================================
@@ -72,7 +86,7 @@ export type ProofStat = {
 export const heroProof: ProofStat[] = [
   { key: 'community' },
   { key: 'languages', value: '3' },
-  { key: 'categories', value: '5' },
+  { key: 'categories', value: '6' },
   { key: 'reply', value: '48h' },
 ]
 
@@ -125,15 +139,22 @@ export const reelDisplay: 'embed' | 'link' = 'embed'
 /*  PORTFOLIO                                                                 */
 /* -------------------------------------------------------------------------- */
 
-export type CategoryKey = 'lifestyle' | 'product' | 'family' | 'beauty' | 'fashion'
+export type CategoryKey =
+  | 'motherhood'
+  | 'beauty'
+  | 'grwm'
+  | 'unboxing'
+  | 'travel'
+  | 'lifestyle'
 
 /** Filter order in the portfolio. Labels come from `work.categories`. */
 export const categoryKeys: CategoryKey[] = [
-  'lifestyle',
-  'product',
-  'family',
+  'motherhood',
   'beauty',
-  'fashion',
+  'grwm',
+  'unboxing',
+  'travel',
+  'lifestyle',
 ]
 
 export type WorkItem = {
@@ -176,10 +197,10 @@ export const work: WorkItem[] = [
     featured: true,
   },
   {
-    id: 'feeding-routine',
-    category: 'family',
-    video: '/media/work/feeding-routine.mp4',
-    poster: '/media/work/feeding-routine.jpg',
+    id: 'grwm-evening',
+    category: 'grwm',
+    video: '/media/work/grwm-evening.mp4',
+    poster: '/media/work/grwm-evening.jpg',
   },
   {
     id: 'skincare-routine',
@@ -188,21 +209,27 @@ export const work: WorkItem[] = [
     poster: '/media/work/skincare-routine.jpg',
   },
   {
-    id: 'product-detail',
-    category: 'product',
-    video: '/media/work/product-detail.mp4',
-    poster: '/media/work/product-detail.jpg',
+    id: 'feeding-routine',
+    category: 'motherhood',
+    video: '/media/work/feeding-routine.mp4',
+    poster: '/media/work/feeding-routine.jpg',
   },
   {
-    id: 'styling',
-    category: 'fashion',
-    video: '/media/work/styling.mp4',
-    poster: '/media/work/styling.jpg',
+    id: 'unboxing',
+    category: 'unboxing',
+    video: '/media/work/unboxing.mp4',
+    poster: '/media/work/unboxing.jpg',
+  },
+  {
+    id: 'travel-day',
+    category: 'travel',
+    video: '/media/work/travel-day.mp4',
+    poster: '/media/work/travel-day.jpg',
     featured: true,
   },
   {
     id: 'baby-care',
-    category: 'family',
+    category: 'motherhood',
     video: '/media/work/baby-care.mp4',
     poster: '/media/work/baby-care.jpg',
   },
@@ -213,10 +240,10 @@ export const work: WorkItem[] = [
     poster: '/media/work/texture-closeup.jpg',
   },
   {
-    id: 'unboxing',
-    category: 'product',
-    video: '/media/work/unboxing.mp4',
-    poster: '/media/work/unboxing.jpg',
+    id: 'product-detail',
+    category: 'unboxing',
+    video: '/media/work/product-detail.mp4',
+    poster: '/media/work/product-detail.jpg',
   },
   {
     id: 'everyday-ritual',

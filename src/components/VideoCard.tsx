@@ -38,6 +38,16 @@ export function VideoCard({ item, priority = false }: VideoCardProps) {
 
   const posterUrl = asset(item.poster)
   const videoUrl = asset(item.video)
+  /*
+   * A WebM sibling of the same name, offered after the MP4.
+   *
+   * A browser picks the first source it can actually decode. Chrome, Safari,
+   * Edge and iOS all take the MP4, so replacing that one file is enough for
+   * effectively every visitor. The WebM only ever gets used by Chromium builds
+   * shipped without the H.264 decoder — common on Linux — which would otherwise
+   * show a frozen cover image instead of a playing video.
+   */
+  const webmUrl = videoUrl?.replace(/\.mp4$/, '.webm')
   const labels = t.work.items[item.id as keyof typeof t.work.items]
   const title = labels?.title ?? item.id
   const note = labels?.note ?? ''
@@ -78,6 +88,19 @@ export function VideoCard({ item, priority = false }: VideoCardProps) {
       visibility.disconnect()
     }
   }, [item.video])
+
+  /*
+   * A <video> that was rendered without any <source> has already reported "no
+   * source" by the time lazy attachment adds one. Appending a child does not
+   * restart that process on its own — the element has to be told to look again.
+   */
+  useEffect(() => {
+    const video = videoRef.current
+    if (!video || !attached) return
+    if (video.networkState === video.NETWORK_NO_SOURCE || video.readyState === 0) {
+      video.load()
+    }
+  }, [attached])
 
   // Drive playback from visibility.
   useEffect(() => {
@@ -148,7 +171,12 @@ export function VideoCard({ item, priority = false }: VideoCardProps) {
             aria-label={title}
             className="relative h-full w-full object-cover transition-transform duration-[1.2s] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.04]"
           >
-            {attached && <source src={videoUrl} type="video/mp4" />}
+            {attached && (
+              <>
+                <source src={videoUrl} type="video/mp4" />
+                {webmUrl !== videoUrl && <source src={webmUrl} type="video/webm" />}
+              </>
+            )}
           </video>
         )}
 

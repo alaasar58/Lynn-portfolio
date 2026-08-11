@@ -31,12 +31,23 @@ export const en = {
   },
 
   hero: {
-    eyebrow: 'Lifestyle & Product Content Creator',
-    title: 'Lifestyle & product content for brands.',
-    lede: 'Authentic short-form content designed to make products feel natural, useful and worth discovering.',
+    role: 'Mom & Lifestyle Digital Creator',
+    location: 'Hamburg, Germany',
+    /* The headline is set in two parts so the second can be styled in italic. */
+    title: 'Motherhood, beauty, and',
+    titleAccent: 'everything in between.',
+    lede: "I'm Lynn — a mom and lifestyle creator in Hamburg, making aesthetic short-form content around motherhood, skincare, getting ready, unboxing and travel.",
     primaryCta: 'Work With Me',
     secondaryCta: 'View My Work',
-    location: 'Germany · Working with brands worldwide',
+    pillarsLabel: 'What I create',
+    pillars: [
+      'Motherhood',
+      'Skincare',
+      'Get Ready With Me',
+      'Unboxing',
+      'Travel',
+      'Aesthetic lifestyle',
+    ],
     proof: {
       community: 'Instagram community',
       languages: 'Languages on camera & in text',
@@ -72,11 +83,12 @@ export const en = {
     mute: 'Mute',
     placeholderNote: 'Placeholder preview — final footage on request.',
     categories: {
+      motherhood: 'Motherhood',
+      beauty: 'Beauty & Skincare',
+      grwm: 'Get Ready With Me',
+      unboxing: 'Unboxing',
+      travel: 'Travel',
       lifestyle: 'Lifestyle',
-      product: 'Product',
-      family: 'Family & Baby',
-      beauty: 'Beauty',
-      fashion: 'Fashion & Accessories',
     },
     items: {
       'morning-light': {
@@ -111,9 +123,13 @@ export const en = {
         title: 'Texture & finish',
         note: 'Macro detail · slow motion',
       },
-      styling: {
-        title: 'Styling',
-        note: 'Fabric and texture · movement',
+      'grwm-evening': {
+        title: 'Evening get ready',
+        note: 'GRWM · natural light · voiceover',
+      },
+      'travel-day': {
+        title: 'Travel day',
+        note: 'Travel diary · slow, aesthetic pacing',
       },
     },
   },
@@ -159,10 +175,10 @@ export const en = {
 
   about: {
     eyebrow: 'About',
-    title: 'I make products feel like part of a real life — because they are.',
+    title: 'A mom, a creator, and a soft spot for the everyday.',
     paragraphs: [
-      'I create lifestyle and product content for brands: short-form video built around products I actually use. Real product, real use, real experience — that is the order I work in, and it is the reason the content lands.',
-      'My background is in everyday lifestyle content, with a strong specialisation in family and baby products, alongside beauty, skincare, fashion and everyday e-commerce products. My community of around 27,000 responds best to content that is genuinely useful, so that is what I build.',
+      "I'm Lynn, a mom and lifestyle creator based in Hamburg, Germany. My focus is on motherhood, skincare, get ready with me, unboxing, traveling, and aesthetic lifestyle content.",
+      'For brands, that means short-form video built around products I actually use. Real product, real use, real experience — that is the order I work in, and it is the reason the content lands. My community of around 27,000 responds best to content that is genuinely useful, so that is what I build.',
       'I work in Arabic and English on camera and as voiceover, and in German for captions, subtitles, scripts and on-screen text — which makes it straightforward to adapt one product for several markets.',
       'I am honest about what a product does. If something is worth mentioning, I mention it. That is what keeps the recommendation credible, and it is what makes the content work.',
     ],
@@ -362,7 +378,7 @@ export const en = {
   footer: {
     cta: 'Work With Me',
     email: 'Email',
-    rights: 'Lifestyle & Product Content Creator',
+    rights: 'Mom & Lifestyle Digital Creator',
   },
 }
 

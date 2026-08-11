@@ -13,6 +13,14 @@ public/media/work/morning-light.jpg   ← the cover image
 **To replace a placeholder, overwrite the file keeping the same name.** No code
 change, no component edit — the card picks up the new file automatically.
 
+You may also see a `.webm` next to each `.mp4`. Browsers pick the first source
+they can decode, and Chrome, Safari, Edge and iOS all take the MP4 — so
+**replacing the MP4 alone is enough for effectively every visitor**. The WebM is
+only reached by Chromium builds shipped without the H.264 decoder (some Linux
+distributions), which would otherwise show a frozen cover image. If you replace
+an MP4 and want to be thorough, just delete the matching `.webm`; nothing
+breaks either way.
+
 The files currently in this folder are generated placeholders: soft-focus
 gradients in the site's palette, so the portfolio looks finished before the real
 footage arrives. They are small on purpose (~25 KB each).

@@ -27,12 +27,22 @@ export const de: Dictionary = {
   },
 
   hero: {
-    eyebrow: 'Lifestyle- & Produkt-Content-Creator',
-    title: 'Lifestyle- & Produkt-Content für Marken.',
-    lede: 'Authentischer Short-Form-Content, der Produkte natürlich, nützlich und entdeckenswert wirken lässt.',
+    role: 'Mom- & Lifestyle-Creator',
+    location: 'Hamburg, Deutschland',
+    title: 'Mutterschaft, Beauty und',
+    titleAccent: 'alles dazwischen.',
+    lede: 'Ich bin Lynn — Mom- und Lifestyle-Creator aus Hamburg. Ich mache ästhetischen Short-Form-Content rund um Mutterschaft, Skincare, Get Ready With Me, Unboxing und Reisen.',
     primaryCta: 'Zusammenarbeiten',
     secondaryCta: 'Arbeiten ansehen',
-    location: 'Deutschland · Für Marken weltweit',
+    pillarsLabel: 'Was ich erstelle',
+    pillars: [
+      'Mutterschaft',
+      'Skincare',
+      'Get Ready With Me',
+      'Unboxing',
+      'Reisen',
+      'Ästhetischer Lifestyle',
+    ],
     proof: {
       community: 'Instagram-Community',
       languages: 'Sprachen vor der Kamera & im Text',
@@ -68,11 +78,12 @@ export const de: Dictionary = {
     mute: 'Ton aus',
     placeholderNote: 'Platzhalter-Vorschau — finales Material auf Anfrage.',
     categories: {
+      motherhood: 'Mutterschaft',
+      beauty: 'Beauty & Skincare',
+      grwm: 'Get Ready With Me',
+      unboxing: 'Unboxing',
+      travel: 'Reisen',
       lifestyle: 'Lifestyle',
-      product: 'Produkt',
-      family: 'Familie & Baby',
-      beauty: 'Beauty',
-      fashion: 'Mode & Accessoires',
     },
     items: {
       'morning-light': {
@@ -107,9 +118,13 @@ export const de: Dictionary = {
         title: 'Textur & Finish',
         note: 'Makro-Detail · Zeitlupe',
       },
-      styling: {
-        title: 'Styling',
-        note: 'Stoff und Textur · Bewegung',
+      'grwm-evening': {
+        title: 'Get Ready am Abend',
+        note: 'GRWM · natürliches Licht · Voiceover',
+      },
+      'travel-day': {
+        title: 'Reisetag',
+        note: 'Reisetagebuch · ruhiges, ästhetisches Tempo',
       },
     },
   },
@@ -155,10 +170,10 @@ export const de: Dictionary = {
 
   about: {
     eyebrow: 'Über mich',
-    title: 'Ich zeige Produkte als Teil eines echten Alltags — weil sie es sind.',
+    title: 'Mutter, Creator — und ein Faible für den Alltag.',
     paragraphs: [
-      'Ich erstelle Lifestyle- und Produkt-Content für Marken: Short-Form-Video rund um Produkte, die ich tatsächlich benutze. Echtes Produkt, echte Nutzung, echte Erfahrung — in dieser Reihenfolge arbeite ich, und genau deshalb funktioniert der Content.',
-      'Mein Hintergrund liegt im alltäglichen Lifestyle-Content, mit einer starken Spezialisierung auf Familien- und Babyprodukte, dazu Beauty, Skincare, Mode und alltägliche E-Commerce-Produkte. Meine Community von rund 27.000 reagiert am besten auf Inhalte, die wirklich nützlich sind — also genau darauf baue ich.',
+      'Ich bin Lynn, Mom- und Lifestyle-Creator aus Hamburg. Mein Fokus liegt auf Mutterschaft, Skincare, Get Ready With Me, Unboxing, Reisen und ästhetischem Lifestyle-Content.',
+      'Für Marken heißt das: Short-Form-Video rund um Produkte, die ich tatsächlich benutze. Echtes Produkt, echte Nutzung, echte Erfahrung — in dieser Reihenfolge arbeite ich, und genau deshalb funktioniert der Content. Meine Community von rund 27.000 reagiert am besten auf Inhalte, die wirklich nützlich sind.',
       'Ich arbeite auf Arabisch und Englisch vor der Kamera und als Voiceover, auf Deutsch für Captions, Untertitel, Skripte und Text im Bild — so lässt sich ein Produkt unkompliziert für mehrere Märkte anpassen.',
       'Ich bin ehrlich damit, was ein Produkt kann. Wenn etwas erwähnenswert ist, erwähne ich es. Das hält die Empfehlung glaubwürdig — und genau das lässt den Content wirken.',
     ],
@@ -361,6 +376,6 @@ export const de: Dictionary = {
   footer: {
     cta: 'Zusammenarbeiten',
     email: 'E-Mail',
-    rights: 'Lifestyle- & Produkt-Content-Creator',
+    rights: 'Mom- & Lifestyle-Creator',
   },
 }
