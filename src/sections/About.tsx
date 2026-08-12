@@ -27,8 +27,8 @@ export function About() {
     <Section id="about" tone="sand" eyebrow={t.about.eyebrow} title={t.about.title}>
       <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
         <div className="space-y-5 lg:col-span-7">
-          {t.about.paragraphs.map((paragraph) => (
-            <p key={paragraph.slice(0, 24)} className="leading-relaxed text-ink-soft">
+          {t.about.paragraphs.map((paragraph, index) => (
+            <p key={index} className="leading-relaxed text-ink-soft">
               {paragraph}
             </p>
           ))}
@@ -45,8 +45,8 @@ export function About() {
             src={asset(images.aboutPortrait)}
             alt=""
             aria-hidden="true"
-            width={900}
-            height={1125}
+            width={1200}
+            height={960}
             loading="lazy"
             decoding="async"
             className="aspect-[5/4] w-full rounded-card object-cover"

@@ -90,7 +90,7 @@ export function Hero() {
       <div className="shell relative">
         <div className="grid items-center gap-14 pb-20 pt-28 sm:pt-32 lg:min-h-[88vh] lg:grid-cols-12 lg:gap-8 lg:pb-24">
           {/* ------------------------------------------------------- Identity */}
-          <div className="relative z-10 lg:col-span-6">
+          <div className="relative z-10 lg:col-span-5">
             <p className="text-[0.7rem] font-medium uppercase tracking-[0.24em] text-ink-muted">
               {t.hero.location}
             </p>
@@ -133,8 +133,8 @@ export function Hero() {
           </div>
 
           {/* ---------------------------------------------------------- Image */}
-          <div className="lg:col-span-6">
-            <div className="relative mx-auto w-full max-w-[21rem] sm:max-w-[24rem] lg:me-[-4vw] lg:ms-auto lg:max-w-[30rem]">
+          <div className="lg:col-span-7">
+            <div className="relative mx-auto w-full max-w-[23rem] sm:max-w-[26rem] lg:me-[-6vw] lg:ms-auto lg:max-w-[34rem]">
               {/* Contour echo, offset — the second plate of the print. */}
               <div
                 aria-hidden="true"
@@ -145,8 +145,8 @@ export function Hero() {
               <img
                 src={asset(images.heroPortrait)}
                 alt={site.fullName}
-                width={1000}
-                height={1250}
+                width={1200}
+                height={1500}
                 loading="eager"
                 fetchPriority="high"
                 decoding="async"

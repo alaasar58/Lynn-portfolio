@@ -24,7 +24,7 @@ export function Footer() {
         </div>
 
         <div className="mt-10 flex flex-col gap-8 sm:flex-row sm:justify-between">
-          <nav aria-label="Footer" className="flex flex-wrap gap-x-6 gap-y-2">
+          <nav aria-label={t.nav.ariaFooter} className="flex flex-wrap gap-x-6 gap-y-2">
             {nav.map((entry) => (
               <a
                 key={entry.href}

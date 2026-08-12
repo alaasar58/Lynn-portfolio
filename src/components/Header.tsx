@@ -46,7 +46,7 @@ export function Header() {
           <span className="text-blush-deep">.</span>
         </a>
 
-        <nav aria-label="Primary" className="hidden items-center gap-7 lg:flex">
+        <nav aria-label={t.nav.ariaPrimary} className="hidden items-center gap-7 lg:flex">
           {nav.map((entry) => (
             <a
               key={entry.href}
@@ -91,7 +91,7 @@ export function Header() {
 
       {/* Mobile navigation */}
       <div id="mobile-nav" hidden={!open} className="border-t border-line bg-bone lg:hidden">
-        <nav aria-label="Primary mobile" className="shell flex flex-col py-5">
+        <nav aria-label={t.nav.ariaMobile} className="shell flex flex-col py-5">
           {nav.map((entry) => (
             <a
               key={entry.href}

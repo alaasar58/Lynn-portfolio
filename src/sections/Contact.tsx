@@ -41,10 +41,22 @@ export function Contact() {
     { name: 'timeline', label: t.contact.fields.timeline, options: t.contact.timelines, wide: true },
   ]
 
+  /*
+   * Builds the body of the fallback email.
+   *
+   * Each input's `name` attribute is deliberately identical to its key under
+   * `t.contact.fields`, so the mail is labelled in the visitor's language
+   * instead of with raw field names. Renaming one without the other silently
+   * falls back to the raw name.
+   */
   const buildSummary = (data: FormData) => {
+    const labels = t.contact.fields as Record<string, string>
     const lines: string[] = []
     for (const [key, value] of data.entries()) {
-      if (typeof value === 'string' && value.trim()) lines.push(`${key}: ${value}`)
+      if (key === 'website') continue // the honeypot never belongs in the mail
+      if (typeof value === 'string' && value.trim()) {
+        lines.push(`${labels[key] ?? key}: ${value}`)
+      }
     }
     return lines.join('\n')
   }
@@ -58,7 +70,7 @@ export function Contact() {
     if (data.get('website')) return
 
     if (!FORM_ENDPOINT) {
-      const subject = `Project inquiry — ${data.get('company') || data.get('name')}`
+      const subject = `${t.contact.mailSubject} — ${data.get('company') || data.get('name')}`
       window.location.href = `mailto:${site.email}?subject=${encodeURIComponent(
         subject,
       )}&body=${encodeURIComponent(buildSummary(data))}`
@@ -141,7 +153,7 @@ export function Contact() {
 
           {/* Honeypot — hidden from people, tempting to bots. */}
           <div aria-hidden="true" className="absolute start-[-9999px] h-0 w-0 overflow-hidden">
-            <label htmlFor="website">Website</label>
+            <label htmlFor="website">{t.contact.honeypot}</label>
             <input id="website" name="website" type="text" tabIndex={-1} autoComplete="off" />
           </div>
 
