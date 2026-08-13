@@ -73,6 +73,8 @@ export const de: Dictionary = {
     embedFallback: 'Wird nichts angezeigt? Öffne das Reel auf Instagram.',
     loadingReel: 'Reel wird geladen …',
     play: 'Abspielen',
+    unmute: 'Ton an',
+    mute: 'Ton aus',
     brandsHeading: 'Marken, mit denen ich gearbeitet habe',
     disclaimer:
       'Eine Mischung aus bezahlten Aufträgen und Inhalten mit Produkten, die ich selbst gekauft habe.',

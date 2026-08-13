@@ -86,6 +86,8 @@ export const en = {
     embedFallback: 'Not showing? Open the Reel on Instagram.',
     loadingReel: 'Loading the Reel…',
     play: 'Play',
+    unmute: 'Sound on',
+    mute: 'Sound off',
     brandsHeading: "Brands I've worked with",
     disclaimer:
       'A mix of paid work and content I made with products I bought myself.',

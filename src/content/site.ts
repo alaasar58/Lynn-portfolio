@@ -39,21 +39,16 @@ export const site = {
  *  IMAGES — every one of these is a temporary file you replace
  * =============================================================================
  *  Overwrite the file at the path below, keeping the same name, and the site
- *  picks it up. No code change, ever.
+ *  picks it up. No code change, ever. See public/media/UPLOAD.md for the full
+ *  list with formats and sizes.
  *
- *      public/media/hero/portrait.jpg     the large hero image
- *      public/media/about/portrait.jpg    the image beside the About text
- *      public/media/work/<id>.jpg|mp4     portfolio covers and clips
- *      public/media/reels/<code>.jpg      covers for the featured Reels
- *
- *  What is there now was generated for this site: warm, soft-focus scenes in
- *  the palette, so nothing reads as an empty box before your photos arrive.
- *  Both portraits are 4:5 — a 4:5 crop replaces them cleanly.
+ *      public/media/cover.jpg    the large image on page 1   4:5 portrait
+ *      public/media/about.jpg    beside the About text       5:4 landscape
  * =============================================================================
  */
 export const images = {
-  heroPortrait: '/media/hero/portrait.jpg',
-  aboutPortrait: '/media/about/portrait.jpg',
+  cover: '/media/cover.jpg',
+  about: '/media/about.jpg',
 }
 
 /*
@@ -101,49 +96,57 @@ export const nav = [
 ] as const
 
 /* -------------------------------------------------------------------------- */
-/*  FEATURED INSTAGRAM REELS                                                  */
+/*  THE THREE REELS                                                           */
 /* -------------------------------------------------------------------------- */
 
+/*
+ * The three clips that play in the phone frames on page 2.
+ *
+ * Each one is two files in `public/media/reels/`, named after its `id`:
+ *
+ *     reel-1.mp4    the clip that plays
+ *     reel-1.jpg    the still shown before it starts
+ *
+ * REPLACING ONE: overwrite the file, keep the name. Nothing in the code
+ * changes. See public/media/UPLOAD.md for formats and sizes.
+ *
+ * ADDING A FOURTH: one entry here plus the two files.
+ *
+ * `code` is the shortcode from a published Reel's URL —
+ * instagram.com/reel/<code>/ — and is optional. With it, the frame carries a
+ * link to the original post; without it, no link is shown rather than a broken
+ * one.
+ */
 export type Reel = {
-  /** The shortcode from the Reel URL: instagram.com/reel/<code>/ */
-  code: string
-  /** Cover image shown on the card. See the note below. */
-  poster?: string
+  /** File base name in public/media/reels/. */
+  id: string
+  video: string
+  poster: string
+  code?: string
 }
 
-/*
- * Instagram does not let a website read a Reel's thumbnail without an approved
- * API token, so each cover has to be an image we host ourselves.
- *
- * The files below are placeholders in the site palette. To use the real ones:
- * take a still from each Reel (a screenshot of the best frame is fine), and
- * overwrite the matching file keeping the same name —
- *
- *     public/media/reels/DabNET8N0QF.jpg
- *
- * No code change needed. Export at 1080 × 1920, vertical, around 200 KB.
- */
 export const featuredReels: Reel[] = [
-  { code: 'DabNET8N0QF', poster: '/media/reels/DabNET8N0QF.jpg' },
-  { code: 'DZ5mjgghM2X', poster: '/media/reels/DZ5mjgghM2X.jpg' },
-  { code: 'DZDj6BZttNH', poster: '/media/reels/DZDj6BZttNH.jpg' },
+  {
+    id: 'reel-1',
+    video: '/media/reels/reel-1.mp4',
+    poster: '/media/reels/reel-1.jpg',
+    code: 'DabNET8N0QF',
+  },
+  {
+    id: 'reel-2',
+    video: '/media/reels/reel-2.mp4',
+    poster: '/media/reels/reel-2.jpg',
+    code: 'DZ5mjgghM2X',
+  },
+  {
+    id: 'reel-3',
+    video: '/media/reels/reel-3.mp4',
+    poster: '/media/reels/reel-3.jpg',
+    code: 'DZDj6BZttNH',
+  },
 ]
 
 export const reelUrl = (code: string) => `https://www.instagram.com/reel/${code}/`
-
-export const reelEmbedUrl = (code: string) =>
-  `https://www.instagram.com/reel/${code}/embed/captioned/`
-
-/**
- * How a Reel card behaves when clicked.
- *
- *   'embed'  Opens the Reel in a lightbox using Instagram's official embed, so
- *            the visitor stays on the site. A direct link to the original post
- *            sits underneath in case the embed is blocked (ad blockers and some
- *            privacy settings refuse it).
- *   'link'   Skips the lightbox and opens the original Instagram post directly.
- */
-export const reelDisplay: 'embed' | 'link' = 'embed'
 
 /* -------------------------------------------------------------------------- */
 /*  BRANDS                                                                    */

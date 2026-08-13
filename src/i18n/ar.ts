@@ -75,6 +75,8 @@ export const ar: Dictionary = {
     embedFallback: 'لا يظهر المقطع؟ افتح الريل على إنستغرام.',
     loadingReel: 'جارٍ تحميل الريل …',
     play: 'تشغيل',
+    unmute: 'تشغيل الصوت',
+    mute: 'كتم الصوت',
     brandsHeading: 'براندات عملت معها',
     disclaimer:
       'مزيج من أعمال مدفوعة ومحتوى صوّرته بمنتجات اشتريتها بنفسي.',

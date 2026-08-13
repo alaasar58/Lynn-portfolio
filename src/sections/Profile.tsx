@@ -59,7 +59,7 @@ export function Profile() {
         <div className="lg:col-span-5">
           {/* Replace public/media/about/portrait.jpg to change this image. */}
           <img
-            src={asset(images.aboutPortrait)}
+            src={asset(images.about)}
             alt=""
             aria-hidden="true"
             width={1200}

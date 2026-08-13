@@ -184,7 +184,7 @@ export function Cover() {
               />
 
               <img
-                src={asset(images.heroPortrait)}
+                src={asset(images.cover)}
                 alt={site.fullName}
                 width={1200}
                 height={1500}
