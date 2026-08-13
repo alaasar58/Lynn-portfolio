@@ -4,7 +4,6 @@ import { Footer } from './components/Footer'
 import { LanguageModal } from './components/LanguageModal'
 import { Cover } from './sections/Cover'
 import { Profile } from './sections/Profile'
-import { Work } from './sections/Work'
 import { Audience } from './sections/Audience'
 import { Offer } from './sections/Offer'
 import { Contact } from './sections/Contact'
@@ -13,13 +12,9 @@ import { Contact } from './sections/Contact'
  * Four pages in one scroll, in the order a brand manager reads a media kit:
  *
  *   1  Cover      who she is, and how to reach her
- *   2  Profile    about me, the six topics she films, then the portfolio
+ *   2  Profile    about me, the published Reels, and the brands worked with
  *   3  Audience   who is watching, with nothing invented
  *   4  Offer      what she can make, what it starts at, and the inquiry form
- *
- * Work sits under Profile rather than standing alone: the phone frames say what
- * she makes, the grid is the evidence, and splitting them across two pages
- * would separate a claim from its proof.
  */
 function Site() {
   const { t } = useI18n()
@@ -38,7 +33,6 @@ function Site() {
       <main>
         <Cover />
         <Profile />
-        <Work />
         <Audience />
         <Offer />
         <Contact />

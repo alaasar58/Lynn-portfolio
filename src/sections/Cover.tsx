@@ -1,7 +1,8 @@
+import type { ReactElement } from 'react'
 import { images, site } from '../content/site'
 import { useI18n } from '../i18n'
 import { asset } from '../lib/asset'
-import { InstagramGlyph } from '../components/InstagramGlyph'
+import { InstagramGlyph, MailGlyph, TikTokGlyph } from '../components/Glyphs'
 
 /**
  * Page one. A cover, not a summary.
@@ -27,7 +28,13 @@ export function Cover() {
   const instagram = site.socials.find((social) => social.label === 'Instagram')
   const tiktok = site.socials.find((social) => social.label === 'TikTok')
 
-  type Contact = { label: string; value: string; href: string; external: boolean }
+  type Contact = {
+    label: string
+    value: string
+    href: string
+    external: boolean
+    Glyph: (props: { className?: string }) => ReactElement
+  }
 
   const contacts: Contact[] = [
     {
@@ -35,6 +42,7 @@ export function Cover() {
       value: site.email,
       href: `mailto:${site.email}`,
       external: false,
+      Glyph: MailGlyph,
     },
   ]
   if (instagram) {
@@ -43,6 +51,7 @@ export function Cover() {
       value: instagram.handle,
       href: instagram.href,
       external: true,
+      Glyph: InstagramGlyph,
     })
   }
   if (tiktok) {
@@ -51,6 +60,7 @@ export function Cover() {
       value: tiktok.handle,
       href: tiktok.href,
       external: true,
+      Glyph: TikTokGlyph,
     })
   }
 
@@ -114,9 +124,7 @@ export function Cover() {
             */}
             <h1 className="text-[clamp(3rem,13vw,5.6rem)] uppercase leading-[0.88] tracking-[-0.015em] lg:text-[clamp(3.5rem,6.4vw,6.2rem)]">
               <span className="block">{site.fullName.split(' ')[0]}</span>
-              <span className="block text-ink-soft">
-                {site.fullName.split(' ').slice(1).join(' ')}
-              </span>
+              <span className="block">{site.fullName.split(' ').slice(1).join(' ')}</span>
             </h1>
 
             <p className="mt-7 flex items-center gap-4">
@@ -127,11 +135,15 @@ export function Cover() {
             </p>
 
             {/*
-              The three ways to reach her. A stack of labelled lines rather than
-              a row of buttons: on a cover, contact details are information, not
-              a call to action.
+              The three ways to reach her: mark, then value, on one baseline.
+              No labels — "Instagram" beside the Instagram mark says it twice —
+              and no buttons, because on a cover these are details to read, not
+              actions to take. Stacked rather than in a row: at this column
+              width a row wraps, and a wrapped row leaves an orphan separator,
+              which is exactly the kind of small wrongness that makes a page
+              look unconsidered.
             */}
-            <ul className="mt-14 max-w-sm divide-y divide-line border-y border-line">
+            <ul className="mt-12 space-y-3.5 sm:mt-14">
               {contacts.map((entry) => (
                 <li key={entry.label}>
                   <a
@@ -139,36 +151,26 @@ export function Cover() {
                     {...(entry.external
                       ? { target: '_blank', rel: 'noreferrer noopener' }
                       : {})}
-                    className="group flex flex-col gap-1.5 py-4 sm:flex-row sm:items-baseline sm:justify-between sm:gap-6"
+                    className="group inline-flex items-center gap-3 text-ink transition-colors duration-300 hover:text-blush-deep"
                   >
-                    <span className="text-[0.68rem] font-medium uppercase tracking-[0.2em] text-ink-muted">
-                      {entry.label}
-                    </span>
+                    <entry.Glyph className="h-[1.1rem] w-[1.1rem] shrink-0 text-ink-muted transition-colors duration-300 group-hover:text-blush-deep" />
                     {/*
                       dir="ltr" isolates the Latin value. Without it the "@" of
                       a handle is a neutral character at an RTL boundary and
                       Arabic renders "lynn_kawqge@".
                     */}
-                    <span dir="ltr" className="relative font-display text-lg text-ink sm:text-xl">
-                      <span className="break-all">{entry.value}</span>
+                    <span dir="ltr" className="relative font-display text-base leading-none sm:text-lg">
+                      {entry.value}
                       {/* Rule grows from the leading edge on hover. */}
                       <span
                         aria-hidden="true"
-                        className="absolute inset-x-0 -bottom-0.5 h-px origin-[left] scale-x-0 bg-blush-deep transition-transform duration-500 ease-[var(--ease-soft)] group-hover:scale-x-100 rtl:origin-[right]"
+                        className="absolute inset-x-0 -bottom-1.5 h-px origin-[left] scale-x-0 bg-blush-deep transition-transform duration-500 ease-[var(--ease-soft)] group-hover:scale-x-100 rtl:origin-[right]"
                       />
                     </span>
                   </a>
                 </li>
               ))}
             </ul>
-
-            <a
-              href="#about"
-              className="mt-12 inline-flex items-center gap-3 text-[0.68rem] uppercase tracking-[0.2em] text-ink-muted transition-colors duration-300 hover:text-blush-deep"
-            >
-              {t.cover.scroll}
-              <span aria-hidden="true" className="cover-cue block h-6 w-px bg-blush-mid" />
-            </a>
           </div>
 
           {/* ---------------------------------------------------------- Image */}

@@ -146,174 +146,37 @@ export const reelEmbedUrl = (code: string) =>
 export const reelDisplay: 'embed' | 'link' = 'embed'
 
 /* -------------------------------------------------------------------------- */
-/*  PORTFOLIO                                                                 */
-/* -------------------------------------------------------------------------- */
-
-export type CategoryKey =
-  | 'motherhood'
-  | 'beauty'
-  | 'grwm'
-  | 'unboxing'
-  | 'travel'
-  | 'lifestyle'
-
-/** Filter order in the portfolio. Labels come from `work.categories`. */
-export const categoryKeys: CategoryKey[] = [
-  'motherhood',
-  'beauty',
-  'grwm',
-  'unboxing',
-  'travel',
-  'lifestyle',
-]
-
-export type WorkItem = {
-  /** Also the translation key under `work.items` in the dictionaries. */
-  id: string
-  category: CategoryKey
-  /** Looping preview. Autoplays muted once the card scrolls into view. */
-  video?: string
-  /** Still shown before playback starts. Always worth providing. */
-  poster?: string
-  /** Gives an item a double-width tile, for the strongest pieces. */
-  featured?: boolean
-  /** Only for confirmed paid work — shows a "Brand collaboration" badge. */
-  paid?: boolean
-  brand?: string
-}
-
-/*
- * REPLACING THE MEDIA
- * -------------------
- * Every file below lives in `public/media/work/` and is named after the item's
- * id. To swap in real footage, overwrite the file keeping the same name — no
- * code change needed:
- *
- *     public/media/work/morning-light.mp4   ← your video
- *     public/media/work/morning-light.jpg   ← your cover image
- *
- * The current files are generated placeholders in the site's palette. See
- * `public/media/README.md` for recommended export settings.
- *
- * To add an item: copy a block, give it a new id, drop in the two files, and
- * add the same id under `work.items` in each dictionary.
- */
-export const work: WorkItem[] = [
-  {
-    id: 'morning-light',
-    category: 'lifestyle',
-    video: '/media/work/morning-light.mp4',
-    poster: '/media/work/morning-light.jpg',
-    featured: true,
-  },
-  {
-    id: 'grwm-evening',
-    category: 'grwm',
-    video: '/media/work/grwm-evening.mp4',
-    poster: '/media/work/grwm-evening.jpg',
-  },
-  {
-    id: 'skincare-routine',
-    category: 'beauty',
-    video: '/media/work/skincare-routine.mp4',
-    poster: '/media/work/skincare-routine.jpg',
-  },
-  {
-    id: 'feeding-routine',
-    category: 'motherhood',
-    video: '/media/work/feeding-routine.mp4',
-    poster: '/media/work/feeding-routine.jpg',
-  },
-  {
-    id: 'unboxing',
-    category: 'unboxing',
-    video: '/media/work/unboxing.mp4',
-    poster: '/media/work/unboxing.jpg',
-  },
-  {
-    id: 'travel-day',
-    category: 'travel',
-    video: '/media/work/travel-day.mp4',
-    poster: '/media/work/travel-day.jpg',
-    featured: true,
-  },
-  {
-    id: 'baby-care',
-    category: 'motherhood',
-    video: '/media/work/baby-care.mp4',
-    poster: '/media/work/baby-care.jpg',
-  },
-  {
-    id: 'texture-closeup',
-    category: 'beauty',
-    video: '/media/work/texture-closeup.mp4',
-    poster: '/media/work/texture-closeup.jpg',
-  },
-  {
-    id: 'product-detail',
-    category: 'unboxing',
-    video: '/media/work/product-detail.mp4',
-    poster: '/media/work/product-detail.jpg',
-  },
-  {
-    id: 'everyday-ritual',
-    category: 'lifestyle',
-    video: '/media/work/everyday-ritual.mp4',
-    poster: '/media/work/everyday-ritual.jpg',
-  },
-]
-
-/* -------------------------------------------------------------------------- */
-/*  THE SIX PHONE FRAMES                                                      */
+/*  BRANDS                                                                    */
 /* -------------------------------------------------------------------------- */
 
 /*
- * The six topics shown in phone frames on the profile page, in the order they
- * appear: three across the top row, three across the bottom.
+ * Brands content has been created around. Presented as portfolio experience —
+ * not as a claim that each one was a paid collaboration.
  *
- * `caption` is the key under `reels.captions` in the dictionaries — that is
- * where the wording lives, in all three languages. `video` and `poster` point
- * at files already in `public/media/work/`, so a clip shown here is the same
- * file the portfolio grid uses. Overwrite the file to change what plays.
+ * ADDING ONE
+ * ----------
+ * Add a line here. A name on its own is enough and looks finished:
+ *
+ *     { name: 'Your Brand' },
+ *
+ * To show a logo instead, drop the file into `public/media/brands/` and point
+ * at it. SVG is best; a PNG with a transparent background also works. Logos
+ * render in greyscale and come to colour on hover, which is what keeps a mixed
+ * set of marks from looking like a patchwork:
+ *
+ *     { name: 'Your Brand', logo: '/media/brands/your-brand.svg' },
+ *
+ * `name` is used as the image's alt text, so fill it in either way. The grid
+ * fills row by row and handles any number of entries.
  */
-export const phoneReels = [
-  {
-    caption: 'motherhood',
-    video: '/media/work/feeding-routine.mp4',
-    poster: '/media/work/feeding-routine.jpg',
-  },
-  {
-    caption: 'dailyLife',
-    video: '/media/work/morning-light.mp4',
-    poster: '/media/work/morning-light.jpg',
-  },
-  {
-    caption: 'unboxing',
-    video: '/media/work/unboxing.mp4',
-    poster: '/media/work/unboxing.jpg',
-  },
-  {
-    caption: 'skincare',
-    video: '/media/work/skincare-routine.mp4',
-    poster: '/media/work/skincare-routine.jpg',
-  },
-  {
-    caption: 'getReadyWithMe',
-    video: '/media/work/grwm-evening.mp4',
-    poster: '/media/work/grwm-evening.jpg',
-  },
-  {
-    caption: 'travel',
-    video: '/media/work/travel-day.mp4',
-    poster: '/media/work/travel-day.jpg',
-  },
-] as const
+export type Brand = { name: string; logo?: string }
 
-/**
- * Products and brands content has been created around. Presented as portfolio
- * experience — not as a claim that each one was a paid collaboration.
- */
-export const experienceBrands = ['Farida Baby', 'MAM', 'Philips Avent', 'The Ordinary']
+export const brands: Brand[] = [
+  { name: 'Farida Baby' },
+  { name: 'MAM' },
+  { name: 'Philips Avent' },
+  { name: 'The Ordinary' },
+]
 
 /* -------------------------------------------------------------------------- */
 /*  PRICING                                                                   */

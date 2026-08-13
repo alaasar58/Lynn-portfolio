@@ -1,11 +1,13 @@
 import { Section } from '../components/Section'
-import { PhoneWall } from '../components/PhoneWall'
+import { Brands } from '../components/Brands'
+import { ReelPhones } from '../components/ReelPhones'
 import { images } from '../content/site'
 import { useI18n } from '../i18n'
 import { asset } from '../lib/asset'
 
 /**
- * Page two: who she is, then what she films.
+ * Page two: who she is, the Reels she has published, and who she has worked
+ * with.
  *
  * The introduction is deliberately three short paragraphs. A media kit is
  * skimmed, and the fastest way to lose a brand manager is a wall of text about
@@ -76,17 +78,14 @@ export function Profile() {
         </div>
       </div>
 
-      {/* ------------------------------------------------------ Phone frames */}
-      <div className="mt-28 lg:mt-36">
-        <header className="max-w-2xl">
-          <p className="eyebrow">{t.reels.eyebrow}</p>
-          <h2 className="mt-4 text-3xl leading-[1.15] sm:text-4xl">{t.reels.title}</h2>
-          <p className="mt-4 leading-relaxed text-ink-soft">{t.reels.lede}</p>
-        </header>
+      {/* -------------------------------------------------- Published Reels */}
+      <div className="mt-24 lg:mt-32">
+        <ReelPhones />
+      </div>
 
-        <div className="mt-14 lg:mt-20">
-          <PhoneWall />
-        </div>
+      {/* ------------------------------------------------------------ Brands */}
+      <div className="mt-20 border-t border-line pt-12 lg:mt-24">
+        <Brands />
       </div>
     </Section>
   )

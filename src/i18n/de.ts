@@ -38,15 +38,14 @@ export const de: Dictionary = {
     emailLabel: 'E-Mail',
     instagramLabel: 'Instagram',
     tiktokLabel: 'TikTok',
-    scroll: 'Scrollen',
   },
 
   about: {
     eyebrow: 'Über mich',
     title: 'Ich bin Lynn.',
     paragraphs: [
-      'Digital Creator aus Hamburg, und Mutter. Ich filme die gewöhnlichen Teile eines Tages und versuche, sie so aussehen zu lassen, wie sie sind.',
-      'Ich benutze ein Produkt erst und filme es dann. Diese Reihenfolge ist die ganze Methode, und ich glaube, deshalb wirken die Videos glaubwürdig.',
+      'Ich bin Mama und Lifestyle-Creator aus Hamburg.',
+      'Mein Schwerpunkt liegt auf Mutterschaft, Hautpflege, GRWM, Unboxing, Reisen und ästhetischem Lifestyle-Content.',
       'Vor der Kamera arbeite ich auf Arabisch und Englisch, auf Deutsch schreibe ich Untertitel, Captions und Skripte. Ein Produkt, mehrere Zielgruppen, ohne zweiten Drehtag.',
     ],
     valuesTitle: 'Wie ich Marken aussuche',
@@ -64,96 +63,19 @@ export const de: Dictionary = {
     ],
   },
 
-  reels: {
-    eyebrow: 'Inhalte',
-    title: 'Sechs Themen, die ich filme.',
-    lede: 'Dafür kommen meine Zuschauerinnen wieder.',
-    captions: {
-      motherhood: 'Mutterschaft',
-      dailyLife: 'Alltag',
-      unboxing: 'Unboxing',
-      skincare: 'Hautpflege',
-      getReadyWithMe: 'Get Ready With Me',
-      travel: 'Reisen',
-    },
-  },
 
   work: {
-    eyebrow: 'Ausgewählte Arbeiten',
-    title: 'Videos, die wie ein echter Tag aussehen.',
-    lede: 'Zuerst meine veröffentlichten Reels, danach alles nach Themen sortiert.',
     featuredHeading: 'Auf Instagram veröffentlicht',
     viewProfile: 'Profil ansehen',
-    seeMore: 'Mehr von mir auf Instagram',
-    byCategory: 'Nach Thema',
-    filterLabel: 'Arbeiten nach Thema filtern',
-    all: 'Alle',
-    empty: 'Zu diesem Thema kommt bald mehr.',
-    brandsHeading: 'Produkte und Marken, zu denen ich Inhalte gemacht habe',
-    disclaimer:
-      'Das hier ist eine Mischung aus bezahlten Aufträgen und Inhalten mit Produkten, die ich selbst gekauft habe. Wo eine Marke für ein Video bezahlt hat, steht es auf der Karte.',
-    portfolioBadge: 'Eigener Inhalt',
-    collaborationBadge: 'Bezahlte Zusammenarbeit',
     reelBadge: 'Reel',
     watchOnInstagram: 'Auf Instagram ansehen',
     openOnInstagram: 'Auf Instagram öffnen',
     embedFallback: 'Wird nichts angezeigt? Öffne das Reel auf Instagram.',
     loadingReel: 'Reel wird geladen …',
     play: 'Abspielen',
-    pause: 'Pause',
-    unmute: 'Ton an',
-    mute: 'Ton aus',
-    placeholderNote: 'Das sind Platzhalter. Echtes Material schicke ich dir gern.',
-    categories: {
-      motherhood: 'Mutterschaft',
-      beauty: 'Beauty und Hautpflege',
-      grwm: 'Get Ready With Me',
-      unboxing: 'Unboxing',
-      travel: 'Reisen',
-      lifestyle: 'Alltag',
-    },
-    items: {
-      'morning-light': {
-        title: 'Morgenlicht',
-        note: 'Ruhige Alltagsaufnahmen, natürliches Tempo',
-      },
-      'everyday-ritual': {
-        title: 'Alltagsritual',
-        note: 'Ein Produkt mitten in einem normalen Morgen',
-      },
-      'product-detail': {
-        title: 'Produktdetail',
-        note: 'Nah dran, mit Text im Bild',
-      },
-      unboxing: {
-        title: 'Erster Eindruck',
-        note: 'Karton auf, schnelle Schnitte, Voiceover',
-      },
-      'feeding-routine': {
-        title: 'Fütterungsroutine',
-        note: 'Zeigen, wie es funktioniert, in einer echten Situation',
-      },
-      'baby-care': {
-        title: 'Baby-Essentials',
-        note: 'Die nützliche Sorte Video, die man sich speichert',
-      },
-      'skincare-routine': {
-        title: 'Hautpflege-Routine',
-        note: 'Eine kurze Routine bei Tageslicht',
-      },
-      'texture-closeup': {
-        title: 'Textur',
-        note: 'Ganz nah, in Zeitlupe',
-      },
-      'grwm-evening': {
-        title: 'Fertigmachen',
-        note: 'Spiegel, warmes Licht, Voiceover',
-      },
-      'travel-day': {
-        title: 'Reisetag',
-        note: 'Ein ruhiges Reisetagebuch',
-      },
-    },
+    brandsHeading: 'Marken, mit denen ich gearbeitet habe',
+    disclaimer:
+      'Eine Mischung aus bezahlten Aufträgen und Inhalten mit Produkten, die ich selbst gekauft habe.',
   },
 
   audience: {

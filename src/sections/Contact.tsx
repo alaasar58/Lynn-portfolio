@@ -3,7 +3,7 @@ import type { FormEvent } from 'react'
 import { Section } from '../components/Section'
 import { site } from '../content/site'
 import { useI18n } from '../i18n'
-import { InstagramGlyph } from '../components/InstagramGlyph'
+import { InstagramGlyph, TikTokGlyph } from '../components/Glyphs'
 
 /*
  * Where the form posts.
@@ -96,10 +96,13 @@ export function Contact() {
   return (
     <Section id="contact" eyebrow={t.contact.eyebrow} title={t.contact.title} lede={t.contact.lede}>
       <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
-        <form onSubmit={handleSubmit} className="relative lg:col-span-7">
+        <form onSubmit={handleSubmit} className="relative min-w-0 lg:col-span-7">
           <div className="grid gap-5 sm:grid-cols-2">
             {textFields.map((field) => (
-              <div key={field.name} className={field.name === 'link' ? 'sm:col-span-2' : ''}>
+              <div
+                key={field.name}
+                className={`min-w-0 ${field.name === 'link' ? 'sm:col-span-2' : ''}`}
+              >
                 <label className="field-label" htmlFor={field.name}>
                   {field.label}
                   {!field.required && (
@@ -118,7 +121,7 @@ export function Contact() {
             ))}
 
             {selects.map((select) => (
-              <div key={select.name} className={select.wide ? 'sm:col-span-2' : ''}>
+              <div key={select.name} className={`min-w-0 ${select.wide ? 'sm:col-span-2' : ''}`}>
                 <label className="field-label" htmlFor={select.name}>
                   {select.label}
                 </label>
@@ -135,14 +138,14 @@ export function Contact() {
               </div>
             ))}
 
-            <div className="sm:col-span-2">
+            <div className="min-w-0 sm:col-span-2">
               <label className="field-label" htmlFor="brief">
                 {t.contact.fields.brief}
               </label>
               <textarea id="brief" name="brief" rows={5} required className="field resize-y" />
             </div>
 
-            <div className="sm:col-span-2">
+            <div className="min-w-0 sm:col-span-2">
               <label className="field-label" htmlFor="notes">
                 {t.contact.fields.notes}{' '}
                 <span className="text-ink-muted">({t.contact.optional})</span>
@@ -175,7 +178,7 @@ export function Contact() {
           </div>
         </form>
 
-        <aside className="lg:col-span-5">
+        <aside className="min-w-0 lg:col-span-5">
           <div className="rounded-card border border-line bg-sand/60 p-8">
             <h3 className="text-lg">{t.contact.preferEmail}</h3>
             <a
@@ -215,7 +218,11 @@ export function Contact() {
                       rel="noreferrer noopener"
                       className="inline-flex items-center gap-2 text-ink hover:text-blush-deep"
                     >
-                      {social.label === 'Instagram' && <InstagramGlyph className="h-4 w-4" />}
+                      {social.label === 'Instagram' ? (
+                        <InstagramGlyph className="h-4 w-4" />
+                      ) : (
+                        <TikTokGlyph className="h-4 w-4" />
+                      )}
                       {social.label}
                       <span dir="ltr" className="text-ink-muted">
                         {social.handle}

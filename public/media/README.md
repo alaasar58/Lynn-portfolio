@@ -4,10 +4,10 @@ Every visual on the site is a file in this folder. All of them are temporary and
 all of them are replaced the same way: **overwrite the file, keep the name.**
 
 ```
-hero/portrait.jpg          the large hero image          4:5, ~1000 × 1250
-about/portrait.jpg         image beside the About text   4:5, ~900 × 1125
-work/<id>.jpg  + .mp4      portfolio cover and clip      9:16 vertical
-reels/<shortcode>.jpg      cover for a featured Reel     9:16 vertical
+hero/portrait.jpg          the large cover image         4:5, ~1000 × 1250
+about/portrait.jpg         image beside the About text   5:4, ~1200 × 960
+reels/<shortcode>.jpg      cover for a published Reel    9:16 vertical
+brands/<name>.svg|png      optional brand logo           transparent background
 ```
 
 Nothing in the code references an image by URL — the paths live in

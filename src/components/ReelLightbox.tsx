@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { reelEmbedUrl, reelUrl } from '../content/site'
 import { useI18n } from '../i18n'
 import type { Reel } from '../content/site'
-import { InstagramGlyph } from './InstagramGlyph'
+import { InstagramGlyph } from './Glyphs'
 
 type ReelLightboxProps = {
   reel: Reel | null

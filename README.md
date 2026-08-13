@@ -8,7 +8,7 @@ It is **four pages in one scroll**:
 | Page | Anchor | What is on it |
 | ---- | ------ | ------------- |
 | 1. Cover | `#top` | Name, role, and the three ways to reach her. Nothing else. |
-| 2. Profile | `#about` `#work` | About Me, six topics in phone frames, then the portfolio grid |
+| 2. Profile | `#about` | About Me, the published Reels in iPhone frames, and the brands |
 | 3. Audience | `#audience` | Who is watching — only figures that can be verified |
 | 4. Offer | `#services` `#contact` | Services, starting prices, and the inquiry form |
 
@@ -65,7 +65,7 @@ Everything language-independent:
 | Brands listed under Work            | `experienceBrands` |
 | Prices                              | `pricingTiers`     |
 | Cover and About images              | `images`           |
-| The six phone frames on page 2      | `phoneReels`       |
+| Brands worked with (and their logos)| `brands`           |
 | Follower counts                     | `socialStats`      |
 | Audience gender split, updated date | `audienceFacts`    |
 
@@ -85,6 +85,24 @@ Keeping the filename identical is the whole trick — the site reads the path fr
 `images` in `src/content/site.ts` and nowhere else, so the new photo appears on
 the next deploy, about a minute later. The same applies to
 `public/media/about/portrait.jpg` (landscape, 5:4) on page 2.
+
+### Brands
+
+The brands sit in `brands` in `src/content/site.ts`. A name on its own is enough
+and renders in the display face:
+
+```ts
+export const brands: Brand[] = [
+  { name: 'Farida Baby' },
+  { name: 'MAM', logo: '/media/brands/mam.svg' },
+]
+```
+
+For a logo, drop the file into `public/media/brands/` and point at it. SVG is
+best; a PNG with a transparent background works too. Logos render in greyscale
+and come to colour on hover, which is what keeps a set of very different marks
+from looking like a patchwork. Keep `name` filled in either way — it is the
+image's alt text. The grid fills row by row and takes any number of entries.
 
 ### Audience figures — what is shown and what is not
 
@@ -222,19 +240,18 @@ publish directory `dist`.
 src/
   i18n/               en.ts / de.ts / ar.ts — all visible text
                       index.tsx — language state, storage, RTL
-  content/site.ts     links, media paths, prices, audience facts
-  components/         Header, Footer, Section, VideoCard, PhoneWall,
-                      FeaturedReels, ReelLightbox,
+  content/site.ts     links, media paths, prices, brands, audience facts
+  components/         Header, Footer, Section, Glyphs, PhoneFrame,
+                      ReelPhones, ReelLightbox, Brands,
                       LanguageModal, LanguageSwitcher
-  sections/           Cover, Profile, Work, Audience, Offer, Contact
-  lib/useAutoplayVideo.ts  shared video playback behaviour
+  sections/           Cover, Profile, Audience, Offer, Contact
   lib/useReveal.ts    scroll-in animation hook
   index.css           design tokens + shared utility classes
 public/
   media/hero/         the large cover image
   media/about/        image beside the About text
-  media/work/         portfolio videos and covers
-  media/reels/        covers for the featured Reels
+  media/brands/       optional brand logos
+  media/reels/        covers for the three published Reels
 ```
 
 ## Performance & accessibility notes

@@ -49,7 +49,6 @@ export const en = {
     emailLabel: 'Email',
     instagramLabel: 'Instagram',
     tiktokLabel: 'TikTok',
-    scroll: 'Scroll',
   },
 
   /* ---------------------------------------------------------------- page 2 */
@@ -57,8 +56,8 @@ export const en = {
     eyebrow: 'About Me',
     title: 'I am Lynn.',
     paragraphs: [
-      'A digital creator in Hamburg, and a mother. I film the ordinary parts of a day and try to make them look like themselves.',
-      'I use a product first, then I film it. That order is the whole method, and I think it is why the videos feel believable.',
+      "I'm a mom and lifestyle creator based in Hamburg, Germany.",
+      'My focus is on motherhood, skincare, GRWM, unboxing, travel and aesthetic lifestyle content.',
       'I work in Arabic and English on camera, and in German for captions, subtitles and scripts. One product, more than one audience, without a second shoot.',
     ],
     valuesTitle: 'How I pick brands',
@@ -76,98 +75,20 @@ export const en = {
     ],
   },
 
-  reels: {
-    eyebrow: 'Content',
-    title: 'Six things I film.',
-    lede: 'The topics my audience comes back for.',
-    /* Captions under the phone frames, in the order they are shown.
-       Written out in full — never abbreviated. */
-    captions: {
-      motherhood: 'Motherhood',
-      dailyLife: 'Daily Life',
-      unboxing: 'Unboxing',
-      skincare: 'Skincare',
-      getReadyWithMe: 'Get Ready With Me',
-      travel: 'Travel',
-    },
-  },
-
+  /* What is left of the old portfolio section: the three published Reels, the
+     lightbox that plays them, and the brand wall. */
   work: {
-    eyebrow: 'Selected Work',
-    title: 'Videos that look like a real day.',
-    lede: 'My published Reels first, then everything sorted by topic.',
     featuredHeading: 'Published on Instagram',
     viewProfile: 'View profile',
-    seeMore: 'More of my work on Instagram',
-    byCategory: 'By topic',
-    filterLabel: 'Filter work by topic',
-    all: 'All',
-    empty: 'More from this topic is coming soon.',
-    brandsHeading: 'Products and brands I have made content around',
-    disclaimer:
-      'This is a mix of paid work and content I made with products I bought myself. Where a brand paid for a video, the card says so.',
-    portfolioBadge: 'My own content',
-    collaborationBadge: 'Paid collaboration',
     reelBadge: 'Reel',
     watchOnInstagram: 'Watch on Instagram',
     openOnInstagram: 'Open on Instagram',
     embedFallback: 'Not showing? Open the Reel on Instagram.',
     loadingReel: 'Loading the Reel…',
     play: 'Play',
-    pause: 'Pause',
-    unmute: 'Sound on',
-    mute: 'Sound off',
-    placeholderNote: 'These are placeholder visuals. Happy to send real footage.',
-    categories: {
-      motherhood: 'Motherhood',
-      beauty: 'Beauty & Skincare',
-      grwm: 'Get Ready With Me',
-      unboxing: 'Unboxing',
-      travel: 'Travel',
-      lifestyle: 'Everyday life',
-    },
-    items: {
-      'morning-light': {
-        title: 'Morning light',
-        note: 'Quiet everyday footage, natural pace',
-      },
-      'everyday-ritual': {
-        title: 'Everyday ritual',
-        note: 'A product in the middle of a normal morning',
-      },
-      'product-detail': {
-        title: 'Product detail',
-        note: 'Close up, with text on screen',
-      },
-      unboxing: {
-        title: 'First impression',
-        note: 'Opening the box, quick cuts, voiceover',
-      },
-      'feeding-routine': {
-        title: 'Feeding routine',
-        note: 'Showing how it works, in a real situation',
-      },
-      'baby-care': {
-        title: 'Baby care essentials',
-        note: 'The useful kind of video people save',
-      },
-      'skincare-routine': {
-        title: 'Skincare routine',
-        note: 'A short routine in daylight',
-      },
-      'texture-closeup': {
-        title: 'Texture and finish',
-        note: 'Very close up, slowed down',
-      },
-      'grwm-evening': {
-        title: 'Getting ready',
-        note: 'Mirror, warm light, voiceover',
-      },
-      'travel-day': {
-        title: 'Travel day',
-        note: 'A calm travel diary',
-      },
-    },
+    brandsHeading: "Brands I've worked with",
+    disclaimer:
+      'A mix of paid work and content I made with products I bought myself.',
   },
 
   /* ---------------------------------------------------------------- page 3 */
