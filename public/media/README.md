@@ -8,14 +8,17 @@ That file is written for whoever is uploading, in German. This one is the short
 technical version.
 
 ```
-cover.jpg              page 1, the large image        4:5, ~1000 × 1250
-about.jpg              beside the About text          5:4, ~1200 × 960
-reels/reel-1.mp4       the clip in the left phone     9:16, 1080 × 1920
-reels/reel-1.jpg       its still                      9:16
-reels/reel-2.*         middle phone
-reels/reel-3.*         right phone
+cover.jpg              page 1, the large image        4:5
+about.jpg              beside the About text          5:4
+reels/reel-1.mp4       the clip in the left phone     9:16
+reels/reel-2.mp4       middle phone
+reels/reel-3.mp4       right phone
 brands/<name>.svg|png  optional brand logos           transparent background
 ```
+
+The `.jpg` and `.webm` beside each clip are **build artefacts**, not uploads —
+see below. The copies committed here are placeholders so `npm run dev` looks
+complete.
 
 Nothing in the code references a file by URL. The paths live in `images`,
 `featuredReels` and `brands` in `src/content/site.ts`, and nowhere else.
@@ -27,30 +30,36 @@ very slowly — only the light and the framing drift. Figures are faceless
 silhouettes, because a drawn face would read as some other person standing where
 the photo is going.
 
-## The `.webm` beside each `.mp4`
+## Sizes are not your problem
 
-Browsers take the first source they can decode, and Chrome, Safari, Edge and iOS
-all take the MP4 — so **replacing the MP4 alone covers effectively every
-visitor**. The WebM is only reached by Chromium builds shipped without the H.264
-decoder, common on Linux, which would otherwise show a frozen still.
+`scripts/media/optimize.mjs` runs on the built output during deploy and
+recompresses everything before it is published:
 
-If you replace an MP4, delete the matching `.webm`. Nothing breaks either way.
+- Videos → 720 × 1280, H.264 CRF 30, max 30 fps, max 20 seconds, AAC 96k.
+  A 186 MB 1080p test file came out at 1.1 MB.
+- The `.webm` sibling and the `.jpg` still are cut from the MP4 every build, so
+  the three can never drift apart. Neither is ever uploaded.
+- Images → longest edge 1600 px, quality 82, metadata stripped.
+
+Clips already at or under 720 px wide and 3 MB are left alone, which is why the
+drawn placeholders survive untouched.
+
+The still is taken half a second in. To take it from somewhere else, set
+`posterAt` on that entry in `featuredReels` (`src/content/site.ts`).
+
+**Nothing in `public/media` is ever modified** — the originals stay exactly as
+uploaded, and only the published copy is compressed. If ffmpeg is not installed,
+the script says so and exits successfully, so a local build never breaks.
 
 ## Recommended export settings
 
+Only one thing actually matters: GitHub's web upload stops at 25 MB per file.
+Everything else the build handles.
+
 | Setting    | Value                                                  |
 | ---------- | ------------------------------------------------------ |
-| Format     | MP4 (H.264 + AAC), `faststart` enabled                 |
+| Format     | MP4 (H.264 + AAC)                                      |
 | Aspect     | 9:16 vertical                                          |
-| Resolution | 1080 × 1920                                            |
-| Length     | 6–15 seconds — a short loop, not the full edit         |
-| File size  | Under 5 MB per clip; under 2 MB is better              |
+| Length     | 8–15 seconds — a loop, not the full edit               |
 | Audio      | Keep it — tiles start muted, sound comes on hover      |
-| Still      | JPG, same aspect, ~200 KB                              |
 
-A clip is only fetched once its phone is near the viewport, plays muted while on
-screen and pauses when it scrolls away — so three clips cost nothing on load.
-Short, well-compressed files keep it that way.
-
-Always provide the still: it is what shows before playback starts, and what a
-visitor sees if their browser blocks unattended playback.

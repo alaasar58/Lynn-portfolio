@@ -85,16 +85,35 @@ them at that file and nothing else.
 The short version:
 
 ```
-cover.jpg              page 1, the large image        4:5   ~1000 × 1250
-about.jpg              beside the About text          5:4   ~1200 × 960
-reels/reel-1.mp4/.jpg  left phone                     9:16  1080 × 1920
-reels/reel-2.mp4/.jpg  middle phone
-reels/reel-3.mp4/.jpg  right phone
+cover.jpg              page 1, the large image        4:5
+about.jpg              beside the About text          5:4
+reels/reel-1.mp4       left phone                     9:16
+reels/reel-2.mp4       middle phone
+reels/reel-3.mp4       right phone
 brands/<name>.svg|png  optional logos
 ```
 
+One file per phone: the still and the `.webm` are cut from the MP4 at build
+time, never uploaded.
+
 On GitHub: open the folder → **Add file → Upload files** → drop the file in →
 **Commit changes**. Filenames are case-sensitive.
+
+### File size is handled for you
+
+`scripts/media/optimize.mjs` runs during deploy, on the built output, and
+recompresses everything before publishing: videos to 720 × 1280 / CRF 30 / max
+20 s, images to 1600 px. A 186 MB 1080p test clip came out at 1.1 MB. Files in
+`public/media` are never modified — only the published copy is compressed, so a
+heavy original can be uploaded once and forgotten.
+
+The one limit that remains is GitHub's: **25 MB per file through the web
+uploader.** Trim the clip to ~10 seconds, or use GitHub Desktop, which allows
+100 MB. Both routes are spelled out in `public/media/UPLOAD.md`.
+
+Without ffmpeg installed the script prints a note and exits successfully, so a
+local `npm run build` never breaks. Run it by hand with `npm run media:optimize`
+after a build.
 
 ### How the clips behave
 

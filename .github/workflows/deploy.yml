@@ -43,6 +43,16 @@ jobs:
           VITE_FORM_ENDPOINT: ${{ secrets.VITE_FORM_ENDPOINT }}
         run: npm run build
 
+      # Everything under public/media is published as uploaded unless it is
+      # recompressed here. Doing it on the built output rather than committing
+      # the small version back means a heavy file can be uploaded once and
+      # forgotten about, with no second workflow run needed to make it live.
+      - name: Install ffmpeg
+        run: sudo apt-get update && sudo apt-get install -y ffmpeg
+
+      - name: Optimise media
+        run: npm run media:optimize
+
       # Prints how Pages is currently configured. If `build_type` is not
       # "workflow", publishing is rejected before the deploy job starts and the
       # source has to be switched under Settings → Pages → Source. GITHUB_TOKEN

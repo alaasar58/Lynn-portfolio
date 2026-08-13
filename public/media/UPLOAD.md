@@ -7,24 +7,33 @@ bis deine eigenen Dateien da sind.
 **Eine einzige Regel: Datei überschreiben, Namen genau so lassen.**
 Am Code ändert sich nichts. Ein bis zwei Minuten nach dem Hochladen ist es live.
 
+**Die Dateigröße ist dir egal.** Die Website rechnet dein Video beim
+Veröffentlichen selbst klein — aus 186 MB wurden im Test 1,1 MB, und im
+Handy-Rahmen sieht man davon nichts. Du musst nichts komprimieren, nichts
+umwandeln, kein Standbild machen.
+
 ---
 
 ## Die Liste
 
-| Datei | Was es ist | Format | Hochkant / Quer | Größe |
-| ----- | ---------- | ------ | --------------- | ----- |
-| `cover.jpg` | Das große Bild auf der ersten Seite | JPG | hochkant **4:5** | ~1000 × 1250 px |
-| `about.jpg` | Bild neben „I am Lynn." | JPG | quer **5:4** | ~1200 × 960 px |
-| `reels/reel-1.mp4` | Video im **linken** Handy | MP4 | hochkant **9:16** | 1080 × 1920 px |
-| `reels/reel-1.jpg` | Standbild dazu | JPG | hochkant **9:16** | 1080 × 1920 px |
-| `reels/reel-2.mp4` | Video im **mittleren** Handy | MP4 | hochkant **9:16** | 1080 × 1920 px |
-| `reels/reel-2.jpg` | Standbild dazu | JPG | hochkant **9:16** | 1080 × 1920 px |
-| `reels/reel-3.mp4` | Video im **rechten** Handy | MP4 | hochkant **9:16** | 1080 × 1920 px |
-| `reels/reel-3.jpg` | Standbild dazu | JPG | hochkant **9:16** | 1080 × 1920 px |
-| `brands/…` | Logos der Marken, optional | SVG oder PNG | egal | transparenter Hintergrund |
+| Datei | Was es ist | Format | Hochkant / Quer |
+| ----- | ---------- | ------ | --------------- |
+| `cover.jpg` | Das große Bild auf der ersten Seite | JPG | hochkant **4:5** |
+| `about.jpg` | Bild neben „I am Lynn." | JPG | quer **5:4** |
+| `reels/reel-1.mp4` | Video im **linken** Handy | MP4 | hochkant **9:16** |
+| `reels/reel-2.mp4` | Video im **mittleren** Handy | MP4 | hochkant **9:16** |
+| `reels/reel-3.mp4` | Video im **rechten** Handy | MP4 | hochkant **9:16** |
+| `brands/…` | Logos der Marken, optional | SVG oder PNG | egal |
+
+**Das ist alles. Pro Handy eine einzige Datei.**
+
+Das Standbild, das man vor dem Abspielen sieht, wird automatisch aus deinem
+Video geschnitten (aus der ersten halben Sekunde). Willst du ein anderes Bild,
+sag mir einfach die Sekunde — zum Beispiel „nimm Sekunde 3" — das ist eine Zahl
+im Code und in einer Minute geändert.
 
 Du musst nicht alles auf einmal machen. Jede Datei, die du hochlädst, ersetzt
-genau einen Platzhalter — der Rest bleibt so lange, wie er ist.
+genau einen Platzhalter, der Rest bleibt so lange, wie er ist.
 
 ---
 
@@ -42,28 +51,45 @@ Das ist genau, was wir wollen.
 
 ---
 
-## Videos: worauf es ankommt
+## Wenn die Datei größer als 25 MB ist
 
-- **MP4**, Codec H.264, Ton als AAC. Das ist, was jedes Handy beim Export
-  ausspuckt — du musst nichts umwandeln.
-- **Hochkant 9:16**, so wie du es für Instagram schneidest.
-- **Unter 5 MB pro Clip.** Über die GitHub-Oberfläche gehen höchstens 25 MB pro
-  Datei, aber viel wichtiger: ein schweres Video macht die Seite auf dem Handy
-  langsam, und dann klickt niemand weiter.
-- **6 bis 15 Sekunden.** Ein Ausschnitt, der in Schleife läuft, nicht der ganze
-  Schnitt. Die lange Fassung sieht man ja, wenn man draufklickt.
-- **Standbild immer mitschicken.** Das ist, was man sieht, bevor das Video
-  startet — und was jemand mit langsamem Internet vielleicht überhaupt nur
-  sieht. Ein Screenshot vom schönsten Bild aus dem Video reicht.
+Das ist die einzige Grenze, die dich noch betrifft: **über die GitHub-Website
+gehen höchstens 25 MB pro Datei.** Nicht weil die Seite das braucht, sondern weil
+der Upload-Weg im Browser dort aufhört.
 
-### Das `.webm` daneben
+Drei Wege, von einfach nach gründlich:
 
-Neben jedem `.mp4` liegt eine Datei mit demselben Namen und der Endung `.webm`.
-Die brauchen nur ein paar Linux-Browser, die kein MP4 abspielen können.
+**1. Kürzen — bringt am meisten und ist sowieso richtig.**
+Ein 75-MB-Video ist meistens eine ganze Minute. Auf der Seite läuft aber nur eine
+Schleife von acht bis zwölf Sekunden. Schneide dein Video auf ~10 Sekunden, und
+aus 75 MB werden etwa 12 MB. Das passt, und die Seite sieht dadurch sogar besser
+aus, weil die Schleife enger ist.
 
-**Wenn du ein `.mp4` austauschst, lösche das gleichnamige `.webm`.** Sonst
-sehen diese wenigen Besucher weiter das alte Platzhaltervideo. Nichts geht
-kaputt, wenn du es vergisst — es ist nur unsauber.
+**2. GitHub Desktop statt Browser — dort sind 100 MB erlaubt.**
+[desktop.github.com](https://desktop.github.com) installieren, mit deinem Konto
+anmelden, das Projekt einmal herunterladen („Clone"), Dateien im Finder/Explorer
+in den Ordner legen, im Programm auf **Commit** und **Push** klicken. Damit
+kannst du dein 75-MB-Video direkt hochladen, ohne es vorher anzufassen.
+
+**3. Kleiner exportieren.**
+Wenn dein Schnittprogramm es anbietet: **1080p statt 4K** und **30 statt 60
+Bilder pro Sekunde**. Das allein viertelt die Datei oft. Nimmt dir aber keiner
+übel, wenn du stattdessen einfach Weg 1 oder 2 nimmst — die Seite rechnet
+ohnehin auf 720p herunter.
+
+---
+
+## Bilder: kein HEIC
+
+iPhone-Fotos sind manchmal `.heic`. **Das zeigt kein Browser an.** Zwei
+Möglichkeiten:
+
+- Auf dem iPhone unter **Einstellungen → Kamera → Formate** auf **„Maximale
+  Kompatibilität"** stellen — dann kommen ab sofort JPG-Dateien heraus.
+- Oder ein vorhandenes Foto einmal in der Fotos-App bearbeiten (irgendeinen
+  Filter drauf und wieder weg) und teilen — dabei wird meist ein JPG erzeugt.
+
+Die Datei muss am Ende `cover.jpg` bzw. `about.jpg` heißen.
 
 ---
 
@@ -78,10 +104,12 @@ kaputt, wenn du es vergisst — es ist nur unsauber.
 - **Klick auf ein Handy** öffnet das Video groß, mit Ton und Steuerung.
 - Wer in seinem System „weniger Bewegung" eingestellt hat, sieht das Standbild
   mit einem Abspielknopf. Das ist Absicht.
+- Die Seite zeigt höchstens die **ersten 20 Sekunden**. Ist dein Video länger,
+  wird der Rest beim Veröffentlichen abgeschnitten.
 
 ---
 
 ## Ein viertes Handy?
 
 Dafür braucht es eine Zeile Code — sag mir Bescheid, das ist in einer Minute
-erledigt. Die Dateien wären dann `reels/reel-4.mp4` und `reels/reel-4.jpg`.
+erledigt. Die Datei wäre dann `reels/reel-4.mp4`.

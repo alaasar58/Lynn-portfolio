@@ -102,15 +102,20 @@ export const nav = [
 /*
  * The three clips that play in the phone frames on page 2.
  *
- * Each one is two files in `public/media/reels/`, named after its `id`:
+ * Each one is ONE file in `public/media/reels/`, named after its `id`:
  *
  *     reel-1.mp4    the clip that plays
- *     reel-1.jpg    the still shown before it starts
  *
  * REPLACING ONE: overwrite the file, keep the name. Nothing in the code
- * changes. See public/media/UPLOAD.md for formats and sizes.
+ * changes, and the size does not matter — it is recompressed on the way out.
+ * See public/media/UPLOAD.md.
  *
- * ADDING A FOURTH: one entry here plus the two files.
+ * ADDING A FOURTH: one entry here plus one file.
+ *
+ * The still and the .webm are NOT uploaded — both are cut from the MP4 when the
+ * site is built (scripts/media/optimize.mjs), so they can never drift apart
+ * from the clip. `posterAt` picks the second the still is taken from; leave it
+ * out for half a second in.
  *
  * `code` is the shortcode from a published Reel's URL —
  * instagram.com/reel/<code>/ — and is optional. With it, the frame carries a
@@ -122,6 +127,8 @@ export type Reel = {
   id: string
   video: string
   poster: string
+  /** Second the still is cut from. Default 0.5. */
+  posterAt?: number
   code?: string
 }
 
