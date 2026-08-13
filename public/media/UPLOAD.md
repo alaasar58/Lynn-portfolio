@@ -19,7 +19,7 @@ umwandeln, kein Standbild machen.
 | Datei | Was es ist | Format | Hochkant / Quer |
 | ----- | ---------- | ------ | --------------- |
 | `cover.jpg` | Das große Bild auf der ersten Seite | JPG | hochkant **4:5** |
-| `about.jpg` | Bild neben „I am Lynn." | JPG | quer **5:4** |
+| `about.jpg` | Bild neben „I am Lynn." | JPG | hochkant **4:5** |
 | `reels/reel-1.mp4` | Video im **linken** Handy | MP4 | hochkant **9:16** |
 | `reels/reel-2.mp4` | Video im **mittleren** Handy | MP4 | hochkant **9:16** |
 | `reels/reel-3.mp4` | Video im **rechten** Handy | MP4 | hochkant **9:16** |

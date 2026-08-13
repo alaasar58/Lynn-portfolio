@@ -57,16 +57,18 @@ export function Profile() {
         </div>
 
         <div className="lg:col-span-5">
-          {/* Replace public/media/about/portrait.jpg to change this image. */}
+          {/* Replace public/media/about.jpg to change this image. Portrait,
+              because phone photos are, and a landscape frame would crop a
+              standing shot down to a band across the middle. */}
           <img
             src={asset(images.about)}
             alt=""
             aria-hidden="true"
-            width={1200}
-            height={960}
+            width={1000}
+            height={1250}
             loading="lazy"
             decoding="async"
-            className="aspect-[5/4] w-full rounded-card object-cover"
+            className="aspect-[4/5] w-full rounded-card object-cover"
           />
 
           <div className="mt-8 border-s-2 border-blush-mid ps-6">

@@ -236,8 +236,18 @@ try {
 
 const reels = path.join(root, 'reels')
 if (existsSync(reels)) {
-  for (const name of readdirSync(reels).filter((f) => f.endsWith('.mp4'))) {
+  const files = readdirSync(reels)
+
+  for (const name of files.filter((f) => f.endsWith('.mp4'))) {
     optimiseVideo(path.join(reels, name), posterTimes[name.replace(/\.mp4$/, '')])
+  }
+
+  // A frame can hold a photo instead of a clip. Those stills are uploads, so
+  // they are compressed like any other image — but only where no clip exists,
+  // since a clip's still is generated above and already small.
+  for (const name of files.filter((f) => /\.(jpe?g|png)$/i.test(f))) {
+    if (files.includes(name.replace(/\.(jpe?g|png)$/i, '.mp4'))) continue
+    optimiseImage(path.join(reels, name))
   }
 }
 

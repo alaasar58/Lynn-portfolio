@@ -9,7 +9,7 @@ technical version.
 
 ```
 cover.jpg              page 1, the large image        4:5
-about.jpg              beside the About text          5:4
+about.jpg              beside the About text          4:5
 reels/reel-1.mp4       the clip in the left phone     9:16
 reels/reel-2.mp4       middle phone
 reels/reel-3.mp4       right phone

@@ -43,12 +43,26 @@ export const site = {
  *  list with formats and sizes.
  *
  *      public/media/cover.jpg    the large image on page 1   4:5 portrait
- *      public/media/about.jpg    beside the About text       5:4 landscape
+ *      public/media/about.jpg    beside the About text       4:5 portrait
  * =============================================================================
  */
 export const images = {
   cover: '/media/cover.jpg',
   about: '/media/about.jpg',
+
+  /*
+   * How the cover photo sits in its frame.
+   *
+   * A phone photo taken at arm's length puts the subject small and off-centre,
+   * which is right for the photo and wrong for a cover. Rather than asking for
+   * a re-crop, the frame zooms in: `coverZoom` is how far (1 = not at all), and
+   * `coverFocus` is the point it zooms towards, as `x y` across the image.
+   *
+   * Both only need touching when the photo is replaced. Raise the zoom to come
+   * closer; move the focus left/up by lowering the percentages.
+   */
+  coverZoom: 1.45,
+  coverFocus: '58% 56%',
 }
 
 /*
@@ -102,20 +116,23 @@ export const nav = [
 /*
  * The three clips that play in the phone frames on page 2.
  *
- * Each one is ONE file in `public/media/reels/`, named after its `id`:
+ * A frame can hold either a clip or a photo:
  *
- *     reel-1.mp4    the clip that plays
+ *     reel-1.mp4    a clip — plays by itself, muted, and loops
+ *     reel-1.jpg    a photo — shown as it is
+ *
+ * With a clip, the still and the .webm are cut from the MP4 when the site is
+ * built (scripts/media/optimize.mjs), so they can never drift apart from it and
+ * neither is ever uploaded. `posterAt` picks the second the still comes from.
+ *
+ * With only a photo, leave `video` out. The frame then shows the photo, with no
+ * sound button and no player — which is right: there is nothing to play.
  *
  * REPLACING ONE: overwrite the file, keep the name. Nothing in the code
  * changes, and the size does not matter — it is recompressed on the way out.
  * See public/media/UPLOAD.md.
  *
  * ADDING A FOURTH: one entry here plus one file.
- *
- * The still and the .webm are NOT uploaded — both are cut from the MP4 when the
- * site is built (scripts/media/optimize.mjs), so they can never drift apart
- * from the clip. `posterAt` picks the second the still is taken from; leave it
- * out for half a second in.
  *
  * `code` is the shortcode from a published Reel's URL —
  * instagram.com/reel/<code>/ — and is optional. With it, the frame carries a
@@ -125,7 +142,8 @@ export const nav = [
 export type Reel = {
   /** File base name in public/media/reels/. */
   id: string
-  video: string
+  /** Leave out until a clip is uploaded — the poster then stands on its own. */
+  video?: string
   poster: string
   /** Second the still is cut from. Default 0.5. */
   posterAt?: number
@@ -133,24 +151,10 @@ export type Reel = {
 }
 
 export const featuredReels: Reel[] = [
-  {
-    id: 'reel-1',
-    video: '/media/reels/reel-1.mp4',
-    poster: '/media/reels/reel-1.jpg',
-    code: 'DabNET8N0QF',
-  },
-  {
-    id: 'reel-2',
-    video: '/media/reels/reel-2.mp4',
-    poster: '/media/reels/reel-2.jpg',
-    code: 'DZ5mjgghM2X',
-  },
-  {
-    id: 'reel-3',
-    video: '/media/reels/reel-3.mp4',
-    poster: '/media/reels/reel-3.jpg',
-    code: 'DZDj6BZttNH',
-  },
+  // TODO: add `video: '/media/reels/reel-1.mp4'` once the clip is uploaded.
+  { id: 'reel-1', poster: '/media/reels/reel-1.jpg', code: 'DabNET8N0QF' },
+  { id: 'reel-2', poster: '/media/reels/reel-2.jpg', code: 'DZ5mjgghM2X' },
+  { id: 'reel-3', poster: '/media/reels/reel-3.jpg', code: 'DZDj6BZttNH' },
 ]
 
 export const reelUrl = (code: string) => `https://www.instagram.com/reel/${code}/`

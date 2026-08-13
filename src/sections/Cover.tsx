@@ -183,17 +183,30 @@ export function Cover() {
                 style={{ clipPath: 'url(#hero-contour)' }}
               />
 
-              <img
-                src={asset(images.cover)}
-                alt={site.fullName}
-                width={1200}
-                height={1500}
-                loading="eager"
-                fetchPriority="high"
-                decoding="async"
-                className="relative aspect-[4/5] w-full object-cover"
+              {/*
+                The clip sits on the wrapper rather than the image, so the photo
+                inside can be scaled towards its subject without breaking the
+                contour. See `coverZoom` / `coverFocus` in src/content/site.ts.
+              */}
+              <div
+                className="relative aspect-[4/5] w-full overflow-hidden"
                 style={{ clipPath: 'url(#hero-contour)' }}
-              />
+              >
+                <img
+                  src={asset(images.cover)}
+                  alt={site.fullName}
+                  width={1200}
+                  height={1500}
+                  loading="eager"
+                  fetchPriority="high"
+                  decoding="async"
+                  className="h-full w-full object-cover"
+                  style={{
+                    transform: `scale(${images.coverZoom})`,
+                    transformOrigin: images.coverFocus,
+                  }}
+                />
+              </div>
             </div>
           </div>
         </div>
