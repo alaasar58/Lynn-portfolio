@@ -13,8 +13,9 @@
  * built-in token, so a commit-back would only go live on the *next* upload.
  * This has no such delay, cannot loop, and needs no extra permissions.
  *
- * For each video it also writes the WebM sibling and cuts the still, so the
- * only thing anyone ever has to upload is one MP4 per phone.
+ * For each video it also writes the WebM sibling, and cuts the still when none
+ * was uploaded — so one file per phone is enough, and a second one (a photo of
+ * the same name) is how you choose the frame shown before it plays.
  */
 import { execFileSync } from 'node:child_process'
 import { existsSync, readdirSync, renameSync, statSync, unlinkSync } from 'node:fs'
@@ -29,6 +30,8 @@ const MAX_H = 1280
 const MAX_SECONDS = 20
 /** A clip at or under these is left alone — the drawn placeholders are. */
 const SKIP_BYTES = 3 * 1024 * 1024
+/** The WebM is only a fallback for browsers without H.264 — see below. */
+const WEBM_W = 480
 const IMAGE_EDGE = 1600
 const IMAGE_QUALITY = 82
 const SKIP_IMAGE_BYTES = 400 * 1024
@@ -135,9 +138,17 @@ function optimiseVideo(file, posterAt) {
   const before = statSync(file).size
   const { w, seconds } = probe(file)
 
+  /*
+   * An iPhone hands you a .mov. Browsers are unreliable with that container, so
+   * one always comes out of here as an .mp4 under the same name — which is also
+   * the name the site asks for.
+   */
+  const isMov = /\.mov$/i.test(file)
+  const mp4 = isMov ? file.replace(/\.mov$/i, '.mp4') : file
+
   // Already small and already the right size: the drawn placeholders land here.
-  const small = before <= SKIP_BYTES && (w === null || w <= MAX_W)
-  const tmp = `${file}.tmp.mp4`
+  const small = !isMov && before <= SKIP_BYTES && (w === null || w <= MAX_W)
+  const tmp = `${mp4}.tmp.mp4`
 
   if (!small) {
     const trim = seconds && seconds > MAX_SECONDS ? ['-t', String(MAX_SECONDS)] : []
@@ -158,17 +169,25 @@ function optimiseVideo(file, posterAt) {
       tmp,
     ])
     unlinkSync(file)
-    renameSync(tmp, file)
-    note(path.basename(file), before, statSync(file).size, 'video')
+    renameSync(tmp, mp4)
+    note(path.basename(mp4), before, statSync(mp4).size, 'video')
   }
 
-  // The WebM and the still are always rebuilt from whatever the MP4 now is, so
-  // the three can never drift apart.
-  const base = file.replace(/\.mp4$/, '')
+  const base = mp4.replace(/\.mp4$/, '')
+
+  /*
+   * The WebM is rebuilt every time, so it cannot fall behind the clip.
+   *
+   * It is a compatibility fallback, not the file anyone actually gets: Chrome,
+   * Safari, Edge, Firefox and iOS all take the MP4. Only a Chromium built
+   * without the H.264 decoder ever reaches this. So it is encoded smaller and
+   * rougher on purpose — at the MP4's settings it came out larger than the MP4.
+   */
   run([
-    '-i', file,
+    '-i', mp4,
+    '-vf', `scale='min(${WEBM_W},iw)':-2:force_original_aspect_ratio=decrease`,
     '-c:v', 'libvpx-vp9',
-    '-crf', '38',
+    '-crf', '44',
     '-b:v', '0',
     '-row-mt', '1',
     // VP9's default deadline spends minutes chasing a few percent. This runs on
@@ -180,15 +199,16 @@ function optimiseVideo(file, posterAt) {
   ])
   note(`${path.basename(base)}.webm`, 0, statSync(`${base}.webm`).size, 'webm')
 
-  const at = Number.isFinite(posterAt) ? posterAt : 0.5
-  run([
-    '-ss', String(at),
-    '-i', file,
-    '-frames:v', '1',
-    '-q:v', '4',
-    `${base}.jpg`,
-  ])
-  note(`${path.basename(base)}.jpg`, 0, statSync(`${base}.jpg`).size, 'still')
+  /*
+   * The still is cut from the clip only when none was uploaded. Uploading a
+   * photo next to a clip is how you choose the frame people see before it
+   * plays, and a generated one must not overwrite that choice.
+   */
+  if (!existsSync(`${base}.jpg`)) {
+    const at = Number.isFinite(posterAt) ? posterAt : 0.5
+    run(['-ss', String(at), '-i', mp4, '-frames:v', '1', '-q:v', '4', `${base}.jpg`])
+    note(`${path.basename(base)}.jpg`, 0, statSync(`${base}.jpg`).size, 'still')
+  }
 }
 
 /* ------------------------------------------------------------------ images */
@@ -238,15 +258,14 @@ const reels = path.join(root, 'reels')
 if (existsSync(reels)) {
   const files = readdirSync(reels)
 
-  for (const name of files.filter((f) => f.endsWith('.mp4'))) {
-    optimiseVideo(path.join(reels, name), posterTimes[name.replace(/\.mp4$/, '')])
+  for (const name of files.filter((f) => /\.(mp4|mov)$/i.test(f))) {
+    optimiseVideo(path.join(reels, name), posterTimes[name.replace(/\.(mp4|mov)$/i, '')])
   }
 
   // A frame can hold a photo instead of a clip. Those stills are uploads, so
   // they are compressed like any other image — but only where no clip exists,
   // since a clip's still is generated above and already small.
   for (const name of files.filter((f) => /\.(jpe?g|png)$/i.test(f))) {
-    if (files.includes(name.replace(/\.(jpe?g|png)$/i, '.mp4'))) continue
     optimiseImage(path.join(reels, name))
   }
 }

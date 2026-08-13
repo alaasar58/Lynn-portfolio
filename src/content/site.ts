@@ -160,15 +160,15 @@ export type Reel = {
  * THE ORDER HERE IS THE ORDER ON THE PAGE: three across the top row, three
  * across the bottom. Move a line to move a phone.
  *
- * `video` is commented out where no clip has been uploaded yet — those frames
- * show the photo instead. Uncomment the line and drop the file in to turn a
- * frame back into a clip.
+ * Where `video` is commented out, no clip has been uploaded for that topic yet
+ * and the frame shows the photo instead. Uncomment the line and drop the file
+ * in to turn a frame back into a clip.
  */
 export const featuredReels: Reel[] = [
   {
     id: 'motherhood',
     poster: '/media/reels/motherhood.jpg',
-    // video: '/media/reels/motherhood.mp4',
+    video: '/media/reels/motherhood.mp4',
   },
   {
     id: 'skincare',
@@ -183,7 +183,7 @@ export const featuredReels: Reel[] = [
   {
     id: 'unboxing',
     poster: '/media/reels/unboxing.jpg',
-    // video: '/media/reels/unboxing.mp4',
+    video: '/media/reels/unboxing.mp4',
   },
   {
     id: 'travel',
@@ -193,7 +193,7 @@ export const featuredReels: Reel[] = [
   {
     id: 'lifestyle',
     poster: '/media/reels/lifestyle.jpg',
-    // video: '/media/reels/lifestyle.mp4',
+    video: '/media/reels/lifestyle.mp4',
   },
 ]
 
