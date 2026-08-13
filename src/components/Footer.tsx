@@ -10,8 +10,11 @@ export function Footer() {
         <div className="flex flex-col gap-10 border-b border-bone/15 pb-10 sm:flex-row sm:items-end sm:justify-between">
           <div>
             <p className="font-display text-3xl">
-              {site.name}
-              <span className="text-blush-mid">.</span>
+              {/* Inline isolate: keeps the full stop after the name in RTL. */}
+              <span dir="ltr">
+                {site.name}
+                <span className="text-blush-mid">.</span>
+              </span>
             </p>
             <p className="mt-2 text-sm text-bone/60">{t.footer.rights}</p>
           </div>
@@ -45,7 +48,10 @@ export function Footer() {
                 rel="noreferrer noopener"
                 className="text-sm text-bone/60 transition-colors hover:text-bone"
               >
-                {social.label} <span className="text-bone/40">{social.handle}</span>
+                {social.label}{' '}
+              <span dir="ltr" className="text-bone/40">
+                {social.handle}
+              </span>
               </a>
             ))}
             <a

@@ -39,6 +39,7 @@ export function Header() {
       <div className="shell flex h-20 items-center justify-between gap-4">
         <a
           href="#top"
+          dir="ltr"
           className="font-display text-xl tracking-tight"
           onClick={() => setOpen(false)}
         >
@@ -62,7 +63,7 @@ export function Header() {
           <LanguageSwitcher className="hidden sm:flex" />
 
           <a href="#contact" className="btn-primary hidden px-5 sm:inline-flex">
-            {t.hero.ctaContact}
+            {t.cover.ctaContact}
           </a>
 
           <button
@@ -104,7 +105,7 @@ export function Header() {
           ))}
 
           <a href="#contact" onClick={() => setOpen(false)} className="btn-primary mt-5 w-full">
-            {t.hero.ctaContact}
+            {t.cover.ctaContact}
           </a>
 
           <LanguageSwitcher className="mt-4 self-start sm:hidden" />

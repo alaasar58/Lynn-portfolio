@@ -11,6 +11,8 @@
  * No agency vocabulary ("deliverables", "core service", "assets"), no
  * superlatives, and no sales pitch. If a sentence sounds like a brochure,
  * rewrite it.
+ *
+ * The site is four pages in one scroll: cover, profile, audience, offer.
  */
 export const en = {
   meta: {
@@ -26,12 +28,9 @@ export const en = {
   },
 
   nav: {
-    work: 'Work',
-    services: 'Services',
     about: 'About',
-    process: 'Process',
-    partnerships: 'Partnerships',
-    pricing: 'Pricing',
+    audience: 'Audience',
+    services: 'Services',
     contact: 'Contact',
     menuOpen: 'Open menu',
     menuClose: 'Close menu',
@@ -42,24 +41,55 @@ export const en = {
     ariaFooter: 'Footer navigation',
   },
 
-  hero: {
+  /* ---------------------------------------------------------------- page 1 */
+  cover: {
     role: 'Digital Creator',
-    location: 'Hamburg, Germany',
-    tagline: 'Real products. Real life. Thoughtfully created.',
-    /* ctaWork opens the portfolio; ctaContact is the inquiry CTA, reused by the
-       header button so the two never drift apart. */
-    ctaWork: 'View My Work',
+    /** Also the header and footer button, so the two never drift apart. */
     ctaContact: 'Work With Me',
-    credLanguages: ['Arabic', 'English', 'German'],
-    pillarsLabel: 'What I make',
-    pillars: [
-      'Motherhood',
-      'Skincare',
-      'Get Ready With Me',
-      'Unboxing',
-      'Travel',
-      'Everyday life',
+    emailLabel: 'Email',
+    instagramLabel: 'Instagram',
+    tiktokLabel: 'TikTok',
+    scroll: 'Scroll',
+  },
+
+  /* ---------------------------------------------------------------- page 2 */
+  about: {
+    eyebrow: 'About Me',
+    title: 'I am Lynn.',
+    paragraphs: [
+      'A digital creator in Hamburg, and a mother. I film the ordinary parts of a day and try to make them look like themselves.',
+      'I use a product first, then I film it. That order is the whole method, and I think it is why the videos feel believable.',
+      'I work in Arabic and English on camera, and in German for captions, subtitles and scripts. One product, more than one audience, without a second shoot.',
     ],
+    valuesTitle: 'How I pick brands',
+    valuesBody:
+      'I work with products that fit me and the way I live. If something is not the right fit, I will tell you early and kindly.',
+    languagesTitle: 'Languages',
+    languagesNote: 'One product, more than one audience, without a second shoot.',
+    languages: [
+      { name: 'Arabic', detail: 'On camera and voiceover' },
+      { name: 'English', detail: 'On camera and voiceover' },
+      {
+        name: 'German',
+        detail: 'Captions, subtitles, scripts. Spoken on request',
+      },
+    ],
+  },
+
+  reels: {
+    eyebrow: 'Content',
+    title: 'Six things I film.',
+    lede: 'The topics my audience comes back for.',
+    /* Captions under the phone frames, in the order they are shown.
+       Written out in full — never abbreviated. */
+    captions: {
+      motherhood: 'Motherhood',
+      dailyLife: 'Daily Life',
+      unboxing: 'Unboxing',
+      skincare: 'Skincare',
+      getReadyWithMe: 'Get Ready With Me',
+      travel: 'Travel',
+    },
   },
 
   work: {
@@ -140,172 +170,95 @@ export const en = {
     },
   },
 
+  /* ---------------------------------------------------------------- page 3 */
+  audience: {
+    eyebrow: 'Audience',
+    title: 'Who is watching.',
+    lede: 'The numbers below are the ones I can show today. Anything marked as available on request comes straight from Instagram and TikTok Insights.',
+    followers: 'followers',
+    /* Prefix for approximate figures. */
+    approx: '~',
+    instagram: 'Instagram',
+    tiktok: 'TikTok',
+    genderTitle: 'Gender',
+    women: 'Women',
+    men: 'Men and other',
+    genderNote: 'From Instagram Insights, rounded.',
+    ageTitle: 'Age',
+    ageValue: 'Mostly 18 to 35',
+    ageNote: 'The band my audience sits in. I have not broken it down further, so I am not going to guess at brackets.',
+    reachTitle: 'Where they are',
+    regions: ['Germany', 'Arabic-speaking countries'],
+    reachNote: 'Country-level percentages on request.',
+    languagesTitle: 'Content languages',
+    /** Heading over the metrics that have no verified figure yet. */
+    pendingTitle: 'Available on request',
+    pendingLede:
+      'I would rather send you a current screenshot from Insights than put a number here that ages badly.',
+    pendingBadge: 'On request',
+    pendingMetrics: [
+      { label: 'Reach', note: 'Last 30 days, per platform' },
+      { label: 'Impressions', note: 'Last 30 days' },
+      { label: 'Engagement rate', note: 'Average across recent Reels' },
+      { label: 'Best performing posts', note: 'With their figures' },
+    ],
+    note: 'Follower counts are updated by hand from Instagram and TikTok Insights.',
+    cta: 'Ask for the full insights',
+  },
+
+  /* ---------------------------------------------------------------- page 4 */
   services: {
     eyebrow: 'Services',
     title: 'What I can make for you.',
     lede: 'Short product videos are what I do most. Everything else supports that.',
-    coreLabel: 'What I do most',
-    primaryTitle: 'Short product videos',
-    primaryBody:
-      'I film short vertical videos with a product actually being used. I take care of the idea, the filming, the edit and the final files. You can post them as they are, or run them as ads.',
-    primaryIncludes: [
-      'Product videos',
-      'Everyday lifestyle content',
-      'UGC-style videos',
-      'Showing how a product works',
-      'Telling a small story around a product',
-      'Reels and TikToks',
+    offer: [
+      {
+        title: 'Reels and short-form video',
+        body: 'Vertical video with a product actually being used. Idea, filming, edit, finished file — ready to post.',
+      },
+      {
+        title: 'UGC for your ads',
+        body: 'The same videos cut for paid use, with hooks and openings built to be tested against each other.',
+      },
+      {
+        title: 'Unboxing and product detail',
+        body: 'First impressions, close-ups and texture shots for product pages and launches.',
+      },
+      {
+        title: 'Photos, extra footage and editing',
+        body: 'Stills and clean clips for your own edits. If you already have footage, I can cut it instead.',
+      },
     ],
+    howItWorksTitle: 'How it works',
+    howItWorks: [
+      {
+        title: 'Brief or free rein',
+        body: 'Send a detailed brief, or send the product and leave it to me. Both are fine.',
+      },
+      {
+        title: 'Dates you can plan around',
+        body: 'You get the formats and dates we agreed on, with one round of changes. If something shifts, I tell you early.',
+      },
+    ],
+    languagesTitle: 'In three languages',
+    languagesBody:
+      'Arabic and English on camera, German in the captions and on screen. So one shoot reaches more than one market.',
     cta: 'Start a project',
-    secondary: [
-      {
-        title: 'Voiceover and language versions',
-        body: 'I speak Arabic and English on camera and record voiceovers in both. For German I write the captions, subtitles and the text on screen. So one product can reach more than one audience.',
-      },
-      {
-        title: 'Extra footage and product photos',
-        body: 'Clean additional clips and still photos you can use in your own edits, on product pages and in ads.',
-      },
-      {
-        title: 'Editing',
-        body: 'If you already have footage, I can cut it into a short video with pacing, text on screen, music and sound.',
-      },
-      {
-        title: 'Ideas and hooks',
-        body: 'Angles, opening lines and small scripts built around your product. Useful when you need ideas, not just footage.',
-      },
-    ],
-    future:
-      'For brands I work with regularly, I can also plan content month by month and put together bigger packages.',
-  },
-
-  about: {
-    eyebrow: 'About',
-    title: 'A little about me.',
-    paragraphs: [
-      "I'm Lynn, a digital creator based in Hamburg. I make content around motherhood, skincare, getting ready, unboxing, travel and ordinary days at home.",
-      "I try a product first, then I film it. That is the order, and I think it is why the videos feel believable. Around 27,000 people follow along on Instagram, and they respond best when something is genuinely useful.",
-      'I work in Arabic and English on camera, and in German for captions, subtitles and scripts. So one product can reach more than one audience without filming it twice.',
-      "If a product isn't for me, I would rather say so than talk it up. That is what keeps my recommendations worth something.",
-    ],
-    valuesTitle: 'How I pick brands',
-    valuesBody:
-      "I work with products that fit me and the way I live. If something isn't the right fit, I will tell you early and kindly.",
-    languagesTitle: 'Languages',
-    languagesNote: 'One product, more than one audience, without a second shoot.',
-    languages: [
-      { name: 'Arabic', detail: 'On camera and voiceover' },
-      { name: 'English', detail: 'On camera and voiceover' },
-      {
-        name: 'German',
-        detail: 'Captions, subtitles, scripts, text on screen. Spoken on request',
-      },
-    ],
-    audienceTitle: 'Audience',
-    audience: {
-      instagram: 'Instagram',
-      tiktok: 'TikTok',
-      /* Follower counts come from `socialStats` in src/content/site.ts and are
-         formatted per language, so the number lives in exactly one place. */
-      followers: 'followers',
-      approx: '~',
-      audienceLabel: 'Mostly',
-      audienceValue: 'Women, mostly 18 to 35',
-      reachLabel: 'Reach',
-      reachValue: 'Germany and Arabic-speaking countries',
-    },
-  },
-
-  process: {
-    eyebrow: 'How it works',
-    title: 'Easy on your side.',
-    lede: 'Send me the product and what you have in mind. I take care of the rest.',
-    note: 'Whether you leave it to me or send a detailed brief, both are fine.',
-    cta: 'Send me a brief',
-    steps: [
-      {
-        title: 'Brief',
-        body: 'You tell me about the product, who it is for, and anything I should keep in mind: the key messages, what I may and may not say, and where the video will be used.',
-      },
-      {
-        title: 'Idea',
-        body: 'I think of a normal situation the product belongs in. If you have a clear brief, I follow it. If you would rather I come up with something, I will.',
-      },
-      {
-        title: 'Filming',
-        body: 'I film at home or wherever the product actually gets used. Close-ups, everyday scenes, and enough extra footage to work with.',
-      },
-      {
-        title: 'Editing',
-        body: 'I cut it all into one short video, with voiceover, text on screen and music where it fits.',
-      },
-      {
-        title: 'Delivery',
-        body: 'You get the finished files in the formats we agreed, on time. One round of changes is included.',
-      },
-    ],
-  },
-
-  partnerships: {
-    eyebrow: 'Working together',
-    title: 'The second video is always better than the first.',
-    lede: 'Most of my best work is with brands I keep working with. Once I know your product and your audience, briefing me gets shorter and the videos get better.',
-    preferred: 'My favourite way',
-    models: [
-      {
-        title: 'Monthly',
-        body: 'You send products, and we plan a set of videos each month. This is how I like to work best.',
-      },
-      {
-        title: 'Now and then',
-        body: 'We work together around launches and campaigns, without a fixed monthly commitment.',
-      },
-      {
-        title: 'A package',
-        body: 'A set number of videos for one product or one campaign.',
-      },
-      {
-        title: 'One video',
-        body: 'One video, one product. A good way to see how I work first.',
-      },
-    ],
-    qualities: [
-      {
-        title: 'I answer quickly',
-        body: 'Questions get answered fast and dates are confirmed in writing. You will not have to chase me.',
-      },
-      {
-        title: 'Feedback is welcome',
-        body: 'Tell me what worked and what did not. It is the fastest way to videos that fit your brand.',
-      },
-      {
-        title: 'Flexible',
-        body: 'Creative freedom where you want it, and close to the brief where you need it.',
-      },
-      {
-        title: 'On time',
-        body: 'You get the formats and dates we agreed on. If something shifts, I tell you early.',
-      },
-    ],
   },
 
   pricing: {
     eyebrow: 'Pricing',
-    title: 'What it usually costs.',
-    lede: "Every project is a little different, but you shouldn't have to guess. These are the starting points.",
+    title: 'My services and prices.',
+    lede: 'Starting points, so you do not have to guess. The final quote depends on how the video is used.',
     from: 'from',
     customFrom: 'depends on the month, from',
     cta: 'Ask for a quote',
     factorsTitle: 'What changes the price',
     factors: [
       'How many videos',
-      'How complex the idea is',
       'How much the shoot involves',
-      'How many rounds of changes',
       'How quickly you need it',
       'Where and how long you use it',
-      'Whether you run it as an ad',
-      'Extra files or formats',
     ],
     note: 'Agencies are welcome too. If you produce content for your own clients, I quote it the same way.',
     tiers: {
@@ -359,7 +312,6 @@ export const en = {
       'Who the video is for and what it should do',
       'What the product does and what to highlight',
       'Anything I must or must not say',
-      'Your brand guidelines, if you have them',
       'Where the video will be used',
     ],
     elsewhere: 'Find me here',

@@ -1,7 +1,7 @@
-import { useEffect, useRef, useState } from 'react'
 import type { WorkItem } from '../content/site'
 import { useI18n } from '../i18n'
 import { asset } from '../lib/asset'
+import { useAutoplayVideo, webmSibling } from '../lib/useAutoplayVideo'
 
 type VideoCardProps = {
   item: WorkItem
@@ -12,136 +12,23 @@ type VideoCardProps = {
 /**
  * A portfolio tile that plays itself.
  *
- * Behaviour follows how short-form video works on social platforms:
- *
- *  - The source is attached only once the card approaches the viewport, so a
- *    page full of video costs nothing on load.
- *  - Playback starts automatically, muted and looping, when the card is
- *    actually on screen, and pauses again when it scrolls away — off-screen
- *    video should never burn battery or bandwidth.
- *  - `playsInline` keeps iOS from hijacking the video into fullscreen.
- *  - A sound toggle sits on the card, so audio is always one tap away.
- *
- * Browsers only permit unattended playback while muted. If a play attempt is
- * refused anyway (some power-saving and data-saver modes), the poster stays put
- * and a play button appears — the visitor is never left with a dead tile.
+ * `playsInline` keeps iOS from hijacking the video into fullscreen, and a sound
+ * toggle sits on the card so audio is always one tap away. Everything else
+ * about playback — lazy attachment, muted autoplay on entry, pause on exit and
+ * the refused-autoplay fallback — lives in `useAutoplayVideo`, shared with the
+ * phone frames on the profile page.
  */
 export function VideoCard({ item, priority = false }: VideoCardProps) {
   const { t } = useI18n()
-  const containerRef = useRef<HTMLElement>(null)
-  const videoRef = useRef<HTMLVideoElement>(null)
-
-  const [attached, setAttached] = useState(priority)
-  const [onScreen, setOnScreen] = useState(false)
-  const [muted, setMuted] = useState(true)
-  const [autoplayRefused, setAutoplayRefused] = useState(false)
+  const { containerRef, videoRef, attached, muted, autoplayRefused, toggleSound, manualPlay } =
+    useAutoplayVideo({ enabled: Boolean(item.video), priority })
 
   const posterUrl = asset(item.poster)
   const videoUrl = asset(item.video)
-  /*
-   * A WebM sibling of the same name, offered after the MP4.
-   *
-   * A browser picks the first source it can actually decode. Chrome, Safari,
-   * Edge and iOS all take the MP4, so replacing that one file is enough for
-   * effectively every visitor. The WebM only ever gets used by Chromium builds
-   * shipped without the H.264 decoder — common on Linux — which would otherwise
-   * show a frozen cover image instead of a playing video.
-   */
-  const webmUrl = videoUrl?.replace(/\.mp4$/, '.webm')
+  const webmUrl = webmSibling(videoUrl)
   const labels = t.work.items[item.id as keyof typeof t.work.items]
   const title = labels?.title ?? item.id
   const note = labels?.note ?? ''
-
-  // Attach the source early, then track whether the card is actually visible.
-  useEffect(() => {
-    const el = containerRef.current
-    if (!el || !item.video) return
-    if (!('IntersectionObserver' in window)) {
-      setAttached(true)
-      setOnScreen(true)
-      return
-    }
-
-    const preload = new IntersectionObserver(
-      (entries) => {
-        if (entries.some((entry) => entry.isIntersecting)) {
-          setAttached(true)
-          preload.disconnect()
-        }
-      },
-      { rootMargin: '400px 0px' },
-    )
-
-    // A card counts as "on screen" once a quarter of it is showing, which
-    // avoids starting playback for tiles only just clipping the edge.
-    const visibility = new IntersectionObserver(
-      (entries) => {
-        for (const entry of entries) setOnScreen(entry.isIntersecting)
-      },
-      { threshold: 0.25 },
-    )
-
-    preload.observe(el)
-    visibility.observe(el)
-    return () => {
-      preload.disconnect()
-      visibility.disconnect()
-    }
-  }, [item.video])
-
-  /*
-   * A <video> that was rendered without any <source> has already reported "no
-   * source" by the time lazy attachment adds one. Appending a child does not
-   * restart that process on its own — the element has to be told to look again.
-   */
-  useEffect(() => {
-    const video = videoRef.current
-    if (!video || !attached) return
-    if (video.networkState === video.NETWORK_NO_SOURCE || video.readyState === 0) {
-      video.load()
-    }
-  }, [attached])
-
-  // Drive playback from visibility.
-  useEffect(() => {
-    const video = videoRef.current
-    if (!video || !attached) return
-
-    if (onScreen) {
-      const attempt = video.play()
-      if (attempt) {
-        attempt.then(() => setAutoplayRefused(false)).catch(() => setAutoplayRefused(true))
-      }
-    } else {
-      video.pause()
-      // Muting again on exit means a card never starts talking unprompted the
-      // next time it scrolls back into view.
-      if (!video.muted) {
-        video.muted = true
-        setMuted(true)
-      }
-    }
-  }, [onScreen, attached])
-
-  const toggleSound = () => {
-    const video = videoRef.current
-    if (!video) return
-    const next = !video.muted
-    video.muted = next
-    setMuted(next)
-    // Unmuting counts as a user gesture, so this is also the moment a refused
-    // autoplay can finally start.
-    if (!next) void video.play().catch(() => undefined)
-  }
-
-  const manualPlay = () => {
-    const video = videoRef.current
-    if (!video) return
-    void video
-      .play()
-      .then(() => setAutoplayRefused(false))
-      .catch(() => undefined)
-  }
 
   return (
     <figure

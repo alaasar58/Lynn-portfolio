@@ -1,0 +1,135 @@
+import { Section } from '../components/Section'
+import { pricingTiers } from '../content/site'
+import { useI18n } from '../i18n'
+
+/**
+ * Page four: what she makes, and what it starts at.
+ *
+ * Deliberately unboxed. The services are four ruled rows rather than four
+ * cards, because a card is a border around something that did not need one, and
+ * four of them in a row is the exact look the brief asked to avoid.
+ *
+ * Every figure comes from `pricingTiers` in `src/content/site.ts`. They are
+ * still `€XXX` placeholders — no price is hard-coded here, and none is invented.
+ */
+export function Offer() {
+  const { t } = useI18n()
+
+  return (
+    <Section
+      id="services"
+      page
+      eyebrow={t.services.eyebrow}
+      title={t.services.title}
+      lede={t.services.lede}
+    >
+      {/* ---------------------------------------------------- What I can make */}
+      <ul className="border-t border-line">
+        {t.services.offer.map((entry, index) => (
+          <li
+            key={entry.title}
+            className="group grid gap-2 border-b border-line py-7 sm:grid-cols-12 sm:gap-8 sm:py-8"
+          >
+            <div className="flex items-baseline gap-4 sm:col-span-5">
+              <span className="text-[0.68rem] tabular-nums text-ink-muted">
+                {String(index + 1).padStart(2, '0')}
+              </span>
+              <h3 className="text-xl transition-colors duration-300 group-hover:text-blush-deep sm:text-2xl">
+                {entry.title}
+              </h3>
+            </div>
+            <p className="leading-relaxed text-ink-soft sm:col-span-7">{entry.body}</p>
+          </li>
+        ))}
+      </ul>
+
+      {/* Languages: the one thing here another creator probably cannot offer. */}
+      <div className="mt-10 flex flex-col gap-3 rounded-card bg-sand/70 p-8 sm:flex-row sm:items-baseline sm:gap-10">
+        <h3 className="shrink-0 text-[0.68rem] font-medium uppercase tracking-[0.2em] text-ink-muted">
+          {t.services.languagesTitle}
+        </h3>
+        <p className="max-w-2xl leading-relaxed text-ink-soft">{t.services.languagesBody}</p>
+      </div>
+
+      {/* ------------------------------------------------------------ Prices */}
+      <div className="mt-28 lg:mt-36">
+        <header className="max-w-2xl">
+          <p className="eyebrow">{t.pricing.eyebrow}</p>
+          <h2 className="mt-4 text-3xl leading-[1.15] sm:text-4xl">{t.pricing.title}</h2>
+          <p className="mt-4 leading-relaxed text-ink-soft">{t.pricing.lede}</p>
+        </header>
+
+        <div className="mt-12 grid gap-px overflow-hidden rounded-card bg-line lg:grid-cols-3">
+          {pricingTiers.map((tier) => {
+            const copy = t.pricing.tiers[tier.key]
+            const featured = 'featured' in tier && tier.featured
+
+            return (
+              <article
+                key={tier.key}
+                className={`flex flex-col p-8 sm:p-10 ${featured ? 'bg-blush/50' : 'bg-bone'}`}
+              >
+                <h3 className="text-xl">{copy.name}</h3>
+
+                <p className="mt-8 text-[0.62rem] uppercase tracking-[0.16em] text-ink-muted">
+                  {t.pricing[tier.unit]}
+                </p>
+                <p className="mt-1 font-display text-[2.75rem] leading-none">{tier.price}</p>
+
+                <p className="mt-6 text-sm leading-relaxed text-ink-soft">{copy.body}</p>
+
+                <ul className="mt-6 space-y-2.5 text-sm text-ink-soft">
+                  {copy.points.map((point) => (
+                    <li key={point} className="flex items-start gap-3">
+                      <span
+                        aria-hidden="true"
+                        className="mt-2 h-1 w-1 shrink-0 rounded-full bg-blush-deep"
+                      />
+                      {point}
+                    </li>
+                  ))}
+                </ul>
+
+                {/* mt-auto pins the CTA to the floor so all three line up. */}
+                <div className="mt-auto pt-10">
+                  <a href="#contact" className={featured ? 'btn-primary w-full' : 'btn-secondary w-full'}>
+                    {t.pricing.cta}
+                  </a>
+                </div>
+              </article>
+            )
+          })}
+        </div>
+
+        <div className="mt-8 flex flex-col gap-6 sm:flex-row sm:justify-between">
+          <div>
+            <h3 className="text-[0.68rem] font-medium uppercase tracking-[0.2em] text-ink-muted">
+              {t.pricing.factorsTitle}
+            </h3>
+            <ul className="mt-3 flex flex-wrap gap-x-6 gap-y-1.5 text-sm text-ink-soft">
+              {t.pricing.factors.map((factor) => (
+                <li key={factor}>{factor}</li>
+              ))}
+            </ul>
+          </div>
+          <p className="max-w-sm text-sm leading-relaxed text-ink-muted">{t.pricing.note}</p>
+        </div>
+      </div>
+
+      {/* -------------------------------------------------------- How it works */}
+      <div className="mt-24 border-t border-line pt-12">
+        <h3 className="text-[0.68rem] font-medium uppercase tracking-[0.2em] text-ink-muted">
+          {t.services.howItWorksTitle}
+        </h3>
+        <div className="mt-6 grid gap-10 sm:grid-cols-2">
+          {t.services.howItWorks.map((step) => (
+            <div key={step.title}>
+              <p className="font-display text-xl">{step.title}</p>
+              <p className="mt-2 leading-relaxed text-ink-soft">{step.body}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </Section>
+  )
+}

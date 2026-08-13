@@ -31,7 +31,6 @@ export function Work() {
   return (
     <Section
       id="work"
-      tone="sand"
       eyebrow={t.work.eyebrow}
       title={t.work.title}
       lede={t.work.lede}
@@ -49,7 +48,9 @@ export function Work() {
             >
               <InstagramGlyph />
               {t.work.viewProfile}
-              <span className="text-ink-muted">{instagram.handle}</span>
+              <span dir="ltr" className="text-ink-muted">
+                {instagram.handle}
+              </span>
             </a>
           )}
         </div>

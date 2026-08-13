@@ -1,7 +1,16 @@
 # Lynn Kawqge — Digital Creator
 
-Portfolio and inquiry site for a multilingual digital creator, aimed at consumer
-brands, e-commerce companies and agencies.
+A media kit for a multilingual digital creator, aimed at consumer brands,
+e-commerce companies and agencies.
+
+It is **four pages in one scroll**:
+
+| Page | Anchor | What is on it |
+| ---- | ------ | ------------- |
+| 1. Cover | `#top` | Name, role, and the three ways to reach her. Nothing else. |
+| 2. Profile | `#about` `#work` | About Me, six topics in phone frames, then the portfolio grid |
+| 3. Audience | `#audience` | Who is watching — only figures that can be verified |
+| 4. Offer | `#services` `#contact` | Services, starting prices, and the inquiry form |
 
 Built with **React + TypeScript + Vite + Tailwind CSS v4**. Static output — it
 runs on GitHub Pages, Netlify, Vercel or any static host, with no server needed.
@@ -55,10 +64,39 @@ Everything language-independent:
 | Portfolio categories                | `categoryKeys`     |
 | Brands listed under Work            | `experienceBrands` |
 | Prices                              | `pricingTiers`     |
-| Hero and About images               | `images`           |
+| Cover and About images              | `images`           |
+| The six phone frames on page 2      | `phoneReels`       |
 | Follower counts                     | `socialStats`      |
+| Audience gender split, updated date | `audienceFacts`    |
 
 Anything still needing a real value is marked `// TODO`.
+
+### Putting your own photo on the cover
+
+The large image on page 1 is a drawn placeholder. To replace it with your photo,
+you do not need to touch any code:
+
+1. Crop the photo to **4:5** (portrait), around 1000 × 1250 px, and save it as
+   **`portrait.jpg`**.
+2. On GitHub, open `public/media/hero/` in this repository.
+3. **Add file → Upload files**, drop the JPG in, and commit.
+
+Keeping the filename identical is the whole trick — the site reads the path from
+`images` in `src/content/site.ts` and nowhere else, so the new photo appears on
+the next deploy, about a minute later. The same applies to
+`public/media/about/portrait.jpg` (landscape, 5:4) on page 2.
+
+### Audience figures — what is shown and what is not
+
+Page 3 shows only what can be checked: the two follower counts, the gender split
+and the age band from `audienceFacts` and `socialStats`, plus the regions from
+the dictionaries. Reach, impressions and engagement rate are deliberately
+rendered as an **"on request"** state rather than a number, because no verified
+figure for them exists in this project.
+
+To publish one later, add it to `audienceFacts` and give it a place in
+`src/sections/Audience.tsx`. Please do not put an estimate in — a reach figure
+is the one number a brand can check.
 
 ### Images and video
 
@@ -184,16 +222,16 @@ publish directory `dist`.
 src/
   i18n/               en.ts / de.ts / ar.ts — all visible text
                       index.tsx — language state, storage, RTL
-  content/site.ts     links, media paths, prices, portfolio structure
-  components/         Header, Footer, Section, VideoCard, Pillars,
+  content/site.ts     links, media paths, prices, audience facts
+  components/         Header, Footer, Section, VideoCard, PhoneWall,
                       FeaturedReels, ReelLightbox,
                       LanguageModal, LanguageSwitcher
-  sections/           Hero, Work, Services, About, Process,
-                      Partnerships, Pricing, Contact
+  sections/           Cover, Profile, Work, Audience, Offer, Contact
+  lib/useAutoplayVideo.ts  shared video playback behaviour
   lib/useReveal.ts    scroll-in animation hook
   index.css           design tokens + shared utility classes
 public/
-  media/hero/         the large hero image
+  media/hero/         the large cover image
   media/about/        image beside the About text
   media/work/         portfolio videos and covers
   media/reels/        covers for the featured Reels

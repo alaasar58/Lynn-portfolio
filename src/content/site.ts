@@ -73,14 +73,31 @@ export const socialStats = {
   tiktokFollowers: 1000,
 }
 
+/*
+ * =============================================================================
+ *  AUDIENCE — only figures that actually exist
+ * =============================================================================
+ *  The audience page shows what can be verified today and nothing else.
+ *  A metric with `pending: true` renders as a designed "on request" state
+ *  instead of a number. To publish a real figure, put it in `value` and drop
+ *  the `pending` flag — no component changes.
+ *
+ *  Do not put an estimate in here. An invented reach figure is the one thing
+ *  a brand can check and catch.
+ * =============================================================================
+ */
+export const audienceFacts = {
+  /** Share of the audience that is women, from Instagram Insights. Rounded. */
+  womenPercent: 98,
+  /** Month the follower counts and the split above were last read off Insights. */
+  updated: '2026-08',
+}
+
 /** Section anchors. Labels come from `nav` in the dictionaries. */
 export const nav = [
-  { key: 'work', href: '#work' },
-  { key: 'services', href: '#services' },
   { key: 'about', href: '#about' },
-  { key: 'process', href: '#process' },
-  { key: 'partnerships', href: '#partnerships' },
-  { key: 'pricing', href: '#pricing' },
+  { key: 'audience', href: '#audience' },
+  { key: 'services', href: '#services' },
 ] as const
 
 /* -------------------------------------------------------------------------- */
@@ -245,6 +262,52 @@ export const work: WorkItem[] = [
     poster: '/media/work/everyday-ritual.jpg',
   },
 ]
+
+/* -------------------------------------------------------------------------- */
+/*  THE SIX PHONE FRAMES                                                      */
+/* -------------------------------------------------------------------------- */
+
+/*
+ * The six topics shown in phone frames on the profile page, in the order they
+ * appear: three across the top row, three across the bottom.
+ *
+ * `caption` is the key under `reels.captions` in the dictionaries — that is
+ * where the wording lives, in all three languages. `video` and `poster` point
+ * at files already in `public/media/work/`, so a clip shown here is the same
+ * file the portfolio grid uses. Overwrite the file to change what plays.
+ */
+export const phoneReels = [
+  {
+    caption: 'motherhood',
+    video: '/media/work/feeding-routine.mp4',
+    poster: '/media/work/feeding-routine.jpg',
+  },
+  {
+    caption: 'dailyLife',
+    video: '/media/work/morning-light.mp4',
+    poster: '/media/work/morning-light.jpg',
+  },
+  {
+    caption: 'unboxing',
+    video: '/media/work/unboxing.mp4',
+    poster: '/media/work/unboxing.jpg',
+  },
+  {
+    caption: 'skincare',
+    video: '/media/work/skincare-routine.mp4',
+    poster: '/media/work/skincare-routine.jpg',
+  },
+  {
+    caption: 'getReadyWithMe',
+    video: '/media/work/grwm-evening.mp4',
+    poster: '/media/work/grwm-evening.jpg',
+  },
+  {
+    caption: 'travel',
+    video: '/media/work/travel-day.mp4',
+    poster: '/media/work/travel-day.jpg',
+  },
+] as const
 
 /**
  * Products and brands content has been created around. Presented as portfolio

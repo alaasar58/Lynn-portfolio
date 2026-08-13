@@ -217,7 +217,9 @@ export function Contact() {
                     >
                       {social.label === 'Instagram' && <InstagramGlyph className="h-4 w-4" />}
                       {social.label}
-                      <span className="text-ink-muted">{social.handle}</span>
+                      <span dir="ltr" className="text-ink-muted">
+                        {social.handle}
+                      </span>
                     </a>
                   </li>
                 ))}

@@ -9,6 +9,12 @@ type SectionProps = {
   children: ReactNode
   /** Tints the section background to break up the vertical rhythm. */
   tone?: 'bone' | 'sand' | 'ink'
+  /**
+   * Gives the section the scale of one page in the media kit: more air above
+   * and below, and at least a full viewport of height, so scrolling from one to
+   * the next reads as turning a page rather than passing a heading.
+   */
+  page?: boolean
   className?: string
 }
 
@@ -30,13 +36,17 @@ export function Section({
   lede,
   children,
   tone = 'bone',
+  page = false,
   className = '',
 }: SectionProps) {
   const ref = useReveal<HTMLDivElement>()
   const onInk = tone === 'ink'
+  const rhythm = page
+    ? 'flex min-h-screen flex-col justify-center py-28 sm:py-32 lg:py-40'
+    : 'py-20 sm:py-28'
 
   return (
-    <section id={id} className={`${tones[tone]} py-20 sm:py-28 ${className}`}>
+    <section id={id} className={`${tones[tone]} ${rhythm} ${className}`}>
       <div ref={ref} className="reveal shell">
         {(eyebrow || title || lede) && (
           <header className="max-w-2xl">
