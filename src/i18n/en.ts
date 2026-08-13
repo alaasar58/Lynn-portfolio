@@ -132,7 +132,7 @@ export const en = {
       { label: 'Engagement rate', note: 'Average across recent Reels' },
       { label: 'Best performing posts', note: 'With their figures' },
     ],
-    note: 'Follower counts are updated by hand from Instagram and TikTok Insights.',
+    note: 'These figures cover the last 30 days and are updated on the 5th of every month, straight from Instagram and TikTok Insights. Any question about them, just ask.',
     cta: 'Ask for the full insights',
   },
 
@@ -140,7 +140,7 @@ export const en = {
   services: {
     eyebrow: 'Services',
     title: 'What I can make for you.',
-    lede: 'Short product videos are what I do most. Everything else supports that.',
+    lede: 'Short product videos are what I do most. Everything else supports that. I film and I am on camera; editing and planning I do with a small team I trust.',
     offer: [
       {
         title: 'Reels and short-form video',
@@ -163,11 +163,11 @@ export const en = {
     howItWorks: [
       {
         title: 'Brief or free rein',
-        body: 'Send a detailed brief, or send the product and leave it to me. Both are fine.',
+        body: 'Send your brief and I go through it with my team, or send the product and leave it to us. Both are fine.',
       },
       {
         title: 'Dates you can plan around',
-        body: 'You get the formats and dates we agreed on, with one round of changes. If something shifts, I tell you early.',
+        body: 'You get the formats and dates we agreed on. What is included — revisions, extra formats, usage — depends on the package we settle on. If something shifts, you hear it from me early.',
       },
     ],
     cta: 'Start a project',
@@ -187,22 +187,22 @@ export const en = {
       'How quickly you need it',
       'Where and how long you use it',
     ],
-    note: 'Agencies are welcome too. If you produce content for your own clients, I quote it the same way.',
+    note: 'What each package covers — revisions, formats, how long and where you may use the video — we agree together, because it differs from project to project. Agencies are welcome: if you produce for your own clients, I quote it the same way.',
     tiers: {
       single: {
         name: 'One video',
         body: 'One short video: the idea, the filming, the edit and the final files.',
-        points: ['1 vertical video', '1 round of changes', 'Normal social use included'],
+        points: ['1 vertical video', 'Revisions as agreed', 'Usage rights as agreed'],
       },
       package: {
         name: 'A package',
         body: 'A few videos for one product or campaign, planned together so they work as a set.',
-        points: ['3 to 5 videos', 'Different angles and openings', 'Extra clips and photos on request'],
+        points: ['3 to 5 videos', 'Different angles and openings', 'Extras as agreed'],
       },
       monthly: {
         name: 'Every month',
         body: 'A set of videos every month, for brands who want content regularly.',
-        points: ['5 to 10+ videos a month', 'Planning and ideas included', 'You get priority in my calendar'],
+        points: ['5 to 10+ videos a month', 'Planning and ideas with my team', 'Priority in my calendar'],
       },
     },
   },
@@ -210,7 +210,7 @@ export const en = {
   contact: {
     eyebrow: 'Contact',
     title: "Let's talk.",
-    lede: 'Tell me about the product and what you need. I usually reply within two working days.',
+    lede: 'Tell me about the product and what you need. I go through every enquiry with my team and usually reply within two working days.',
     /** Subject line of the email the form opens when no endpoint is configured. */
     mailSubject: 'Project inquiry',
     /** Honeypot field label. Hidden from people, tempting to bots. */

@@ -116,14 +116,14 @@ export const de: Dictionary = {
       { label: 'Interaktionsrate', note: 'Durchschnitt der letzten Reels' },
       { label: 'Beste Beiträge', note: 'Mit den dazugehörigen Zahlen' },
     ],
-    note: 'Die Followerzahlen pflege ich von Hand aus den Instagram- und TikTok-Insights.',
+    note: 'Die Zahlen beziehen sich auf die letzten 30 Tage und werden am 5. jedes Monats aktualisiert, direkt aus den Instagram- und TikTok-Insights. Wenn du Fragen dazu hast, frag einfach.',
     cta: 'Vollständige Insights anfragen',
   },
 
   services: {
     eyebrow: 'Leistungen',
     title: 'Was ich für dich machen kann.',
-    lede: 'Kurze Produktvideos mache ich am meisten. Alles andere unterstützt das.',
+    lede: 'Kurze Produktvideos mache ich am meisten. Alles andere unterstützt das. Vor der Kamera stehe ich selbst, beim Schnitt und in der Planung arbeite ich mit einem kleinen Team, dem ich vertraue.',
     offer: [
       {
         title: 'Reels und Kurzvideos',
@@ -146,11 +146,11 @@ export const de: Dictionary = {
     howItWorks: [
       {
         title: 'Briefing oder freie Hand',
-        body: 'Schick ein genaues Briefing, oder schick das Produkt und überlass es mir. Beides passt.',
+        body: 'Schick mir dein Briefing, ich gehe es mit meinem Team durch. Oder schick einfach das Produkt und überlass den Rest uns. Beides passt.',
       },
       {
         title: 'Termine, auf die du dich verlassen kannst',
-        body: 'Du bekommst die vereinbarten Formate und Termine, mit einer Korrekturrunde. Wenn sich etwas verschiebt, sage ich früh Bescheid.',
+        body: 'Du bekommst die vereinbarten Formate und Termine. Was dabei ist — Korrekturrunden, zusätzliche Formate, Nutzungsrechte — hängt vom Paket ab, auf das wir uns einigen. Wenn sich etwas verschiebt, sage ich früh Bescheid.',
       },
     ],
     cta: 'Projekt anfragen',
@@ -170,22 +170,22 @@ export const de: Dictionary = {
       'Wie schnell du es brauchst',
       'Wo und wie lange du es nutzt',
     ],
-    note: 'Agenturen sind genauso willkommen. Wenn du Inhalte für eigene Kunden produzierst, rechne ich das genauso ab.',
+    note: 'Was in einem Paket steckt — Korrekturrunden, Formate, wo und wie lange du das Video nutzen darfst — legen wir gemeinsam fest, das ist von Projekt zu Projekt verschieden. Agenturen sind genauso willkommen: Wenn du für eigene Kunden produzierst, rechne ich das genauso ab.',
     tiers: {
       single: {
         name: 'Ein Video',
         body: 'Ein kurzes Video: Idee, Dreh, Schnitt und die fertigen Dateien.',
-        points: ['1 Hochkant-Video', '1 Korrekturrunde', 'Normale Social-Nutzung inklusive'],
+        points: ['1 Hochkant-Video', 'Korrekturen nach Vereinbarung', 'Nutzungsrechte nach Vereinbarung'],
       },
       package: {
         name: 'Ein Paket',
         body: 'Mehrere Videos für ein Produkt oder eine Kampagne, zusammen geplant, damit sie als Reihe funktionieren.',
-        points: ['3 bis 5 Videos', 'Verschiedene Ansätze und Einstiege', 'Zusatzmaterial und Fotos auf Wunsch'],
+        points: ['3 bis 5 Videos', 'Verschiedene Ansätze und Einstiege', 'Extras nach Vereinbarung'],
       },
       monthly: {
         name: 'Jeden Monat',
         body: 'Eine feste Anzahl Videos pro Monat, für Marken, die regelmäßig Inhalte brauchen.',
-        points: ['5 bis 10+ Videos im Monat', 'Planung und Ideen inklusive', 'Du bekommst Vorrang im Kalender'],
+        points: ['5 bis 10+ Videos im Monat', 'Planung und Ideen mit meinem Team', 'Vorrang in meinem Kalender'],
       },
     },
   },
@@ -193,7 +193,7 @@ export const de: Dictionary = {
   contact: {
     eyebrow: 'Kontakt',
     title: 'Lass uns reden.',
-    lede: 'Erzähl mir vom Produkt und davon, was du brauchst. Ich antworte meistens innerhalb von zwei Werktagen.',
+    lede: 'Erzähl mir vom Produkt und davon, was du brauchst. Ich schaue mir jede Anfrage mit meinem Team an und antworte meistens innerhalb von zwei Werktagen.',
     mailSubject: 'Projektanfrage',
     honeypot: 'Website',
     fields: {

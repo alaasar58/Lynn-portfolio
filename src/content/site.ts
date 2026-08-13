@@ -245,6 +245,6 @@ export const brands: Brand[] = [
  */
 export const pricingTiers = [
   { key: 'single', price: '€XXX', unit: 'from' },
-  { key: 'package', price: '€XXX', unit: 'from', featured: true },
+  { key: 'package', price: '€XXX', unit: 'from' },
   { key: 'monthly', price: '€XXX', unit: 'customFrom' },
 ] as const

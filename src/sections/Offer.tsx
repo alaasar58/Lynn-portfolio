@@ -28,10 +28,10 @@ export function Offer() {
         {t.services.offer.map((entry, index) => (
           <li
             key={entry.title}
-            className="group grid gap-2 border-b border-line py-7 sm:grid-cols-12 sm:gap-8 sm:py-8"
+            className="group -mx-4 grid gap-2 border-b border-line px-4 py-7 transition-colors duration-500 ease-[var(--ease-soft)] hover:bg-blush/25 sm:grid-cols-12 sm:gap-8 sm:py-8"
           >
             <div className="flex items-baseline gap-4 sm:col-span-5">
-              <span className="text-[0.68rem] tabular-nums text-ink-muted">
+              <span className="text-[0.68rem] tabular-nums text-ink-muted transition-colors duration-300 group-hover:text-blush-deep">
                 {String(index + 1).padStart(2, '0')}
               </span>
               <h3 className="text-xl transition-colors duration-300 group-hover:text-blush-deep sm:text-2xl">
@@ -51,15 +51,20 @@ export function Offer() {
           <p className="mt-4 leading-relaxed text-ink-soft">{t.pricing.lede}</p>
         </header>
 
+        {/*
+          No tier is singled out. Marking one as "featured" pushes a choice on
+          the reader and leaves the other two looking like the afterthoughts;
+          the emphasis follows the pointer instead, so whichever one is being
+          read is the one that lifts.
+        */}
         <div className="mt-12 grid gap-px overflow-hidden rounded-card bg-line lg:grid-cols-3">
           {pricingTiers.map((tier) => {
             const copy = t.pricing.tiers[tier.key]
-            const featured = 'featured' in tier && tier.featured
 
             return (
               <article
                 key={tier.key}
-                className={`flex flex-col p-8 sm:p-10 ${featured ? 'bg-blush/50' : 'bg-bone'}`}
+                className="group flex flex-col bg-bone p-8 transition-colors duration-500 ease-[var(--ease-soft)] hover:bg-blush/40 sm:p-10"
               >
                 <h3 className="text-xl">{copy.name}</h3>
 
@@ -84,7 +89,10 @@ export function Offer() {
 
                 {/* mt-auto pins the CTA to the floor so all three line up. */}
                 <div className="mt-auto pt-10">
-                  <a href="#contact" className={featured ? 'btn-primary w-full' : 'btn-secondary w-full'}>
+                  <a
+                    href="#contact"
+                    className="btn-secondary w-full transition-colors duration-500 group-hover:border-ink group-hover:bg-ink group-hover:text-bone"
+                  >
                     {t.pricing.cta}
                   </a>
                 </div>

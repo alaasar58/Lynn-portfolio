@@ -1,12 +1,20 @@
 import { useEffect, useRef } from 'react'
 
 /**
- * Reveals an element once it scrolls into view.
+ * Fades an element in whenever it scrolls into view.
  *
- * The element starts with the `reveal` class (offset + transparent) and gains
- * `reveal-in` when it enters the viewport. Observation stops after the first
- * reveal so nothing re-animates on scroll-back. Users who prefer reduced motion
- * get the element revealed immediately — the CSS neutralises the transition too.
+ * The element carries `reveal` (offset + transparent) and gains `reveal-in`
+ * while it is on screen. It loses it again once it has fully left, so the fade
+ * plays every time the section is scrolled to — coming down the page or back up
+ * it behaves the same, rather than only animating on the first visit.
+ *
+ * Deliberately keyed to "is any of it on screen" rather than to a percentage:
+ * a page section is often taller than the window, and a percentage it can never
+ * reach would leave it invisible for good. The negative bottom margin is what
+ * holds the fade back until the section has properly arrived.
+ *
+ * Users who prefer reduced motion get the element revealed immediately and it
+ * never resets — the CSS neutralises the transition as well.
  */
 export function useReveal<T extends HTMLElement = HTMLDivElement>() {
   const ref = useRef<T>(null)
@@ -24,13 +32,10 @@ export function useReveal<T extends HTMLElement = HTMLDivElement>() {
     const observer = new IntersectionObserver(
       (entries) => {
         for (const entry of entries) {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('reveal-in')
-            observer.unobserve(entry.target)
-          }
+          entry.target.classList.toggle('reveal-in', entry.isIntersecting)
         }
       },
-      { threshold: 0.12, rootMargin: '0px 0px -8% 0px' },
+      { threshold: 0, rootMargin: '0px 0px -12% 0px' },
     )
 
     observer.observe(el)
