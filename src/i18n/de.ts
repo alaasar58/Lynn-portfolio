@@ -45,7 +45,7 @@ export const de: Dictionary = {
     title: 'Ich bin Lynn.',
     paragraphs: [
       'Ich bin Mama und Lifestyle-Creator aus Hamburg.',
-      'Mein Schwerpunkt liegt auf Mutterschaft, Hautpflege, GRWM, Unboxing, Reisen und ästhetischem Lifestyle-Content.',
+      'Mein Schwerpunkt liegt auf Motherhood, Skincare, GRWM, Unboxing, Travel und ästhetischem Lifestyle-Content.',
     ],
     valuesTitle: 'Wie ich Marken aussuche',
     valuesBody:
@@ -73,11 +73,11 @@ export const de: Dictionary = {
     loadingReel: 'Reel wird geladen …',
     /* Caption under each phone. The key is the file name in public/media/reels/. */
     captions: {
-      motherhood: 'Mutterschaft',
-      skincare: 'Hautpflege',
+      motherhood: 'Motherhood',
+      skincare: 'Skincare',
       grwm: 'GRWM',
       unboxing: 'Unboxing',
-      travel: 'Reisen',
+      travel: 'Travel',
       lifestyle: 'Lifestyle',
     },
     play: 'Abspielen',
@@ -85,7 +85,7 @@ export const de: Dictionary = {
     mute: 'Ton aus',
     brandsHeading: 'Marken, mit denen ich gearbeitet habe',
     disclaimer:
-      'Eine Mischung aus bezahlten Aufträgen und Inhalten mit Produkten, die ich selbst gekauft habe.',
+      'Eine Mischung aus bezahlten Aufträgen und Content mit Produkten, die ich selbst gekauft habe.',
   },
 
   audience: {
@@ -102,6 +102,7 @@ export const de: Dictionary = {
     genderNote: 'Aus den Instagram-Insights, gerundet.',
     ageTitle: 'Alter',
     ageValue: 'Meist zwischen 18 und 35',
+    ageScale: ['13', '25', '35', '45', '65+'],
     ageNote: 'Das ist die Spanne, in der meine Zielgruppe liegt. Feiner habe ich es nicht ausgewertet, und raten möchte ich nicht.',
     reachTitle: 'Wo sie sind',
     regions: ['Deutschland', 'Arabischsprachige Länder'],
@@ -123,15 +124,15 @@ export const de: Dictionary = {
   services: {
     eyebrow: 'Leistungen',
     title: 'Was ich für dich machen kann.',
-    lede: 'Kurze Produktvideos mache ich am meisten. Alles andere unterstützt das. Vor der Kamera stehe ich selbst, beim Schnitt und in der Planung arbeite ich mit einem kleinen Team, dem ich vertraue.',
+    lede: 'Kurze Produktvideos mache ich am meisten, alles andere unterstützt das. Vor der Kamera stehe ich selbst; beim Schnitt und in der Planung arbeite ich mit einem kleinen Team, dem ich vertraue.',
     offer: [
       {
         title: 'Reels und Kurzvideos',
-        body: 'Hochkant-Video mit einem Produkt, das wirklich benutzt wird. Idee, Dreh, Schnitt, fertige Datei — bereit zum Posten.',
+        body: 'Hochkant-Video mit einem Produkt, das wirklich benutzt wird: Idee, Dreh, Schnitt, fertige Datei. Bereit zum Posten.',
       },
       {
         title: 'UGC für deine Anzeigen',
-        body: 'Dieselben Videos für bezahlte Nutzung geschnitten, mit Hooks und Einstiegen, die man gegeneinander testen kann.',
+        body: 'Dieselben Videos, für bezahlte Nutzung geschnitten, mit Hooks und Einstiegen, die sich gegeneinander testen lassen.',
       },
       {
         title: 'Unboxing und Produktdetails',
@@ -139,7 +140,7 @@ export const de: Dictionary = {
       },
       {
         title: 'Fotos, Zusatzmaterial und Schnitt',
-        body: 'Fotos und saubere Clips für deine eigenen Schnitte. Wenn du schon Material hast, schneide ich stattdessen.',
+        body: 'Fotos und saubere Clips für deine eigenen Schnitte. Wenn du schon Material hast, übernehme ich stattdessen den Schnitt.',
       },
     ],
     howItWorksTitle: 'So läuft es ab',
@@ -159,14 +160,14 @@ export const de: Dictionary = {
   pricing: {
     eyebrow: 'Preise',
     title: 'Meine Leistungen und Preise.',
-    lede: 'Einstiegspreise, damit du nicht raten musst. Das Angebot hängt davon ab, wie das Video genutzt wird.',
+    lede: 'Einstiegspreise, damit du nicht raten musst. Das endgültige Angebot hängt davon ab, wie das Video genutzt wird.',
     from: 'ab',
     customFrom: 'je nach Monat, ab',
     cta: 'Angebot anfragen',
     factorsTitle: 'Was den Preis verändert',
     factors: [
       'Wie viele Videos',
-      'Wie viel der Dreh braucht',
+      'Wie aufwendig der Dreh ist',
       'Wie schnell du es brauchst',
       'Wo und wie lange du es nutzt',
     ],
@@ -226,7 +227,7 @@ export const de: Dictionary = {
     elsewhere: 'Hier findest du mich',
     contentTypes: [
       'Ein kurzes Produktvideo',
-      'Alltagsnahe Inhalte',
+      'Alltagsnaher Lifestyle-Content',
       'Video im UGC-Stil',
       'Zeigen, wie das Produkt funktioniert',
       'Video mit Voiceover',
@@ -243,6 +244,130 @@ export const de: Dictionary = {
       'Ich bin flexibel',
       'Langfristige Planung',
     ],
+  },
+
+  legal: {
+    navLabel: 'Rechtliches',
+    back: 'Zurück zur Website',
+    updatedLabel: 'Stand',
+    updated: 'August 2026',
+
+    imprint: {
+      navLabel: 'Impressum',
+      title: 'Impressum',
+      intro: 'Angaben gemäß § 5 DDG (Digitale-Dienste-Gesetz).',
+      blocks: [
+        {
+          title: 'Diensteanbieterin',
+          lines: [
+            'Lynn Kawqge',
+            '[Straße und Hausnummer]',
+            '[PLZ und Ort]',
+            'Deutschland',
+          ],
+        },
+        {
+          title: 'Kontakt',
+          lines: ['E-Mail: lynnkawqge.ads@gmail.com', 'Telefon: [Telefonnummer]'],
+        },
+        {
+          title: 'Umsatzsteuer-Identifikationsnummer',
+          lines: [
+            'Umsatzsteuer-Identifikationsnummer gemäß § 27a UStG: [USt-IdNr. — oder Hinweis, dass keine erteilt wurde]',
+          ],
+        },
+        {
+          title: 'Verantwortlich für den Inhalt',
+          lines: ['Lynn Kawqge, Anschrift wie oben (§ 18 Abs. 2 MStV)'],
+        },
+      ],
+      disputeTitle: 'Verbraucherstreitbeilegung',
+      dispute:
+        'Ich bin weder verpflichtet noch bereit, an einem Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.',
+      liabilityTitle: 'Haftung und Urheberrecht',
+      liability: [
+        'Die Inhalte dieser Seite habe ich mit Sorgfalt erstellt. Für eigene Inhalte bin ich nach den allgemeinen Gesetzen verantwortlich, zu einer Überwachung fremder übermittelter oder gespeicherter Informationen bin ich jedoch nicht verpflichtet.',
+        'Diese Seite verlinkt auf externe Seiten, auf deren Inhalte ich keinen Einfluss habe. Dafür ist der jeweilige Anbieter verantwortlich. Als die Links gesetzt wurden, waren keine Rechtsverstöße erkennbar.',
+        'Die Fotos, Videos und Texte auf dieser Seite stammen von mir, sofern nicht anders gekennzeichnet. Jede Nutzung über das urheberrechtlich Erlaubte hinaus braucht meine schriftliche Zustimmung.',
+      ],
+    },
+
+    privacy: {
+      navLabel: 'Datenschutz',
+      title: 'Datenschutzerklärung',
+      intro:
+        'Diese Seite erhebt so wenig wie irgend möglich: keine Cookies, keine Analyse, kein Tracking, keine Werbung. Was hier steht, beschreibt genau das, was tatsächlich passiert — und behauptet bewusst nichts, was es nicht gibt.',
+      sections: [
+        {
+          title: 'Verantwortliche',
+          body: [
+            'Lynn Kawqge, [Straße und Hausnummer], [PLZ und Ort], Deutschland. E-Mail: lynnkawqge.ads@gmail.com',
+          ],
+        },
+        {
+          title: 'Hosting und Server-Logfiles',
+          body: [
+            'Diese Seite läuft auf GitHub Pages, einem Dienst der GitHub, Inc., 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, USA.',
+            'Wenn du die Seite öffnest, sendet dein Browser technische Daten an GitHub, die jeder Webserver erhält: IP-Adresse, Datum und Uhrzeit, die angeforderte Datei, die verweisende Seite sowie Angaben zu Browser und Betriebssystem. GitHub verarbeitet das, um die Seite auszuliefern und ihren Betrieb abzusichern. Ich habe auf diese Logfiles keinen Zugriff und kann sie nicht einsehen.',
+            'Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO: das berechtigte Interesse an einer zuverlässigen und sicheren Bereitstellung der Seite. Die Verarbeitung findet teilweise in den USA statt; GitHub gehört zur Microsoft-Gruppe, die nach dem EU-U.S. Data Privacy Framework zertifiziert ist.',
+          ],
+        },
+        {
+          title: 'Keine Cookies, keine Analyse',
+          body: [
+            'Diese Seite setzt keine Cookies, nutzt keinen Analyse- oder Statistikdienst, kein Werbenetzwerk, keine Heatmaps und kein A/B-Testing. Dein Besuch wird nirgends gemessen oder weitergegeben — deshalb gibt es hier auch kein Einwilligungsbanner.',
+          ],
+        },
+        {
+          title: 'Spracheinstellung',
+          body: [
+            'Deine Sprachwahl wird in deinem eigenen Browser unter dem Schlüssel „lynn.lang" gespeichert, damit du beim nächsten Besuch nicht erneut gefragt wirst. Das ist ein einfacher Wert auf deinem Gerät, er enthält nichts Persönliches und wird an keinen Server übertragen.',
+            'Nach § 25 Abs. 2 TDDDG ist diese Speicherung für einen ausdrücklich gewünschten Dienst unbedingt erforderlich und damit einwilligungsfrei. Du kannst sie jederzeit löschen, indem du in den Browsereinstellungen die Daten dieser Seite entfernst.',
+          ],
+        },
+        {
+          title: 'Schriften, Fotos und Videos',
+          body: [
+            'Die Schriftarten werden von dieser Seite selbst ausgeliefert. Es entsteht keine Verbindung zu Google Fonts oder einem anderen Schriftdienst, und deine IP-Adresse wird dafür an niemanden weitergegeben.',
+            'Alle Fotos und Clips sind Dateien auf dieser Seite. Es gibt keinen externen Videoplayer und keine eingebetteten Instagram- oder TikTok-Inhalte; diese Plattformen erfahren von deinem Besuch also nichts.',
+          ],
+        },
+        {
+          title: 'Kontaktformular',
+          body: [
+            'Das Formular sendet nichts an einen Server von mir — es gibt keinen. Wenn du auf Absenden klickst, öffnet sich dein eigenes E-Mail-Programm mit den eingegebenen Angaben, und bis du diese E-Mail selbst abschickst, verlässt nichts dein Gerät.',
+            'Was danach mit der Nachricht passiert, steht im nächsten Abschnitt.',
+          ],
+        },
+        {
+          title: 'Kontakt per E-Mail',
+          body: [
+            'Wenn du mir schreibst, verarbeite ich die Daten aus deiner Nachricht — Name, E-Mail-Adresse und das, was du mir über deine Anfrage mitteilst — um sie zu beantworten. Rechtsgrundlage ist Art. 6 Abs. 1 lit. b DSGVO, soweit es um einen Vertrag oder dessen Anbahnung geht, ansonsten Art. 6 Abs. 1 lit. f DSGVO: das berechtigte Interesse, Anfragen zu beantworten.',
+            'Ich bewahre die Nachricht so lange auf, wie die Beantwortung und eine daraus entstehende Zusammenarbeit es erfordern, und lösche sie, sobald sie nicht mehr gebraucht wird und keine gesetzliche Aufbewahrungsfrist entgegensteht. E-Mails erreichen mich unter der oben genannten Adresse; Anbieterin dieses Postfachs ist die Google Ireland Limited.',
+          ],
+        },
+        {
+          title: 'Links zu Instagram und TikTok',
+          body: [
+            'Die Links zu meinen Profilen sind gewöhnliche Links, keine Plugins. Solange du auf dieser Seite bist, wird von diesen Plattformen nichts geladen. Eine Verbindung entsteht erst, wenn du einen Link anklickst — ab diesem Moment gilt die Datenschutzerklärung von Meta Platforms Ireland Ltd. beziehungsweise TikTok Technology Ltd., nicht diese hier.',
+          ],
+        },
+        {
+          title: 'Deine Rechte',
+          body: [
+            'Du hast das Recht auf Auskunft über die zu dir gespeicherten Daten, auf Berichtigung, auf Löschung, auf Einschränkung der Verarbeitung, auf Datenübertragbarkeit und auf Widerspruch gegen Verarbeitungen, die auf berechtigten Interessen beruhen (Art. 15 bis 21 DSGVO). Eine E-Mail an die oben genannte Adresse genügt.',
+            'Außerdem kannst du dich bei einer Aufsichtsbehörde beschweren. Für mich ist das der Hamburgische Beauftragte für Datenschutz und Informationsfreiheit.',
+            'Eine automatisierte Entscheidungsfindung oder ein Profiling findet auf dieser Seite nicht statt.',
+          ],
+        },
+        {
+          title: 'Änderungen dieser Erklärung',
+          body: [
+            'Wenn diese Seite eine Funktion bekommt, die Daten anders verarbeitet, wird diese Erklärung mit angepasst. Das Datum oben zeigt dir, welche Fassung du gerade liest.',
+          ],
+        },
+      ],
+    },
   },
 
   footer: {

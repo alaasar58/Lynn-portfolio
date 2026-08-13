@@ -204,6 +204,25 @@ you want more or less pink, adjust `--color-blush*` in that one block.
 
 ---
 
+## Legal pages
+
+The imprint and the privacy policy live on `#imprint` and `#privacy`. They are
+not routes — GitHub Pages serves one HTML file and would answer `/imprint` with
+a 404 — so `src/lib/useHashRoute.ts` reads the hash and `src/sections/Legal.tsx`
+renders that page instead of the scrolling site. Both are translated like
+everything else, so the language switcher works on them.
+
+**Anything still missing is written in `[square brackets]` and rendered
+highlighted**, so an unfinished imprint cannot be published unnoticed. Currently
+missing and legally required in Germany: postal address, telephone number, and
+the VAT ID (or a statement that none was issued).
+
+The privacy policy describes what this site actually does — no cookies, no
+analytics, no embeds, no fonts from a CDN, and a contact form that only opens
+the visitor's mail client. **If any of that changes, that page has to change
+with it**; the most likely trigger is setting `VITE_FORM_ENDPOINT`, which is
+flagged in `src/sections/Contact.tsx`.
+
 ## The inquiry form
 
 The form works in two modes:

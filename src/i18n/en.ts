@@ -117,6 +117,8 @@ export const en = {
     genderNote: 'From Instagram Insights, rounded.',
     ageTitle: 'Age',
     ageValue: 'Mostly 18 to 35',
+    /* Tick labels under the age band. Numerals, but still on-screen text. */
+    ageScale: ['13', '25', '35', '45', '65+'],
     ageNote: 'The band my audience sits in. I have not broken it down further, so I am not going to guess at brackets.',
     reachTitle: 'Where they are',
     regions: ['Germany', 'Arabic-speaking countries'],
@@ -261,6 +263,140 @@ export const en = {
       "I'm flexible",
       'Planning ahead',
     ],
+  },
+
+  /* -------------------------------------------------------------- legal
+     Two pages of their own, reached from the footer. Everything factual in
+     here — address, phone, VAT — has to come from Lynn; anything still
+     missing is written between [square brackets] and rendered highlighted,
+     so it cannot go unnoticed.
+
+     The privacy text describes what this site actually does and nothing more:
+     no cookies, no analytics, no embeds, no form endpoint. If any of that
+     changes — in particular if VITE_FORM_ENDPOINT is ever set — the contact
+     form section below has to be rewritten to match. */
+  legal: {
+    navLabel: 'Legal',
+    back: 'Back to the site',
+    updatedLabel: 'Last updated',
+    updated: 'August 2026',
+
+    imprint: {
+      navLabel: 'Imprint',
+      title: 'Imprint',
+      intro: 'Information required under § 5 of the German Digital Services Act (DDG).',
+      blocks: [
+        {
+          title: 'Service provider',
+          lines: [
+            'Lynn Kawqge',
+            '[Street and house number]',
+            '[Postcode and town]',
+            'Germany',
+          ],
+        },
+        {
+          title: 'Contact',
+          lines: ['Email: lynnkawqge.ads@gmail.com', 'Phone: [Phone number]'],
+        },
+        {
+          title: 'VAT identification number',
+          lines: [
+            'VAT identification number under § 27a of the German VAT Act (UStG): [VAT ID — or state that none has been issued]',
+          ],
+        },
+        {
+          title: 'Responsible for editorial content',
+          lines: ['Lynn Kawqge, address as above (§ 18 (2) MStV)'],
+        },
+      ],
+      disputeTitle: 'Consumer dispute resolution',
+      dispute:
+        'I am neither obliged nor willing to take part in dispute resolution proceedings before a consumer arbitration board.',
+      liabilityTitle: 'Liability and copyright',
+      liability: [
+        'The content of this site was written with care. I am responsible for my own content under general law, but I am not obliged to monitor third-party information transmitted or stored here.',
+        'This site links to external sites whose content I have no influence over. Responsibility lies with their respective providers. Nothing unlawful was apparent when the links were set.',
+        'The photos, videos and texts here are mine unless marked otherwise. Any use beyond what copyright permits needs my written consent.',
+      ],
+    },
+
+    privacy: {
+      navLabel: 'Privacy',
+      title: 'Privacy policy',
+      intro:
+        'This site collects as little as it possibly can: no cookies, no analytics, no tracking, no advertising. What follows describes exactly what happens — and deliberately claims nothing that does not.',
+      sections: [
+        {
+          title: 'Who is responsible',
+          body: [
+            'Lynn Kawqge, [Street and house number], [Postcode and town], Germany. Email: lynnkawqge.ads@gmail.com',
+          ],
+        },
+        {
+          title: 'Hosting and server log files',
+          body: [
+            'This site is hosted on GitHub Pages, a service of GitHub, Inc., 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, USA.',
+            'When you open the site, your browser sends technical data to GitHub that any web server receives: IP address, date and time, the file requested, the referring page, and browser and operating system details. GitHub processes this to deliver the site and to keep it secure. I have no access to these log files and cannot read them.',
+            'The legal basis is Art. 6 (1) (f) GDPR: the legitimate interest in making the site available reliably and securely. Processing takes place partly in the USA; GitHub is part of the Microsoft group, which is certified under the EU-U.S. Data Privacy Framework.',
+          ],
+        },
+        {
+          title: 'No cookies, no analytics',
+          body: [
+            'This site sets no cookies, uses no analytics or statistics service, no advertising network, no heatmaps and no A/B testing. Nothing about your visit is measured or passed on, so no consent banner is needed.',
+          ],
+        },
+        {
+          title: 'Language setting',
+          body: [
+            'Your language choice is saved in your own browser under the key "lynn.lang", so you are not asked again on the next visit. It is a plain value on your device, contains nothing personal and is never sent to a server.',
+            'Under § 25 (2) TDDDG this storage is strictly necessary for a service you explicitly requested, so it does not require consent. You can delete it at any time by clearing this site\u2019s data in your browser settings.',
+          ],
+        },
+        {
+          title: 'Fonts, photos and video',
+          body: [
+            'The typefaces are delivered from this site itself. No connection to Google Fonts or any other font service is made, and your IP address is not passed to a third party for that purpose.',
+            'All photos and clips are files on this site. There is no external video player and no embedded Instagram or TikTok content, so those platforms learn nothing about your visit.',
+          ],
+        },
+        {
+          title: 'Contact form',
+          body: [
+            'The form sends nothing to a server of mine — there is none. When you press send, your own email program opens with the text you entered already filled in, and nothing leaves your device until you send that email yourself.',
+            'What happens to the message after that is described in the next section.',
+          ],
+        },
+        {
+          title: 'Contact by email',
+          body: [
+            'If you write to me, I process the data in your message — name, email address, and whatever you tell me about your enquiry — to answer it. The legal basis is Art. 6 (1) (b) GDPR where it concerns a contract or its preparation, otherwise Art. 6 (1) (f) GDPR: the legitimate interest in answering enquiries.',
+            'I keep the message for as long as answering it and any resulting collaboration require, and delete it once it is no longer needed and no statutory retention period applies. Email reaches me at the address above, hosted by Google Ireland Limited as the provider of that mailbox.',
+          ],
+        },
+        {
+          title: 'Links to Instagram and TikTok',
+          body: [
+            'The links to my profiles are ordinary links, not plugins. Nothing loads from those platforms while you are on this site. A connection is only made once you click a link, and from that moment the privacy policy of Meta Platforms Ireland Ltd. or TikTok Technology Ltd. applies, not this one.',
+          ],
+        },
+        {
+          title: 'Your rights',
+          body: [
+            'You have the right to access the data held about you, to have it corrected or erased, to have its processing restricted, to data portability, and to object to processing based on legitimate interests (Art. 15 to 21 GDPR). One email to the address above is enough.',
+            'You may also complain to a supervisory authority. For me that is the Hamburg Commissioner for Data Protection and Freedom of Information.',
+            'There is no automated decision-making and no profiling on this site.',
+          ],
+        },
+        {
+          title: 'Changes to this policy',
+          body: [
+            'If this site gains a function that processes data differently, this page is updated with it. The date above tells you which version you are reading.',
+          ],
+        },
+      ],
+    },
   },
 
   footer: {

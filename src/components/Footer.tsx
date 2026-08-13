@@ -63,9 +63,32 @@ export function Footer() {
           </div>
         </div>
 
-        <p className="mt-10 text-xs text-bone/40">
-          © {new Date().getFullYear()} {site.name}. {t.footer.rights}.
-        </p>
+        {/*
+          The legal links sit on their own line, above the copyright and
+          separated by a rule, so they are found where every German site puts
+          them. `justify-between` on a row that mirrors under RTL keeps them on
+          the reading side in Arabic without any special case.
+        */}
+        <div className="mt-10 flex flex-col gap-4 border-t border-bone/15 pt-8 sm:flex-row sm:items-center sm:justify-between">
+          <nav aria-label={t.legal.navLabel} className="flex flex-wrap items-center gap-x-6 gap-y-2">
+            <a
+              href="#imprint"
+              className="text-sm text-bone/75 underline-offset-4 transition-colors hover:text-bone hover:underline"
+            >
+              {t.legal.imprint.navLabel}
+            </a>
+            <a
+              href="#privacy"
+              className="text-sm text-bone/75 underline-offset-4 transition-colors hover:text-bone hover:underline"
+            >
+              {t.legal.privacy.navLabel}
+            </a>
+          </nav>
+
+          <p className="text-xs text-bone/40">
+            © {new Date().getFullYear()} {site.name}. {t.footer.rights}.
+          </p>
+        </div>
       </div>
     </footer>
   )

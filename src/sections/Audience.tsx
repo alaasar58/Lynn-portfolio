@@ -99,11 +99,9 @@ export function Audience() {
                 />
               </div>
               <div className="mt-2 flex justify-between text-[0.68rem] text-ink-muted">
-                <span>13</span>
-                <span>25</span>
-                <span>35</span>
-                <span>45</span>
-                <span>65+</span>
+                {t.audience.ageScale.map((tick) => (
+                  <span key={tick}>{tick}</span>
+                ))}
               </div>
             </div>
             <p className="mt-3 max-w-md text-sm leading-relaxed text-ink-muted">

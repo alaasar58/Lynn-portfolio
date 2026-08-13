@@ -13,6 +13,18 @@ import { InstagramGlyph, TikTokGlyph } from '../components/Glyphs'
  * straight through. With no endpoint configured the form falls back to opening
  * a pre-filled email to the address in `site.email`, so it is never a dead end.
  */
+/*
+ * !! PRIVACY POLICY DEPENDS ON THIS !!
+ *
+ * With no endpoint set — the state today — the form never talks to a server:
+ * it opens the visitor's own mail client, and `legal.privacy` says exactly
+ * that in all three dictionaries.
+ *
+ * The moment VITE_FORM_ENDPOINT is set, form data starts going to a third
+ * party and that section becomes untrue. Update the "contact form" section in
+ * en.ts, de.ts and ar.ts in the same change: who the processor is, what is
+ * transmitted, on what legal basis and for how long it is kept.
+ */
 const FORM_ENDPOINT = import.meta.env.VITE_FORM_ENDPOINT as string | undefined
 
 type Status = 'idle' | 'sending' | 'sent' | 'error'
