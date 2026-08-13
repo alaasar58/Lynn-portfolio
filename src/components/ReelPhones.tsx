@@ -8,12 +8,19 @@ import { InstagramGlyph } from "./Glyphs";
 import { PhoneFrame } from "./PhoneFrame";
 import { VideoLightbox } from "./VideoLightbox";
 
-/* The middle phone sits slightly higher, so the row reads as a composition
+/* The middle phone of each row sits higher, so a row reads as a composition
    rather than as three equal boxes. Desktop only. */
-const offsets = ["sm:translate-y-4", "sm:-translate-y-3", "sm:translate-y-5"];
+const offsets = [
+  "sm:translate-y-4",
+  "sm:-translate-y-3",
+  "sm:translate-y-5",
+  "sm:translate-y-3",
+  "sm:-translate-y-4",
+  "sm:translate-y-4",
+];
 
 /**
- * The three clips, each playing inside an iPhone frame.
+ * Six frames, one per topic, captioned underneath.
  *
  * They start themselves and loop, muted, once they scroll into view — the way
  * short-form video behaves everywhere else. Sound comes on when the pointer is
@@ -49,7 +56,7 @@ export function ReelPhones() {
         )}
       </div>
 
-      <ul className="mt-10 grid grid-cols-2 gap-x-6 gap-y-10 sm:mt-14 sm:grid-cols-3 sm:gap-x-10">
+      <ul className="mt-10 grid grid-cols-2 gap-x-6 gap-y-12 sm:mt-14 sm:grid-cols-3 sm:gap-x-10 sm:gap-y-16">
         {featuredReels.map((reel, index) => (
           <ReelPhone
             key={reel.id}
@@ -95,7 +102,7 @@ function ReelPhone({ reel, index, onOpen }: ReelPhoneProps) {
       onMouseLeave={hasVideo ? () => hoverSound(false) : undefined}
       /* Three items in two columns leave an orphan on the last row; letting it
          span both columns centres it instead of stranding it on the left. */
-      className={`mx-auto w-full max-w-[15rem] transition-transform duration-700 ease-[var(--ease-soft)] last:odd:col-span-2 sm:last:odd:col-span-1 ${offsets[index] ?? ""}`}
+      className={`mx-auto w-full max-w-[15rem] transition-transform duration-700 ease-[var(--ease-soft)] ${offsets[index] ?? ""}`}
     >
       <PhoneFrame className="group hover:shadow-[0_32px_60px_-28px_rgba(34,31,28,0.6)]">
         {hasVideo ? (
@@ -180,13 +187,17 @@ function ReelPhone({ reel, index, onOpen }: ReelPhoneProps) {
         )}
       </PhoneFrame>
 
+      <p className="mt-5 text-center text-[0.72rem] font-medium uppercase tracking-[0.18em] text-ink-soft sm:text-xs">
+        {t.work.captions[reel.id]}
+      </p>
+
       {/* Direct route to the original post, when this clip is one. */}
       {reel.code && (
         <a
           href={reelUrl(reel.code)}
           target="_blank"
           rel="noreferrer noopener"
-          className="mt-4 flex items-center justify-center gap-1.5 text-xs text-ink-muted underline-offset-4 transition-colors duration-300 hover:text-blush-deep hover:underline"
+          className="mt-2 flex items-center justify-center gap-1.5 text-xs text-ink-muted underline-offset-4 transition-colors duration-300 hover:text-blush-deep hover:underline"
         >
           <InstagramGlyph className="h-3.5 w-3.5" />
           {t.work.watchOnInstagram}

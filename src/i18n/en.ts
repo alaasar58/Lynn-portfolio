@@ -58,7 +58,6 @@ export const en = {
     paragraphs: [
       "I'm a mom and lifestyle creator based in Hamburg, Germany.",
       'My focus is on motherhood, skincare, GRWM, unboxing, travel and aesthetic lifestyle content.',
-      'I work in Arabic and English on camera, and in German for captions, subtitles and scripts. One product, more than one audience, without a second shoot.',
     ],
     valuesTitle: 'How I pick brands',
     valuesBody:
@@ -85,6 +84,15 @@ export const en = {
     openOnInstagram: 'Open on Instagram',
     embedFallback: 'Not showing? Open the Reel on Instagram.',
     loadingReel: 'Loading the Reel…',
+    /* Caption under each phone. The key is the file name in public/media/reels/. */
+    captions: {
+      motherhood: 'Motherhood',
+      skincare: 'Skincare',
+      grwm: 'GRWM',
+      unboxing: 'Unboxing',
+      travel: 'Travel',
+      lifestyle: 'Lifestyle',
+    },
     play: 'Play',
     unmute: 'Sound on',
     mute: 'Sound off',
@@ -113,7 +121,6 @@ export const en = {
     reachTitle: 'Where they are',
     regions: ['Germany', 'Arabic-speaking countries'],
     reachNote: 'Country-level percentages on request.',
-    languagesTitle: 'Content languages',
     /** Heading over the metrics that have no verified figure yet. */
     pendingTitle: 'Available on request',
     pendingLede:
@@ -163,9 +170,6 @@ export const en = {
         body: 'You get the formats and dates we agreed on, with one round of changes. If something shifts, I tell you early.',
       },
     ],
-    languagesTitle: 'In three languages',
-    languagesBody:
-      'Arabic and English on camera, German in the captions and on screen. So one shoot reaches more than one market.',
     cta: 'Start a project',
   },
 

@@ -43,14 +43,6 @@ export function Offer() {
         ))}
       </ul>
 
-      {/* Languages: the one thing here another creator probably cannot offer. */}
-      <div className="mt-10 flex flex-col gap-3 rounded-card bg-sand/70 p-8 sm:flex-row sm:items-baseline sm:gap-10">
-        <h3 className="shrink-0 text-[0.68rem] font-medium uppercase tracking-[0.2em] text-ink-muted">
-          {t.services.languagesTitle}
-        </h3>
-        <p className="max-w-2xl leading-relaxed text-ink-soft">{t.services.languagesBody}</p>
-      </div>
-
       {/* ------------------------------------------------------------ Prices */}
       <div className="mt-28 lg:mt-36">
         <header className="max-w-2xl">

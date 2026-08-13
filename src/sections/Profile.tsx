@@ -53,6 +53,9 @@ export function Profile() {
                 </li>
               ))}
             </ul>
+            <p className="mt-5 text-sm leading-relaxed text-ink-muted">
+              {t.about.languagesNote}
+            </p>
           </div>
         </div>
 

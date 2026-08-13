@@ -16,24 +16,49 @@ umwandeln, kein Standbild machen.
 
 ## Die Liste
 
-| Datei | Was es ist | Format | Hochkant / Quer |
-| ----- | ---------- | ------ | --------------- |
-| `cover.jpg` | Das große Bild auf der ersten Seite | JPG | hochkant **4:5** |
-| `about.jpg` | Bild neben „I am Lynn." | JPG | hochkant **4:5** |
-| `reels/reel-1.mp4` | Video im **linken** Handy | MP4 | hochkant **9:16** |
-| `reels/reel-2.mp4` | Video im **mittleren** Handy | MP4 | hochkant **9:16** |
-| `reels/reel-3.mp4` | Video im **rechten** Handy | MP4 | hochkant **9:16** |
-| `brands/…` | Logos der Marken, optional | SVG oder PNG | egal |
+| Datei | Was es ist | Format |
+| ----- | ---------- | ------ |
+| `cover.jpg` | Das große Bild auf der ersten Seite | JPG, hochkant **4:5** |
+| `about.jpg` | Bild neben „I am Lynn." | JPG, hochkant **4:5** |
+| `reels/motherhood.mp4` | Handy 1 — **Motherhood** | MP4, hochkant **9:16** |
+| `reels/skincare.mp4` | Handy 2 — **Skincare** | MP4, hochkant **9:16** |
+| `reels/grwm.mp4` | Handy 3 — **GRWM** | MP4, hochkant **9:16** |
+| `reels/unboxing.mp4` | Handy 4 — **Unboxing** | MP4, hochkant **9:16** |
+| `reels/travel.mp4` | Handy 5 — **Travel** | MP4, hochkant **9:16** |
+| `reels/lifestyle.mp4` | Handy 6 — **Lifestyle** | MP4, hochkant **9:16** |
+| `brands/…` | Logos der Marken, optional | SVG oder PNG |
 
-**Das ist alles. Pro Handy eine einzige Datei.**
+**Der Dateiname ist das Thema.** Was `motherhood.mp4` heißt, landet unter der
+Überschrift „Motherhood" — du musst mir nichts sagen, leg die Datei einfach
+richtig benannt ab.
 
-Das Standbild, das man vor dem Abspielen sieht, wird automatisch aus deinem
-Video geschnitten (aus der ersten halben Sekunde). Willst du ein anderes Bild,
-sag mir einfach die Sekunde — zum Beispiel „nimm Sekunde 3" — das ist eine Zahl
-im Code und in einer Minute geändert.
+Ein Handy kann auch **ein Foto statt eines Videos** zeigen: dann heißt die Datei
+`motherhood.jpg` statt `.mp4`. Genau so steht es gerade bei Motherhood, Unboxing
+und Lifestyle — dort liegen deine Fotos. Sobald du dort ein Video hochlädst,
+sag mir Bescheid: ich schalte diese drei mit einer Zeile auf Video um.
 
-Du musst nicht alles auf einmal machen. Jede Datei, die du hochlädst, ersetzt
-genau einen Platzhalter, der Rest bleibt so lange, wie er ist.
+Das Standbild vor dem Abspielen wird automatisch aus deinem Video geschnitten.
+Willst du ein anderes, sag mir die Sekunde.
+
+Du musst nicht alles auf einmal machen. Jede Datei ersetzt genau einen
+Platzhalter, der Rest bleibt so lange, wie er ist.
+
+---
+
+## Wo die Themen stehen, wenn du sie ändern willst
+
+Zwei Stellen, sonst nichts:
+
+| Was | Wo |
+| --- | -- |
+| Reihenfolge der Handys, welche Datei wo | `src/content/site.ts` → `featuredReels` |
+| Die Beschriftung unter dem Handy, in allen drei Sprachen | `src/i18n/en.ts`, `de.ts`, `ar.ts` → `work.captions` |
+
+Die Reihenfolge in `featuredReels` **ist** die Reihenfolge auf der Seite: die
+ersten drei oben, die zweiten drei unten. Ein Thema umbenennen heißt: Datei
+umbenennen, in `featuredReels` denselben Namen eintragen, und in den drei
+Sprachdateien die Beschriftung setzen. Sag mir einfach, was du willst — das
+mache ich in zwei Minuten.
 
 ---
 
@@ -42,8 +67,8 @@ genau einen Platzhalter, der Rest bleibt so lange, wie er ist.
 1. Auf GitHub in diesem Projekt den Ordner `public/media` öffnen (für die Videos
    weiter in `reels`).
 2. Oben rechts **Add file → Upload files**.
-3. Datei reinziehen. **Der Name muss exakt stimmen** — `reel-1.mp4`, nicht
-   `Reel-1.MP4` oder `reel1.mp4`. Groß- und Kleinschreibung zählt.
+3. Datei reinziehen. **Der Name muss exakt stimmen** — `skincare.mp4`, nicht
+   `Skincare.MP4` oder `skin-care.mp4`. Groß- und Kleinschreibung zählt.
 4. Unten auf **Commit changes** klicken. Fertig.
 
 GitHub fragt beim Überschreiben nicht nach — es ersetzt die alte Datei einfach.
@@ -109,7 +134,7 @@ Die Datei muss am Ende `cover.jpg` bzw. `about.jpg` heißen.
 
 ---
 
-## Ein viertes Handy?
+## Ein siebtes Handy, oder ein anderes Thema?
 
-Dafür braucht es eine Zeile Code — sag mir Bescheid, das ist in einer Minute
-erledigt. Die Datei wäre dann `reels/reel-4.mp4`.
+Dafür braucht es eine Zeile in `src/content/site.ts` und die Beschriftung in den
+drei Sprachdateien — sag mir Bescheid, das ist in zwei Minuten erledigt.

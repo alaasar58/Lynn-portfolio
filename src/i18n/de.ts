@@ -46,7 +46,6 @@ export const de: Dictionary = {
     paragraphs: [
       'Ich bin Mama und Lifestyle-Creator aus Hamburg.',
       'Mein Schwerpunkt liegt auf Mutterschaft, Hautpflege, GRWM, Unboxing, Reisen und ästhetischem Lifestyle-Content.',
-      'Vor der Kamera arbeite ich auf Arabisch und Englisch, auf Deutsch schreibe ich Untertitel, Captions und Skripte. Ein Produkt, mehrere Zielgruppen, ohne zweiten Drehtag.',
     ],
     valuesTitle: 'Wie ich Marken aussuche',
     valuesBody:
@@ -72,6 +71,15 @@ export const de: Dictionary = {
     openOnInstagram: 'Auf Instagram öffnen',
     embedFallback: 'Wird nichts angezeigt? Öffne das Reel auf Instagram.',
     loadingReel: 'Reel wird geladen …',
+    /* Caption under each phone. The key is the file name in public/media/reels/. */
+    captions: {
+      motherhood: 'Mutterschaft',
+      skincare: 'Hautpflege',
+      grwm: 'GRWM',
+      unboxing: 'Unboxing',
+      travel: 'Reisen',
+      lifestyle: 'Lifestyle',
+    },
     play: 'Abspielen',
     unmute: 'Ton an',
     mute: 'Ton aus',
@@ -98,7 +106,6 @@ export const de: Dictionary = {
     reachTitle: 'Wo sie sind',
     regions: ['Deutschland', 'Arabischsprachige Länder'],
     reachNote: 'Prozente pro Land auf Anfrage.',
-    languagesTitle: 'Sprachen der Inhalte',
     pendingTitle: 'Auf Anfrage',
     pendingLede:
       'Ich schicke dir lieber einen aktuellen Screenshot aus den Insights, als hier eine Zahl hinzuschreiben, die schnell veraltet.',
@@ -146,9 +153,6 @@ export const de: Dictionary = {
         body: 'Du bekommst die vereinbarten Formate und Termine, mit einer Korrekturrunde. Wenn sich etwas verschiebt, sage ich früh Bescheid.',
       },
     ],
-    languagesTitle: 'In drei Sprachen',
-    languagesBody:
-      'Arabisch und Englisch vor der Kamera, Deutsch in den Untertiteln und im Bild. So erreicht ein Drehtag mehr als einen Markt.',
     cta: 'Projekt anfragen',
   },
 

@@ -48,19 +48,19 @@ const sway = (d, amp) => Math.sin(d * Math.PI * 2) * amp
 /** 9:16 work covers. Floor at 100 of 178 keeps detail clear of the caption. */
 const W9 = { vbW: 100, vbH: 178, floorY: 108 }
 /*
- * The three clips in the phone frames. Each renders both a still and a looping
- * video, because that is what the site now plays. The middle and the top-left
- * stay clear: the play mark sits in one, the Dynamic Island over the other.
+ * One scene per topic in the phone frames. Each renders a still and a looping
+ * video. The middle and the top-left stay clear: the play mark sits in one, the
+ * Dynamic Island over the other.
  */
 const reels = {
-  'reel-1': (d) => ({
+  motherhood: (d) => ({
     ...W9,
     body:
-      S.ringLight(64, 40 + sway(d, 0.5), 17, W9.floorY) +
-      S.brushCup(22, W9.floorY, 15, 17) +
-      S.mirror(30, 44, 13),
+      S.babyBottle(12 + sway(d, 0.45), W9.floorY, 19, 36) +
+      S.stack(60, W9.floorY, 28, 3) +
+      S.plant(40, W9.floorY, 14, 24),
   }),
-  'reel-2': (d) => ({
+  skincare: (d) => ({
     ...W9,
     body:
       S.pumpBottle(14 + sway(d, 0.4), W9.floorY, 15, 34, C.bone) +
@@ -68,12 +68,33 @@ const reels = {
       S.jar(38, W9.floorY, 24, 16, C.sand) +
       S.mirror(64, 40, 15),
   }),
-  'reel-3': (d) => ({
+  grwm: (d) => ({
     ...W9,
     body:
-      S.babyBottle(12 + sway(d, 0.45), W9.floorY, 19, 36) +
-      S.stack(60, W9.floorY, 28, 3) +
-      S.plant(40, W9.floorY, 14, 24),
+      S.ringLight(64, 40 + sway(d, 0.5), 17, W9.floorY) +
+      S.brushCup(22, W9.floorY, 15, 17) +
+      S.mirror(30, 44, 13),
+  }),
+  unboxing: (d) => ({
+    ...W9,
+    body:
+      S.openBox(18 + sway(d, 0.4), W9.floorY, 46, 30) +
+      S.dropper(76, W9.floorY, 12, 26, C.blush) +
+      S.plain(20, W9.floorY - 34, 30, 3, C.sand, 0.7),
+  }),
+  travel: (d) => ({
+    ...W9,
+    body:
+      S.suitcase(16 + sway(d, 0.5), W9.floorY, 52, 33) +
+      S.circle(78, W9.floorY - 12, 9, C.blush) +
+      S.plain(70, W9.floorY - 3, 20, 3, C.sand, 0.6),
+  }),
+  lifestyle: (d) => ({
+    ...W9,
+    body:
+      S.window_(18 + sway(d, 0.6), 34, 44, 52) +
+      S.mug(30, W9.floorY, 13, 11) +
+      S.plant(70, W9.floorY, 15, 30),
   }),
 }
 
@@ -134,7 +155,7 @@ async function loop(sceneFn, out, seed) {
   rmSync(TMP, { recursive: true, force: true })
 }
 
-/* Optional filter so one thing can be re-rendered: `npm run media cover reel-2` */
+/* Optional filter so one thing can be re-rendered: `npm run media cover travel` */
 const only = process.argv.slice(2)
 const want = (name) => only.length === 0 || only.includes(name)
 

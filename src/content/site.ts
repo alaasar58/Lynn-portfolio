@@ -136,13 +136,19 @@ export const nav = [
  *
  * `code` is the shortcode from a published Reel's URL —
  * instagram.com/reel/<code>/ — and is optional. With it, the frame carries a
- * link to the original post; without it, no link is shown rather than a broken
- * one.
+ * "watch on Instagram" link to that post; without it, no link is shown.
+ *
+ * None are set right now on purpose: which published Reel each photo belongs to
+ * is not known here, and a link under the wrong topic is a claim the page
+ * should not make. Add the shortcode to an entry once it is confirmed.
  */
 export type Reel = {
-  /** File base name in public/media/reels/. */
-  id: string
-  /** Leave out until a clip is uploaded — the poster then stands on its own. */
+  /**
+   * File base name in `public/media/reels/` AND the caption key under
+   * `reels.captions` in the dictionaries. One word, one topic, one file.
+   */
+  id: 'motherhood' | 'skincare' | 'grwm' | 'unboxing' | 'travel' | 'lifestyle'
+  /** Leave out until a clip is uploaded — the photo then stands on its own. */
   video?: string
   poster: string
   /** Second the still is cut from. Default 0.5. */
@@ -150,11 +156,45 @@ export type Reel = {
   code?: string
 }
 
+/*
+ * THE ORDER HERE IS THE ORDER ON THE PAGE: three across the top row, three
+ * across the bottom. Move a line to move a phone.
+ *
+ * `video` is commented out where no clip has been uploaded yet — those frames
+ * show the photo instead. Uncomment the line and drop the file in to turn a
+ * frame back into a clip.
+ */
 export const featuredReels: Reel[] = [
-  // TODO: add `video: '/media/reels/reel-1.mp4'` once the clip is uploaded.
-  { id: 'reel-1', poster: '/media/reels/reel-1.jpg', code: 'DabNET8N0QF' },
-  { id: 'reel-2', poster: '/media/reels/reel-2.jpg', code: 'DZ5mjgghM2X' },
-  { id: 'reel-3', poster: '/media/reels/reel-3.jpg', code: 'DZDj6BZttNH' },
+  {
+    id: 'motherhood',
+    poster: '/media/reels/motherhood.jpg',
+    // video: '/media/reels/motherhood.mp4',
+  },
+  {
+    id: 'skincare',
+    poster: '/media/reels/skincare.jpg',
+    video: '/media/reels/skincare.mp4',
+  },
+  {
+    id: 'grwm',
+    poster: '/media/reels/grwm.jpg',
+    video: '/media/reels/grwm.mp4',
+  },
+  {
+    id: 'unboxing',
+    poster: '/media/reels/unboxing.jpg',
+    // video: '/media/reels/unboxing.mp4',
+  },
+  {
+    id: 'travel',
+    poster: '/media/reels/travel.jpg',
+    video: '/media/reels/travel.mp4',
+  },
+  {
+    id: 'lifestyle',
+    poster: '/media/reels/lifestyle.jpg',
+    // video: '/media/reels/lifestyle.mp4',
+  },
 ]
 
 export const reelUrl = (code: string) => `https://www.instagram.com/reel/${code}/`
