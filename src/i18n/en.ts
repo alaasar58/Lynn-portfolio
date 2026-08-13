@@ -82,8 +82,6 @@ export const en = {
     reelBadge: 'Reel',
     watchOnInstagram: 'Watch on Instagram',
     openOnInstagram: 'Open on Instagram',
-    embedFallback: 'Not showing? Open the Reel on Instagram.',
-    loadingReel: 'Loading the Reel…',
     /* Caption under each phone. The key is the file name in public/media/reels/. */
     captions: {
       motherhood: 'Motherhood',
@@ -334,65 +332,37 @@ export const en = {
           ],
         },
         {
-          title: 'Hosting and server log files',
+          title: 'Hosting',
           body: [
-            'This site is hosted on GitHub Pages, a service of GitHub, Inc., 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, USA.',
-            'When you open the site, your browser sends technical data to GitHub that any web server receives: IP address, date and time, the file requested, the referring page, and browser and operating system details. GitHub processes this to deliver the site and to keep it secure. I have no access to these log files and cannot read them.',
-            'The legal basis is Art. 6 (1) (f) GDPR: the legitimate interest in making the site available reliably and securely. Processing takes place partly in the USA; GitHub is part of the Microsoft group, which is certified under the EU-U.S. Data Privacy Framework.',
+            'This site is hosted on GitHub Pages (GitHub, Inc., 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, USA). Like every web server, GitHub logs your IP address, the time, the file requested and your browser details in order to deliver the site and keep it secure. I have no access to those logs.',
+            'Legal basis: Art. 6 (1) (f) GDPR. Processing takes place partly in the USA; GitHub belongs to Microsoft, which is certified under the EU-U.S. Data Privacy Framework.',
           ],
         },
         {
-          title: 'No cookies, no analytics',
+          title: 'No cookies, no tracking',
           body: [
-            'This site sets no cookies, uses no analytics or statistics service, no advertising network, no heatmaps and no A/B testing. Nothing about your visit is measured or passed on, so no consent banner is needed.',
+            'No cookies, no analytics, no advertising, no embedded Instagram or TikTok content, and fonts served from this site rather than from Google. Nothing about your visit is measured, so no consent banner is needed.',
+            'The only thing stored on your device is your language choice, under the key "lynn.lang". It contains nothing personal, is never sent anywhere, and is strictly necessary for a service you asked for (§ 25 (2) TDDDG). Clearing this site\u2019s data in your browser removes it.',
           ],
         },
         {
-          title: 'Language setting',
+          title: 'Getting in touch',
           body: [
-            'Your language choice is saved in your own browser under the key "lynn.lang", so you are not asked again on the next visit. It is a plain value on your device, contains nothing personal and is never sent to a server.',
-            'Under § 25 (2) TDDDG this storage is strictly necessary for a service you explicitly requested, so it does not require consent. You can delete it at any time by clearing this site\u2019s data in your browser settings.',
-          ],
-        },
-        {
-          title: 'Fonts, photos and video',
-          body: [
-            'The typefaces are delivered from this site itself. No connection to Google Fonts or any other font service is made, and your IP address is not passed to a third party for that purpose.',
-            'All photos and clips are files on this site. There is no external video player and no embedded Instagram or TikTok content, so those platforms learn nothing about your visit.',
-          ],
-        },
-        {
-          title: 'Contact form',
-          body: [
-            'The form sends nothing to a server of mine — there is none. When you press send, your own email program opens with the text you entered already filled in, and nothing leaves your device until you send that email yourself.',
-            'What happens to the message after that is described in the next section.',
-          ],
-        },
-        {
-          title: 'Contact by email',
-          body: [
-            'If you write to me, I process the data in your message — name, email address, and whatever you tell me about your enquiry — to answer it. The legal basis is Art. 6 (1) (b) GDPR where it concerns a contract or its preparation, otherwise Art. 6 (1) (f) GDPR: the legitimate interest in answering enquiries.',
-            'I keep the message for as long as answering it and any resulting collaboration require, and delete it once it is no longer needed and no statutory retention period applies. Email reaches me at the address above, hosted by Google Ireland Limited as the provider of that mailbox.',
+            'The contact form sends nothing to a server — pressing send opens your own email program with the text filled in, and nothing leaves your device until you send it yourself.',
+            'When you do write to me, I process what is in your message in order to answer it: Art. 6 (1) (b) GDPR where a contract is involved, otherwise Art. 6 (1) (f). I keep it as long as the enquiry and any resulting work require, then delete it. My mailbox is provided by Google Ireland Limited.',
           ],
         },
         {
           title: 'Links to Instagram and TikTok',
           body: [
-            'The links to my profiles are ordinary links, not plugins. Nothing loads from those platforms while you are on this site. A connection is only made once you click a link, and from that moment the privacy policy of Meta Platforms Ireland Ltd. or TikTok Technology Ltd. applies, not this one.',
+            'Ordinary links, not plugins. A connection to those platforms is made only when you click one, and from that point their privacy policies apply, not this one.',
           ],
         },
         {
           title: 'Your rights',
           body: [
-            'You have the right to access the data held about you, to have it corrected or erased, to have its processing restricted, to data portability, and to object to processing based on legitimate interests (Art. 15 to 21 GDPR). One email to the address above is enough.',
-            'You may also complain to a supervisory authority. For me that is the Hamburg Commissioner for Data Protection and Freedom of Information.',
-            'There is no automated decision-making and no profiling on this site.',
-          ],
-        },
-        {
-          title: 'Changes to this policy',
-          body: [
-            'If this site gains a function that processes data differently, this page is updated with it. The date above tells you which version you are reading.',
+            'You can ask what data is held about you, and have it corrected, erased, restricted or handed over; you can object to processing based on legitimate interests (Art. 15 to 21 GDPR). An email to the address above is enough. You may also complain to a supervisory authority — for me, the Hamburg Commissioner for Data Protection and Freedom of Information.',
+            'There is no automated decision-making and no profiling here. If the site ever gains a function that handles data differently, this page is updated with it.',
           ],
         },
       ],

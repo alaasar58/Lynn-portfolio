@@ -69,8 +69,6 @@ export const de: Dictionary = {
     reelBadge: 'Reel',
     watchOnInstagram: 'Auf Instagram ansehen',
     openOnInstagram: 'Auf Instagram öffnen',
-    embedFallback: 'Wird nichts angezeigt? Öffne das Reel auf Instagram.',
-    loadingReel: 'Reel wird geladen …',
     /* Caption under each phone. The key is the file name in public/media/reels/. */
     captions: {
       motherhood: 'Motherhood',
@@ -305,65 +303,37 @@ export const de: Dictionary = {
           ],
         },
         {
-          title: 'Hosting und Server-Logfiles',
+          title: 'Hosting',
           body: [
-            'Diese Seite läuft auf GitHub Pages, einem Dienst der GitHub, Inc., 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, USA.',
-            'Wenn du die Seite öffnest, sendet dein Browser technische Daten an GitHub, die jeder Webserver erhält: IP-Adresse, Datum und Uhrzeit, die angeforderte Datei, die verweisende Seite sowie Angaben zu Browser und Betriebssystem. GitHub verarbeitet das, um die Seite auszuliefern und ihren Betrieb abzusichern. Ich habe auf diese Logfiles keinen Zugriff und kann sie nicht einsehen.',
-            'Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO: das berechtigte Interesse an einer zuverlässigen und sicheren Bereitstellung der Seite. Die Verarbeitung findet teilweise in den USA statt; GitHub gehört zur Microsoft-Gruppe, die nach dem EU-U.S. Data Privacy Framework zertifiziert ist.',
+            'Diese Seite läuft auf GitHub Pages (GitHub, Inc., 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, USA). Wie jeder Webserver protokolliert GitHub deine IP-Adresse, den Zeitpunkt, die angeforderte Datei und Angaben zu deinem Browser, um die Seite auszuliefern und abzusichern. Ich habe auf diese Logfiles keinen Zugriff.',
+            'Rechtsgrundlage: Art. 6 Abs. 1 lit. f DSGVO. Die Verarbeitung findet teilweise in den USA statt; GitHub gehört zu Microsoft und ist nach dem EU-U.S. Data Privacy Framework zertifiziert.',
           ],
         },
         {
-          title: 'Keine Cookies, keine Analyse',
+          title: 'Keine Cookies, kein Tracking',
           body: [
-            'Diese Seite setzt keine Cookies, nutzt keinen Analyse- oder Statistikdienst, kein Werbenetzwerk, keine Heatmaps und kein A/B-Testing. Dein Besuch wird nirgends gemessen oder weitergegeben — deshalb gibt es hier auch kein Einwilligungsbanner.',
+            'Keine Cookies, keine Analyse, keine Werbung, keine eingebetteten Instagram- oder TikTok-Inhalte, und die Schriften kommen von dieser Seite statt von Google. Dein Besuch wird nirgends gemessen — deshalb gibt es auch kein Einwilligungsbanner.',
+            'Gespeichert wird auf deinem Gerät nur deine Sprachwahl, unter dem Schlüssel „lynn.lang". Sie enthält nichts Persönliches, wird nirgendwohin gesendet und ist für einen von dir gewünschten Dienst unbedingt erforderlich (§ 25 Abs. 2 TDDDG). Löschen kannst du sie, indem du in den Browsereinstellungen die Daten dieser Seite entfernst.',
           ],
         },
         {
-          title: 'Spracheinstellung',
+          title: 'Kontaktaufnahme',
           body: [
-            'Deine Sprachwahl wird in deinem eigenen Browser unter dem Schlüssel „lynn.lang" gespeichert, damit du beim nächsten Besuch nicht erneut gefragt wirst. Das ist ein einfacher Wert auf deinem Gerät, er enthält nichts Persönliches und wird an keinen Server übertragen.',
-            'Nach § 25 Abs. 2 TDDDG ist diese Speicherung für einen ausdrücklich gewünschten Dienst unbedingt erforderlich und damit einwilligungsfrei. Du kannst sie jederzeit löschen, indem du in den Browsereinstellungen die Daten dieser Seite entfernst.',
-          ],
-        },
-        {
-          title: 'Schriften, Fotos und Videos',
-          body: [
-            'Die Schriftarten werden von dieser Seite selbst ausgeliefert. Es entsteht keine Verbindung zu Google Fonts oder einem anderen Schriftdienst, und deine IP-Adresse wird dafür an niemanden weitergegeben.',
-            'Alle Fotos und Clips sind Dateien auf dieser Seite. Es gibt keinen externen Videoplayer und keine eingebetteten Instagram- oder TikTok-Inhalte; diese Plattformen erfahren von deinem Besuch also nichts.',
-          ],
-        },
-        {
-          title: 'Kontaktformular',
-          body: [
-            'Das Formular sendet nichts an einen Server von mir — es gibt keinen. Wenn du auf Absenden klickst, öffnet sich dein eigenes E-Mail-Programm mit den eingegebenen Angaben, und bis du diese E-Mail selbst abschickst, verlässt nichts dein Gerät.',
-            'Was danach mit der Nachricht passiert, steht im nächsten Abschnitt.',
-          ],
-        },
-        {
-          title: 'Kontakt per E-Mail',
-          body: [
-            'Wenn du mir schreibst, verarbeite ich die Daten aus deiner Nachricht — Name, E-Mail-Adresse und das, was du mir über deine Anfrage mitteilst — um sie zu beantworten. Rechtsgrundlage ist Art. 6 Abs. 1 lit. b DSGVO, soweit es um einen Vertrag oder dessen Anbahnung geht, ansonsten Art. 6 Abs. 1 lit. f DSGVO: das berechtigte Interesse, Anfragen zu beantworten.',
-            'Ich bewahre die Nachricht so lange auf, wie die Beantwortung und eine daraus entstehende Zusammenarbeit es erfordern, und lösche sie, sobald sie nicht mehr gebraucht wird und keine gesetzliche Aufbewahrungsfrist entgegensteht. E-Mails erreichen mich unter der oben genannten Adresse; Anbieterin dieses Postfachs ist die Google Ireland Limited.',
+            'Das Kontaktformular sendet nichts an einen Server: Beim Absenden öffnet sich dein eigenes E-Mail-Programm mit den eingegebenen Angaben, und bis du die Mail selbst abschickst, verlässt nichts dein Gerät.',
+            'Wenn du mir schreibst, verarbeite ich den Inhalt deiner Nachricht, um sie zu beantworten — Art. 6 Abs. 1 lit. b DSGVO, soweit ein Vertrag betroffen ist, sonst lit. f. Ich bewahre sie so lange auf, wie die Anfrage und eine daraus entstehende Zusammenarbeit es erfordern, und lösche sie danach. Anbieterin meines Postfachs ist die Google Ireland Limited.',
           ],
         },
         {
           title: 'Links zu Instagram und TikTok',
           body: [
-            'Die Links zu meinen Profilen sind gewöhnliche Links, keine Plugins. Solange du auf dieser Seite bist, wird von diesen Plattformen nichts geladen. Eine Verbindung entsteht erst, wenn du einen Link anklickst — ab diesem Moment gilt die Datenschutzerklärung von Meta Platforms Ireland Ltd. beziehungsweise TikTok Technology Ltd., nicht diese hier.',
+            'Gewöhnliche Links, keine Plugins. Eine Verbindung zu diesen Plattformen entsteht erst, wenn du einen Link anklickst — ab dann gilt deren Datenschutzerklärung, nicht diese.',
           ],
         },
         {
           title: 'Deine Rechte',
           body: [
-            'Du hast das Recht auf Auskunft über die zu dir gespeicherten Daten, auf Berichtigung, auf Löschung, auf Einschränkung der Verarbeitung, auf Datenübertragbarkeit und auf Widerspruch gegen Verarbeitungen, die auf berechtigten Interessen beruhen (Art. 15 bis 21 DSGVO). Eine E-Mail an die oben genannte Adresse genügt.',
-            'Außerdem kannst du dich bei einer Aufsichtsbehörde beschweren. Für mich ist das der Hamburgische Beauftragte für Datenschutz und Informationsfreiheit.',
-            'Eine automatisierte Entscheidungsfindung oder ein Profiling findet auf dieser Seite nicht statt.',
-          ],
-        },
-        {
-          title: 'Änderungen dieser Erklärung',
-          body: [
-            'Wenn diese Seite eine Funktion bekommt, die Daten anders verarbeitet, wird diese Erklärung mit angepasst. Das Datum oben zeigt dir, welche Fassung du gerade liest.',
+            'Du kannst Auskunft über deine Daten verlangen und sie berichtigen, löschen, einschränken oder übertragen lassen; Verarbeitungen auf Grundlage berechtigter Interessen kannst du widersprechen (Art. 15 bis 21 DSGVO). Eine E-Mail an die oben genannte Adresse genügt. Beschweren kannst du dich außerdem bei einer Aufsichtsbehörde — für mich ist das der Hamburgische Beauftragte für Datenschutz und Informationsfreiheit.',
+            'Eine automatisierte Entscheidungsfindung oder ein Profiling findet hier nicht statt. Sollte die Seite eine Funktion bekommen, die Daten anders verarbeitet, wird diese Erklärung mit angepasst.',
           ],
         },
       ],
