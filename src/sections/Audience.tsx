@@ -2,6 +2,40 @@ import { Section } from '../components/Section'
 import { audienceFacts, socialStats } from '../content/site'
 import { useI18n } from '../i18n'
 import { formatCount } from '../lib/format'
+import { useCountUp } from '../lib/useCountUp'
+
+/**
+ * One follower figure, counting up from zero as it arrives on screen.
+ *
+ * The animation is decoration on top of a real number; screen readers get the
+ * final figure straight away rather than a value that changes sixty times a
+ * second under them.
+ */
+function FollowerCount({ label, count }: { label: string; count: number }) {
+  const { t, lang } = useI18n()
+  const [ref, shown] = useCountUp<HTMLLIElement>(count)
+
+  return (
+    <li ref={ref}>
+      <p className="text-[0.68rem] font-medium uppercase tracking-[0.2em] text-ink-muted">
+        {label}
+      </p>
+      <p className="mt-2 font-display text-[clamp(2.8rem,9vw,4.5rem)] leading-none">
+        {/* Tabular figures: without them the number jitters sideways as the
+            digits change, and a jittering headline reads as a fault. */}
+        <span aria-hidden="true" className="tabular-nums">
+          {t.audience.approx}
+          {formatCount(shown, lang)}
+        </span>
+        <span className="sr-only">
+          {t.audience.approx}
+          {formatCount(count, lang)}
+        </span>
+      </p>
+      <p className="mt-2 text-sm text-ink-muted">{t.audience.followers}</p>
+    </li>
+  )
+}
 
 /**
  * Page three: the audience, honestly.
@@ -15,7 +49,7 @@ import { formatCount } from '../lib/format'
  * an invented one is the fastest way to lose the conversation.
  */
 export function Audience() {
-  const { t, lang } = useI18n()
+  const { t } = useI18n()
 
   const women = audienceFacts.womenPercent
   const others = 100 - women
@@ -39,16 +73,7 @@ export function Audience() {
         <div className="lg:col-span-5">
           <ul className="space-y-10">
             {followers.map((entry) => (
-              <li key={entry.label}>
-                <p className="text-[0.68rem] font-medium uppercase tracking-[0.2em] text-ink-muted">
-                  {entry.label}
-                </p>
-                <p className="mt-2 font-display text-[clamp(2.8rem,9vw,4.5rem)] leading-none">
-                  {t.audience.approx}
-                  {formatCount(entry.count, lang)}
-                </p>
-                <p className="mt-2 text-sm text-ink-muted">{t.audience.followers}</p>
-              </li>
+              <FollowerCount key={entry.label} label={entry.label} count={entry.count} />
             ))}
           </ul>
         </div>

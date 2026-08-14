@@ -91,6 +91,29 @@ export const mug = (x, y, w, h, fill = C.bone) =>
     path(`M${x + w},${y - h + h * 0.18} a${w * 0.3},${h * 0.22} 0 0 1 0,${h * 0.42}`),
   ].join('')
 
+/** Bread roll — a dome with a single score across it. Base sits on `y`. */
+export const roll = (cx, y, w, fill = C.clay) => {
+  const h = w * 0.62
+  return [
+    shadow(cx, y + 0.5, w * 0.56),
+    path(`M${cx - w / 2},${y} a${w / 2},${h} 0 0 1 ${w},0 Z`, fill),
+    path(`M${cx - w * 0.26},${y - h * 0.55} q${w * 0.26},${-h * 0.28} ${w * 0.52},0`),
+  ].join('')
+}
+
+/** Wooden board the rolls stand on. */
+export const board = (x, y, w, h = 3) =>
+  [shadow(x + w / 2, y + h + 0.5, w * 0.52), rect(x, y, w, h, C.clayDeep, h * 0.5)].join('')
+
+/** Paper bakery bag, folded over at the top. */
+export const paperBag = (x, y, w, h) =>
+  [
+    shadow(x + w / 2, y + 1, w * 0.66),
+    rect(x, y - h, w, h, C.sand, w * 0.06),
+    rect(x - w * 0.03, y - h - h * 0.12, w * 1.06, h * 0.12, C.sandDeep, w * 0.05),
+    path(`M${x + w * 0.5},${y - h} v${h}`, 'none', true, SW * 0.7),
+  ].join('')
+
 /** Baby bottle with teat. */
 export const babyBottle = (x, y, w, h, fill = C.bone) =>
   [

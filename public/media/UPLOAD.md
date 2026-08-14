@@ -21,12 +21,12 @@ umwandeln, kein Standbild machen.
 | `cover.jpg` | Das große Bild auf der ersten Seite | JPG, hochkant **4:5** |
 | `about.jpg` | Bild neben „I am Lynn." | JPG, hochkant **4:5** |
 | `reels/motherhood.mp4` | Handy 1 — **Motherhood** | MP4, hochkant **9:16** |
-| `reels/skincare.mp4` | Handy 2 — **Skincare** | MP4, hochkant **9:16** |
-| `reels/grwm.mp4` | Handy 3 — **GRWM** | MP4, hochkant **9:16** |
-| `reels/unboxing.mp4` | Handy 4 — **Unboxing** | MP4, hochkant **9:16** |
-| `reels/travel.mp4` | Handy 5 — **Travel** | MP4, hochkant **9:16** |
-| `reels/lifestyle.mp4` | Handy 6 — **Lifestyle** | MP4, hochkant **9:16** |
-| `brands/…` | Logos der Marken, optional | SVG oder PNG |
+| `reels/beauty.mp4` | Handy 2 — **Beauty & Style** | MP4, hochkant **9:16** |
+| `reels/unboxing.mp4` | Handy 3 — **Unboxing** | MP4, hochkant **9:16** |
+| `reels/travel.mp4` | Handy 4 — **Travel** | MP4, hochkant **9:16** |
+| `reels/lifestyle.mp4` | Handy 5 — **Lifestyle** | MP4, hochkant **9:16** |
+| `reels/food.mp4` | Handy 6 — **Food** | MP4, hochkant **9:16** |
+| `brands/…` | Die Logos deiner Brands | SVG oder PNG mit transparentem Hintergrund |
 
 **Der Dateiname ist das Thema.** Was `motherhood.mp4` heißt, landet unter der
 Überschrift „Motherhood" — du musst mir nichts sagen, leg die Datei einfach
@@ -42,6 +42,25 @@ Willst du ein anderes, sag mir die Sekunde.
 
 Du musst nicht alles auf einmal machen. Jede Datei ersetzt genau einen
 Platzhalter, der Rest bleibt so lange, wie er ist.
+
+---
+
+## Die Logos deiner Brands
+
+In `public/media/brands/` — ein Logo pro Brand, am besten **SVG**, sonst **PNG
+mit transparentem Hintergrund** (kein weißer Kasten drumherum). Dateiname klein
+und ohne Umlaute, z. B. `stadtbaeckerei.svg`.
+
+Schick mir dazu bitte **die Farbe der Brand** (den Farbcode wie `#0a7b3c`, oder
+einfach „das Grün aus ihrem Logo") — in dieser Farbe leuchtet die Kachel auf,
+wenn jemand mit der Maus darübergeht.
+
+Solange kein Logo da ist, steht dort einfach der Name in der Schrift der Seite.
+Das sieht fertig aus, kein leerer Kasten.
+
+**Nur echte Brands.** In die Liste kommt, wovon du wirklich Produkte bekommen
+oder für die du bezahlte UGC gemacht hast. Ein Name auf einem Media-Kit ist eine
+Aussage, die eine Agentur mit einer einzigen Nachricht prüfen kann.
 
 ---
 
@@ -67,8 +86,8 @@ mache ich in zwei Minuten.
 1. Auf GitHub in diesem Projekt den Ordner `public/media` öffnen (für die Videos
    weiter in `reels`).
 2. Oben rechts **Add file → Upload files**.
-3. Datei reinziehen. **Der Name muss exakt stimmen** — `skincare.mp4`, nicht
-   `Skincare.MP4` oder `skin-care.mp4`. Groß- und Kleinschreibung zählt.
+3. Datei reinziehen. **Der Name muss exakt stimmen** — `beauty.mp4`, nicht
+   `Beauty.MP4` oder `beauty-style.mp4`. Groß- und Kleinschreibung zählt.
 4. Unten auf **Commit changes** klicken. Fertig.
 
 GitHub fragt beim Überschreiben nicht nach — es ersetzt die alte Datei einfach.

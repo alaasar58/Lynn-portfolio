@@ -83,17 +83,17 @@ export const ar: Dictionary = {
     /* Caption under each phone. The key is the file name in public/media/reels/. */
     captions: {
       motherhood: 'Motherhood',
-      skincare: 'Skincare',
-      grwm: 'GRWM',
+      beauty: 'Beauty & Style',
       unboxing: 'Unboxing',
       travel: 'Travel',
       lifestyle: 'Lifestyle',
+      food: 'Food',
     },
     play: 'تشغيل',
     unmute: 'تشغيل الصوت',
     mute: 'كتم الصوت',
     brandsHeading: 'براندات عملت معها',
-    disclaimer: 'مزيج من أعمال مدفوعة، ومن Content صوّرته بمنتجات اشتريتها بنفسي.',
+    disclaimer: 'براندات أرسلت لي منتجاتها أو تعاقدت معي على UGC مدفوع. مزيج من الاثنين — وليس كل اسم هنا حملة مدفوعة.',
   },
 
   audience: {

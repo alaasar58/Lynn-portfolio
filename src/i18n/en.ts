@@ -85,18 +85,18 @@ export const en = {
     /* Caption under each phone. The key is the file name in public/media/reels/. */
     captions: {
       motherhood: 'Motherhood',
-      skincare: 'Skincare',
-      grwm: 'GRWM',
+      beauty: 'Beauty & Style',
       unboxing: 'Unboxing',
       travel: 'Travel',
       lifestyle: 'Lifestyle',
+      food: 'Food',
     },
     play: 'Play',
     unmute: 'Sound on',
     mute: 'Sound off',
     brandsHeading: "Brands I've worked with",
     disclaimer:
-      'A mix of paid work and content I made with products I bought myself.',
+      'Brands that sent me products or booked me for paid UGC. A mix of both — not every name here is a paid campaign.',
   },
 
   /* ---------------------------------------------------------------- page 3 */

@@ -60,20 +60,17 @@ const reels = {
       S.stack(60, W9.floorY, 28, 3) +
       S.plant(40, W9.floorY, 14, 24),
   }),
-  skincare: (d) => ({
+  /* One tile for both halves of the topic: the skincare shelf on the floor,
+     the ring light and the brushes behind it. */
+  beauty: (d) => ({
     ...W9,
     body:
-      S.pumpBottle(14 + sway(d, 0.4), W9.floorY, 15, 34, C.bone) +
-      S.dropper(74, W9.floorY, 13, 27, C.blush) +
-      S.jar(38, W9.floorY, 24, 16, C.sand) +
-      S.mirror(64, 40, 15),
-  }),
-  grwm: (d) => ({
-    ...W9,
-    body:
-      S.ringLight(64, 40 + sway(d, 0.5), 17, W9.floorY) +
-      S.brushCup(22, W9.floorY, 15, 17) +
-      S.mirror(30, 44, 13),
+      S.ringLight(62, 38 + sway(d, 0.5), 16, W9.floorY) +
+      S.mirror(28, 42, 13) +
+      S.pumpBottle(12 + sway(d, 0.4), W9.floorY, 14, 32, C.bone) +
+      S.jar(34, W9.floorY, 22, 15, C.sand) +
+      S.brushCup(62, W9.floorY, 14, 16) +
+      S.dropper(82, W9.floorY, 12, 25, C.blush),
   }),
   unboxing: (d) => ({
     ...W9,
@@ -95,6 +92,19 @@ const reels = {
       S.window_(18 + sway(d, 0.6), 34, 44, 52) +
       S.mug(30, W9.floorY, 13, 11) +
       S.plant(70, W9.floorY, 15, 30),
+  }),
+  /* The bakery shoot: rolls on a board, the paper bag they came in, coffee. */
+  food: (d) => ({
+    ...W9,
+    body:
+      S.plain(16, 54 + sway(d, 0.6), 46, 2.5, C.sandDeep, 0.6) +
+      S.jar(24, 54 + sway(d, 0.6), 13, 11, C.bone) +
+      S.roll(52, 54 + sway(d, 0.6), 14, C.clay) +
+      S.paperBag(74 + sway(d, 0.4), W9.floorY, 20, 34) +
+      S.board(24, W9.floorY - 3, 44) +
+      S.roll(38 + sway(d, 0.3), W9.floorY - 3, 20, C.clay) +
+      S.roll(58, W9.floorY - 3, 16, C.clayDeep) +
+      S.mug(6, W9.floorY, 14, 12),
   }),
 }
 

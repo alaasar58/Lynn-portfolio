@@ -69,17 +69,17 @@ export const images = {
  * =============================================================================
  *  FOLLOWER COUNTS — edit these two numbers and nothing else
  * =============================================================================
- *  Written as plain numbers, not text. The site formats them per language and
- *  uses them in two places: the figure in the hero strip ("27K" / "27 Tsd." /
- *  "27 ألف") and the audience list under About ("~27,000 followers").
+ *  Written as plain numbers, not text — the site formats them per language
+ *  ("27,200" / "27.200") and counts up to them when the audience page scrolls
+ *  into view.
  *
  *  Instagram and TikTok give no public way for a website to read a follower
  *  count on its own — see README, "Keeping the follower counts current".
  * =============================================================================
  */
 export const socialStats = {
-  instagramFollowers: 27000,
-  tiktokFollowers: 1000,
+  instagramFollowers: 27200,
+  tiktokFollowers: 1200,
 }
 
 /*
@@ -110,11 +110,11 @@ export const nav = [
 ] as const
 
 /* -------------------------------------------------------------------------- */
-/*  THE THREE REELS                                                           */
+/*  THE SIX REELS                                                             */
 /* -------------------------------------------------------------------------- */
 
 /*
- * The three clips that play in the phone frames on page 2.
+ * The six clips that play in the phone frames on page 2.
  *
  * A frame can hold either a clip or a photo:
  *
@@ -132,7 +132,7 @@ export const nav = [
  * changes, and the size does not matter — it is recompressed on the way out.
  * See public/media/UPLOAD.md.
  *
- * ADDING A FOURTH: one entry here plus one file.
+ * ADDING ANOTHER: one entry here plus one file.
  *
  * `code` is the shortcode from a published Reel's URL —
  * instagram.com/reel/<code>/ — and is optional. With it, the frame carries a
@@ -147,7 +147,7 @@ export type Reel = {
    * File base name in `public/media/reels/` AND the caption key under
    * `reels.captions` in the dictionaries. One word, one topic, one file.
    */
-  id: 'motherhood' | 'skincare' | 'grwm' | 'unboxing' | 'travel' | 'lifestyle'
+  id: 'motherhood' | 'beauty' | 'unboxing' | 'travel' | 'lifestyle' | 'food'
   /** Leave out until a clip is uploaded — the photo then stands on its own. */
   video?: string
   poster: string
@@ -171,14 +171,9 @@ export const featuredReels: Reel[] = [
     video: '/media/reels/motherhood.mp4',
   },
   {
-    id: 'skincare',
-    poster: '/media/reels/skincare.jpg',
-    video: '/media/reels/skincare.mp4',
-  },
-  {
-    id: 'grwm',
-    poster: '/media/reels/grwm.jpg',
-    video: '/media/reels/grwm.mp4',
+    id: 'beauty',
+    poster: '/media/reels/beauty.jpg',
+    video: '/media/reels/beauty.mp4',
   },
   {
     id: 'unboxing',
@@ -195,6 +190,11 @@ export const featuredReels: Reel[] = [
     poster: '/media/reels/lifestyle.jpg',
     video: '/media/reels/lifestyle.mp4',
   },
+  {
+    id: 'food',
+    poster: '/media/reels/food.jpg',
+    video: '/media/reels/food.mp4',
+  },
 ]
 
 export const reelUrl = (code: string) => `https://www.instagram.com/reel/${code}/`
@@ -204,32 +204,55 @@ export const reelUrl = (code: string) => `https://www.instagram.com/reel/${code}
 /* -------------------------------------------------------------------------- */
 
 /*
- * Brands content has been created around. Presented as portfolio experience —
- * not as a claim that each one was a paid collaboration.
+ * ONLY REAL BRANDS BELONG IN THIS LIST.
+ *
+ * A brand goes in here if Lynn actually received products from it or produced
+ * paid UGC for it. Nothing aspirational, nothing "would fit the feed" — a name
+ * on a media kit is a claim, and it is the one claim a brand manager can check
+ * in a single message.
  *
  * ADDING ONE
  * ----------
- * Add a line here. A name on its own is enough and looks finished:
+ * A name on its own is enough and looks finished:
  *
  *     { name: 'Your Brand' },
  *
- * To show a logo instead, drop the file into `public/media/brands/` and point
- * at it. SVG is best; a PNG with a transparent background also works. Logos
- * render in greyscale and come to colour on hover, which is what keeps a mixed
- * set of marks from looking like a patchwork:
+ * With a logo it looks like a media kit. Drop the file into
+ * `public/media/brands/` and point at it. SVG is best; a PNG with a
+ * transparent background works too:
  *
- *     { name: 'Your Brand', logo: '/media/brands/your-brand.svg' },
+ *     { name: 'Your Brand', logo: '/media/brands/your-brand.svg', color: '#0a7b3c' },
  *
- * `name` is used as the image's alt text, so fill it in either way. The grid
- * fills row by row and handles any number of entries.
+ * `color` is that brand's own colour, and it is what the tile lights up in
+ * when the pointer is over it — the logo comes out of grey into full colour and
+ * the cell takes a soft glow in the same tone. Leave it out and the tile uses
+ * the site's blush instead, which still looks deliberate.
+ *
+ * `href` is optional and makes the tile a link to the brand.
+ *
+ * `name` is the image's alt text, so fill it in either way. The grid fills row
+ * by row and handles any number of entries.
  */
-export type Brand = { name: string; logo?: string }
+export type Brand = {
+  name: string
+  logo?: string
+  /** The brand's own colour, e.g. '#0a7b3c'. Used for the hover glow. */
+  color?: string
+  href?: string
+}
 
+/*
+ * TODO — three things, all from Lynn:
+ *   1. the exact spelling of each name (these came off a voice message)
+ *   2. the logo file into public/media/brands/, then add `logo:` here
+ *   3. the brand's colour into `color:`
+ * Until then the tiles show the name set in the display face, which is a
+ * finished look in its own right — no empty boxes, no placeholder logos.
+ */
 export const brands: Brand[] = [
-  { name: 'Farida Baby' },
-  { name: 'MAM' },
-  { name: 'Philips Avent' },
-  { name: 'The Ordinary' },
+  { name: 'Gborn' },
+  { name: 'Monkia' },
+  { name: 'Stadtbäckerei Schaft' },
 ]
 
 /* -------------------------------------------------------------------------- */
