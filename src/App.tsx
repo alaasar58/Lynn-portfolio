@@ -9,7 +9,8 @@ import { Audience } from './sections/Audience'
 import { Offer } from './sections/Offer'
 import { Contact } from './sections/Contact'
 import { Legal } from './sections/Legal'
-import { useHashRoute } from './lib/useHashRoute'
+import { Mosques } from './mosques/Mosques'
+import { isLegalRoute, useHashRoute } from './lib/useHashRoute'
 
 /**
  * Four pages in one scroll, in the order a brand manager reads a media kit:
@@ -23,10 +24,26 @@ import { useHashRoute } from './lib/useHashRoute'
  * `#imprint` and `#privacy` and replace the page rather than extending it —
  * legal text has no business interrupting a media kit, and a visitor who opens
  * it is not browsing any more.
+ *
+ * `#mosques` is a page of the same kind, but for a different visitor: someone
+ * who followed the credit line on a mosque's website. It replaces the media kit
+ * entirely — no header navigation into it, no footer links out of it — because
+ * that visitor came to ask about a website for their congregation.
  */
 function Site() {
   const { t } = useI18n()
-  const legalRoute = useHashRoute()
+  const route = useHashRoute()
+
+  // The mosque offer stands on its own: its own header, its own languages, and
+  // no way from it into the media kit.
+  if (route === 'mosques') {
+    return (
+      <>
+        <Mosques />
+        <Footer variant="minimal" />
+      </>
+    )
+  }
 
   return (
     <>
@@ -39,8 +56,8 @@ function Site() {
 
       <Header />
 
-      {legalRoute ? (
-        <Legal route={legalRoute} />
+      {route && isLegalRoute(route) ? (
+        <Legal route={route} />
       ) : (
         <main>
           <Cover />

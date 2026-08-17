@@ -1,28 +1,41 @@
 import { useEffect, useState } from 'react'
 
-/** The two pages that are not part of the scroll. */
+/** The two legal pages that are not part of the scroll. */
 export const LEGAL_ROUTES = ['imprint', 'privacy'] as const
 export type LegalRoute = (typeof LEGAL_ROUTES)[number]
 
-const read = (): LegalRoute | null => {
+/**
+ * Every view that replaces the site rather than extending it.
+ *
+ * `mosques` is the offer page for mosque congregations. It is reached from the
+ * footer of a mosque's own website and is linked from nowhere on this one.
+ */
+export const PAGE_ROUTES = [...LEGAL_ROUTES, 'mosques'] as const
+export type PageRoute = (typeof PAGE_ROUTES)[number]
+
+export const isLegalRoute = (route: PageRoute): route is LegalRoute =>
+  (LEGAL_ROUTES as readonly string[]).includes(route)
+
+const read = (): PageRoute | null => {
   if (typeof window === 'undefined') return null
   const hash = window.location.hash.replace(/^#/, '')
-  return (LEGAL_ROUTES as readonly string[]).includes(hash) ? (hash as LegalRoute) : null
+  return (PAGE_ROUTES as readonly string[]).includes(hash) ? (hash as PageRoute) : null
 }
 
 /**
- * Which legal page the address bar is asking for, or null for the site itself.
+ * Which standalone page the address bar is asking for, or null for the site
+ * itself.
  *
- * The whole site is one scrolling page, so the imprint and the privacy policy
- * are the only two things that need to be a *different* view. A hash is enough
- * for that and buys a lot: no router dependency, no server rewrite rules, and
- * every URL still resolves on GitHub Pages, which serves exactly one HTML file
- * and would answer a real /imprint path with a 404.
+ * The whole site is one scrolling page, so the imprint, the privacy policy and
+ * the mosque offer are the only things that need to be a *different* view. A
+ * hash is enough for that and buys a lot: no router dependency, no server
+ * rewrite rules, and every URL still resolves on GitHub Pages, which serves
+ * exactly one HTML file and would answer a real /imprint path with a 404.
  *
  * Back and forward work because that is what `hashchange` is.
  */
 export function useHashRoute() {
-  const [route, setRoute] = useState<LegalRoute | null>(read)
+  const [route, setRoute] = useState<PageRoute | null>(read)
 
   useEffect(() => {
     const onChange = () => {
@@ -31,8 +44,8 @@ export function useHashRoute() {
 
       if (next) {
         /*
-         * A legal page is a new page, so it starts at the top rather than
-         * wherever the visitor happened to be on the long page behind it.
+         * A standalone page is a new page, so it starts at the top rather
+         * than wherever the visitor happened to be on the page behind it.
          * After the frame, too: scrolling before React has swapped the content
          * leaves the browser to restore a position from the taller page.
          */
