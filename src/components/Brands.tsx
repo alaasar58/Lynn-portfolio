@@ -12,17 +12,19 @@ import { asset } from '../lib/asset'
  * chase them across the screen. Three names sitting still read as three real
  * collaborations; the same three sliding past read as filler.
  *
- * At rest every tile is the same quiet grey, so a mixed set of marks — one
- * green, one pink, one navy — still reads as one row rather than a patchwork.
- * On hover the tile it belongs to comes to life in *that brand's own* colour:
- * the logo drops out of greyscale, the cell warms, and a short rule in the same
- * tone draws itself underneath. One brand at a time, which is the whole point.
+ * Every logo is in its own colours, always — a brand's mark is its colours, and
+ * a greyed-out logo on a media kit reads as "we cannot show you this one". The
+ * tiles are rounded cards on the warm ground rather than cells in a table,
+ * which is what stops three marks of three different shapes from looking like a
+ * spreadsheet of them.
  *
- * The colour comes from `color` on the brand in `src/content/site.ts` and is
- * handed to CSS as a variable, so nothing here needs to know which brands
- * exist. Without a colour the tile falls back to the site's blush.
+ * Hovering does not change any colour. It lifts the card slightly, brightens it
+ * and deepens its shadow — enough to say "this one is a link", not enough to
+ * repaint a trademark. The brand's own colour from `src/content/site.ts` is
+ * still handed to CSS as `--brand`, and it is what tints that shadow, so the
+ * lift is warmed by the right colour without anything being recoloured.
  *
- * Everything is a hover *and* a focus state, so a keyboard reaches it too.
+ * Hover and focus do the same thing, so a keyboard reaches it too.
  */
 export function Brands() {
   const { t } = useI18n()
@@ -35,7 +37,7 @@ export function Brands() {
         {t.work.brandsHeading}
       </h3>
 
-      <ul className="mt-8 grid grid-cols-2 gap-px bg-line sm:grid-cols-3">
+      <ul className="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-3 sm:gap-6">
         {brands.map((brand) => (
           <BrandCell key={brand.name} brand={brand} />
         ))}
@@ -67,7 +69,7 @@ function BrandCell({ brand }: { brand: Brand }) {
        * as its own shape allows, which is what makes a mixed set look evenly
        * weighted rather than sorted by luck of proportion.
        */
-      className="max-h-24 w-auto max-w-[78%] opacity-85 grayscale transition-all duration-500 group-hover:opacity-100 group-hover:grayscale-0 group-focus-visible:opacity-100 group-focus-visible:grayscale-0"
+      className="max-h-24 w-auto max-w-[78%] transition-transform duration-500 ease-[var(--ease-soft)] group-hover:scale-[1.04] group-focus-visible:scale-[1.04]"
     />
   ) : (
     <span className="text-center font-display text-lg leading-snug text-ink-soft transition-colors duration-500 group-hover:text-[var(--brand)] group-focus-visible:text-[var(--brand)] sm:text-xl">
@@ -76,26 +78,15 @@ function BrandCell({ brand }: { brand: Brand }) {
   )
 
   /*
-   * The hover state, kept small on purpose.
-   *
-   * An earlier version put a ring around the whole cell and a wide glow under
-   * it, and a wide glow around a logo looks like the logo is on fire. What is
-   * left is quieter and does the same job: the cell lightens, and a short rule
-   * in the brand's colour draws itself under the mark. The colour is the
-   * signal; it does not need to be loud to be seen.
+   * A rounded card that lifts. `color-mix` with the brand colour is what makes
+   * the shadow under a green logo green and the one under a brown logo brown,
+   * at a strength low enough that it reads as depth rather than as a glow —
+   * the wide coloured halo an earlier version had made the logos look on fire.
    */
   const shared =
-    'group relative flex min-h-[8rem] items-center justify-center bg-sand px-6 py-8 transition-colors duration-500 hover:bg-bone focus-visible:bg-bone focus:outline-none'
+    'group flex min-h-[9rem] items-center justify-center rounded-card bg-sand px-6 py-8 shadow-[0_1px_2px_rgba(34,31,28,0.04)] transition-all duration-500 ease-[var(--ease-soft)] hover:-translate-y-1 hover:bg-bone hover:shadow-[0_16px_30px_-20px_color-mix(in_srgb,var(--brand)_70%,transparent)] focus-visible:-translate-y-1 focus-visible:bg-bone focus-visible:shadow-[0_16px_30px_-20px_color-mix(in_srgb,var(--brand)_70%,transparent)] focus:outline-none'
 
-  const body = (
-    <>
-      {inner}
-      <span
-        aria-hidden="true"
-        className="absolute inset-x-8 bottom-6 h-[2px] origin-center scale-x-0 bg-[var(--brand)] opacity-0 transition-all duration-500 ease-[var(--ease-soft)] group-hover:scale-x-100 group-hover:opacity-100 group-focus-visible:scale-x-100 group-focus-visible:opacity-100"
-      />
-    </>
-  )
+  const body = inner
 
   return (
     <li style={style} className="contents">

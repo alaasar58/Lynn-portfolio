@@ -1,40 +1,42 @@
-import { useState } from "react";
-import { featuredReels, reelUrl, site } from "../content/site";
-import type { Reel } from "../content/site";
-import { useI18n } from "../i18n";
-import { asset } from "../lib/asset";
-import { useAutoplayVideo, webmSibling } from "../lib/useAutoplayVideo";
-import { InstagramGlyph } from "./Glyphs";
-import { PhoneFrame } from "./PhoneFrame";
-import { VideoLightbox } from "./VideoLightbox";
+import { useState } from 'react'
+import { featuredReels, reelUrl, site } from '../content/site'
+import type { Reel } from '../content/site'
+import { useI18n } from '../i18n'
+import { asset } from '../lib/asset'
+import { useAutoplayVideo, webmSibling } from '../lib/useAutoplayVideo'
+import { InstagramGlyph } from './Glyphs'
+import { PhoneFrame } from './PhoneFrame'
+import { VideoLightbox } from './VideoLightbox'
 
 /* The middle phone of each row sits higher, so a row reads as a composition
    rather than as three equal boxes. Desktop only. */
 const offsets = [
-  "sm:translate-y-4",
-  "sm:-translate-y-3",
-  "sm:translate-y-5",
-  "sm:translate-y-3",
-  "sm:-translate-y-4",
-  "sm:translate-y-4",
-];
+  'sm:translate-y-4',
+  'sm:-translate-y-3',
+  'sm:translate-y-5',
+  'sm:translate-y-3',
+  'sm:-translate-y-4',
+  'sm:translate-y-4',
+]
 
 /**
  * Six frames, one per topic, captioned underneath.
  *
  * They start themselves and loop, muted, once they scroll into view — the way
- * short-form video behaves everywhere else. Sound comes on when the pointer is
- * over a phone, and there is a sound button as well, because hover is not a
- * user gesture in every browser and does not exist at all on a phone.
+ * short-form video behaves everywhere else. They stay muted until someone
+ * presses the sound button on a phone, and go back to muted as soon as that
+ * phone leaves the screen. Moving the pointer over a tile does nothing: sound
+ * that arrives because a cursor passed by is sound nobody asked for, and it
+ * never worked on a touch screen anyway.
  *
  * Clicking opens the clip large, with controls. That click is also the user
  * activation browsers want before sound, so the large version is the one place
  * where audio reliably starts on its own.
  */
 export function ReelPhones() {
-  const { t } = useI18n();
-  const [active, setActive] = useState<Reel | null>(null);
-  const instagram = site.socials.find((social) => social.label === "Instagram");
+  const { t } = useI18n()
+  const [active, setActive] = useState<Reel | null>(null)
+  const instagram = site.socials.find((social) => social.label === 'Instagram')
 
   return (
     <>
@@ -58,51 +60,37 @@ export function ReelPhones() {
 
       <ul className="mt-10 grid grid-cols-2 gap-x-6 gap-y-12 sm:mt-14 sm:grid-cols-3 sm:gap-x-10 sm:gap-y-16">
         {featuredReels.map((reel, index) => (
-          <ReelPhone
-            key={reel.id}
-            reel={reel}
-            index={index}
-            onOpen={setActive}
-          />
+          <ReelPhone key={reel.id} reel={reel} index={index} onOpen={setActive} />
         ))}
       </ul>
 
       <VideoLightbox reel={active} onClose={() => setActive(null)} />
     </>
-  );
+  )
 }
 
 type ReelPhoneProps = {
-  reel: Reel;
-  index: number;
-  onOpen: (reel: Reel) => void;
-};
+  reel: Reel
+  index: number
+  onOpen: (reel: Reel) => void
+}
 
 function ReelPhone({ reel, index, onOpen }: ReelPhoneProps) {
-  const { t } = useI18n();
-  const hasVideo = Boolean(reel.video);
-  const {
-    containerRef,
-    videoRef,
-    attached,
-    muted,
-    autoplayRefused,
-    toggleSound,
-    hoverSound,
-  } = useAutoplayVideo({ enabled: hasVideo, priority: index === 0 });
+  const { t } = useI18n()
+  const hasVideo = Boolean(reel.video)
+  const { containerRef, videoRef, attached, muted, autoplayRefused, toggleSound } =
+    useAutoplayVideo({ enabled: hasVideo, priority: index === 0 })
 
-  const posterUrl = asset(reel.poster);
-  const videoUrl = asset(reel.video);
-  const webmUrl = webmSibling(videoUrl);
+  const posterUrl = asset(reel.poster)
+  const videoUrl = asset(reel.video)
+  const webmUrl = webmSibling(videoUrl)
 
   return (
     <li
       ref={containerRef as React.RefObject<HTMLLIElement>}
-      onMouseEnter={hasVideo ? () => hoverSound(true) : undefined}
-      onMouseLeave={hasVideo ? () => hoverSound(false) : undefined}
       /* Three items in two columns leave an orphan on the last row; letting it
          span both columns centres it instead of stranding it on the left. */
-      className={`mx-auto w-full max-w-[15rem] transition-transform duration-700 ease-[var(--ease-soft)] ${offsets[index] ?? ""}`}
+      className={`mx-auto w-full max-w-[15rem] transition-transform duration-700 ease-[var(--ease-soft)] ${offsets[index] ?? ''}`}
     >
       <PhoneFrame className="group hover:shadow-[0_32px_60px_-28px_rgba(34,31,28,0.6)]">
         {hasVideo ? (
@@ -112,15 +100,13 @@ function ReelPhone({ reel, index, onOpen }: ReelPhoneProps) {
             muted
             loop
             playsInline
-            preload={index === 0 ? "metadata" : "none"}
+            preload={index === 0 ? 'metadata' : 'none'}
             className="absolute inset-0 h-full w-full object-cover"
           >
             {attached && (
               <>
                 <source src={videoUrl} type="video/mp4" />
-                {webmUrl !== videoUrl && (
-                  <source src={webmUrl} type="video/webm" />
-                )}
+                {webmUrl !== videoUrl && <source src={webmUrl} type="video/webm" />}
               </>
             )}
           </video>
@@ -132,7 +118,7 @@ function ReelPhone({ reel, index, onOpen }: ReelPhoneProps) {
             src={posterUrl}
             alt=""
             aria-hidden="true"
-            loading={index === 0 ? "eager" : "lazy"}
+            loading={index === 0 ? 'eager' : 'lazy'}
             decoding="async"
             className="absolute inset-0 h-full w-full object-cover transition-transform duration-[1.2s] ease-[var(--ease-soft)] group-hover:scale-[1.04]"
           />
@@ -156,11 +142,7 @@ function ReelPhone({ reel, index, onOpen }: ReelPhoneProps) {
                 aria-hidden="true"
                 className="flex h-12 w-12 items-center justify-center rounded-full bg-bone/90 text-ink shadow-lg shadow-ink/10 transition-all duration-500 group-hover:scale-110 group-hover:bg-blush-deep group-hover:text-bone"
               >
-                <svg
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                  className="ms-0.5 h-4 w-4"
-                >
+                <svg viewBox="0 0 24 24" fill="currentColor" className="ms-0.5 h-4 w-4">
                   <path d="M8 5.5v13l11-6.5-11-6.5Z" />
                 </svg>
               </span>
@@ -169,19 +151,20 @@ function ReelPhone({ reel, index, onOpen }: ReelPhoneProps) {
         )}
 
         {/*
-          The reliable way to sound. Hover is the nice way, but it is not a
-          user gesture in every browser and does not exist on a touch screen,
-          so this button is always reachable. Sits above the screen button.
+          The way to sound — the only way. A real press, which is also the
+          user gesture browsers require before they will unmute anything.
+          Sits above the screen button.
         */}
         {hasVideo && (
           <button
             type="button"
             onClick={toggleSound}
-            className="absolute bottom-8 end-3 z-20 flex h-8 w-8 items-center justify-center rounded-full bg-ink/50 text-bone backdrop-blur-sm transition-all duration-300 hover:bg-blush-deep focus-visible:opacity-100 sm:opacity-0 sm:group-hover:opacity-100"
+            /* Always visible now, on every screen: it is the only route to sound,
+               and a control you have to hover to discover is a control most
+               people never find. */
+            className="absolute bottom-8 end-3 z-20 flex h-8 w-8 items-center justify-center rounded-full bg-ink/50 text-bone backdrop-blur-sm transition-colors duration-300 hover:bg-blush-deep"
           >
-            <span className="sr-only">
-              {muted ? t.work.unmute : t.work.mute}
-            </span>
+            <span className="sr-only">{muted ? t.work.unmute : t.work.mute}</span>
             <SoundGlyph muted={muted} />
           </button>
         )}
@@ -204,7 +187,7 @@ function ReelPhone({ reel, index, onOpen }: ReelPhoneProps) {
         </a>
       )}
     </li>
-  );
+  )
 }
 
 function SoundGlyph({ muted }: { muted: boolean }) {
@@ -232,5 +215,5 @@ function SoundGlyph({ muted }: { muted: boolean }) {
         </>
       )}
     </svg>
-  );
+  )
 }

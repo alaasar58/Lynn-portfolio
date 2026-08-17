@@ -13,6 +13,17 @@ type Options = {
  * Read once per call rather than subscribed to: the setting effectively never
  * changes mid-visit, and a listener here would re-render every tile.
  */
+/**
+ * How loud sound comes on. Half, never full.
+ *
+ * A phone frame on a portfolio page is not a cinema, and the clips behind these
+ * frames were filmed on different days at different distances from the phone —
+ * one of them at full volume is a fright. This is re-applied every time a tile
+ * comes on screen, not just once, so a visitor who has been through the row
+ * twice hears the same level both times.
+ */
+export const PLAY_VOLUME = 0.5
+
 function prefersReducedMotion() {
   if (typeof window === 'undefined' || !window.matchMedia) return false
   return window.matchMedia('(prefers-reduced-motion: reduce)').matches
@@ -29,8 +40,13 @@ function prefersReducedMotion() {
  *  - Playback starts automatically, muted and looping, when the element is
  *    actually on screen, and pauses when it scrolls away — off-screen video
  *    should never burn battery or bandwidth.
- *  - Sound is always one tap away, and muting resets on exit so a tile never
- *    starts talking unprompted the next time it scrolls back.
+ *  - A tile is muted until someone presses its sound button, and it goes back
+ *    to muted the moment it leaves the screen. Nothing on this page ever makes
+ *    a noise the visitor did not ask for — not on hover, not on scroll.
+ *  - When sound is turned on it plays at half volume. Clips are recorded at
+ *    wildly different levels, and the volume is re-set on every entry rather
+ *    than left where the last one had it, so the next tile cannot arrive twice
+ *    as loud as the one before it.
  *
  * Browsers only permit unattended playback while muted. If a play attempt is
  * refused anyway (some power-saving and data-saver modes), `autoplayRefused`
@@ -91,6 +107,7 @@ export function useAutoplayVideo({ enabled, priority = false }: Options) {
   useEffect(() => {
     const video = videoRef.current
     if (!video || !attached) return
+    video.volume = PLAY_VOLUME
     if (video.networkState === video.NETWORK_NO_SOURCE || video.readyState === 0) {
       video.load()
     }
@@ -102,6 +119,9 @@ export function useAutoplayVideo({ enabled, priority = false }: Options) {
     if (!video || !attached) return
 
     if (onScreen) {
+      // Every arrival, not just the first: see PLAY_VOLUME above.
+      video.volume = PLAY_VOLUME
+
       // Someone who has asked their system for less motion gets the poster and
       // a play button, not a tile that starts moving at them.
       if (prefersReducedMotion()) {
@@ -121,10 +141,12 @@ export function useAutoplayVideo({ enabled, priority = false }: Options) {
     }
   }, [onScreen, attached])
 
+  /** The only way sound is ever turned on. */
   const toggleSound = () => {
     const video = videoRef.current
     if (!video) return
     const next = !video.muted
+    video.volume = PLAY_VOLUME
     video.muted = next
     setMuted(next)
     // Unmuting counts as a user gesture, so this is also the moment a refused
@@ -141,38 +163,6 @@ export function useAutoplayVideo({ enabled, priority = false }: Options) {
       .catch(() => undefined)
   }
 
-  /*
-   * Sound on hover.
-   *
-   * Worth being clear about the limit: unmuting is only permitted once the page
-   * has user activation, which a pointer moving over an element does not grant.
-   * In practice the first hover of a visit can be refused and every hover after
-   * the visitor's first click anywhere on the page succeeds. There is no way to
-   * do better, which is why the sound button exists alongside this.
-   *
-   * The one rule that must hold either way: a refusal never stops playback. The
-   * tile keeps running muted rather than freezing.
-   */
-  const hoverSound = (on: boolean) => {
-    const video = videoRef.current
-    if (!video || !attached || autoplayRefused) return
-
-    if (!on) {
-      video.muted = true
-      setMuted(true)
-      return
-    }
-
-    video.muted = false
-    setMuted(false)
-    void video.play().catch(() => {
-      video.muted = true
-      setMuted(true)
-      // Playback may have been paused by the failed unmute; start it again.
-      void video.play().catch(() => undefined)
-    })
-  }
-
   return {
     containerRef,
     videoRef,
@@ -181,7 +171,6 @@ export function useAutoplayVideo({ enabled, priority = false }: Options) {
     autoplayRefused,
     toggleSound,
     manualPlay,
-    hoverSound,
   }
 }
 

@@ -3,7 +3,7 @@ import { reelUrl } from '../content/site'
 import type { Reel } from '../content/site'
 import { useI18n } from '../i18n'
 import { asset } from '../lib/asset'
-import { webmSibling } from '../lib/useAutoplayVideo'
+import { PLAY_VOLUME, webmSibling } from '../lib/useAutoplayVideo'
 import { InstagramGlyph } from './Glyphs'
 
 type VideoLightboxProps = {
@@ -29,6 +29,11 @@ export function VideoLightbox({ reel, onClose }: VideoLightboxProps) {
     const onKeyDown = (event: KeyboardEvent) => {
       if (event.key === 'Escape') onClose()
     }
+
+    /* Half volume, the same level the tiles play at. The clips were filmed on
+       different days at different distances, so the one that opens full-screen
+       must not be the one that makes someone reach for their keyboard. */
+    if (videoRef.current) videoRef.current.volume = PLAY_VOLUME
 
     document.addEventListener('keydown', onKeyDown)
     document.body.style.overflow = 'hidden'

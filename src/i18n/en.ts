@@ -287,10 +287,18 @@ export const en = {
   },
 
   /* -------------------------------------------------------------- legal
-     Two pages of their own, reached from the footer. Everything factual in
-     here — address, phone, VAT — has to come from Lynn; anything still
-     missing is written between [square brackets] and rendered highlighted,
-     so it cannot go unnoticed.
+     Two pages of their own, reached from the footer.
+
+     The postal address and phone number are deliberately not here yet: Lynn
+     is adding them herself. Nothing invented stands in for them, and no
+     placeholder is published — an imprint with a made-up address is worse
+     than one that is short. The VAT number says plainly that it has been
+     applied for, which is true and is what the law expects while it is
+     pending. A German imprint does require the address, so this stays
+     incomplete until she fills it in.
+
+     Anything still to be filled in is written between [square brackets] and
+     rendered highlighted, so it cannot go unnoticed.
 
      The privacy text describes what this site actually does and nothing more:
      no cookies, no analytics, no embeds, no form endpoint. If any of that
@@ -309,26 +317,21 @@ export const en = {
       blocks: [
         {
           title: 'Service provider',
-          lines: [
-            'Lynn Kawqge',
-            '[Street and house number]',
-            '[Postcode and town]',
-            'Germany',
-          ],
+          lines: ['Lynn Kawqge', 'Germany'],
         },
         {
           title: 'Contact',
-          lines: ['Email: lynnkawqge.ads@gmail.com', 'Phone: [Phone number]'],
+          lines: ['Email: lynnkawqge.ads@gmail.com'],
         },
         {
           title: 'VAT identification number',
           lines: [
-            'VAT identification number under § 27a of the German VAT Act (UStG): [VAT ID — or state that none has been issued]',
+            'A VAT identification number under § 27a of the German VAT Act (UStG) has been applied for at the tax office and has not been issued yet. It will be added here as soon as it arrives.',
           ],
         },
         {
           title: 'Responsible for editorial content',
-          lines: ['Lynn Kawqge, address as above (§ 18 (2) MStV)'],
+          lines: ['Lynn Kawqge (§ 18 (2) MStV)'],
         },
       ],
       disputeTitle: 'Consumer dispute resolution',
@@ -351,7 +354,7 @@ export const en = {
         {
           title: 'Who is responsible',
           body: [
-            'Lynn Kawqge, [Street and house number], [Postcode and town], Germany. Email: lynnkawqge.ads@gmail.com',
+            'Lynn Kawqge, Germany. Email: lynnkawqge.ads@gmail.com'
           ],
         },
         {

@@ -278,26 +278,21 @@ export const de: Dictionary = {
       blocks: [
         {
           title: 'Diensteanbieterin',
-          lines: [
-            'Lynn Kawqge',
-            '[Straße und Hausnummer]',
-            '[PLZ und Ort]',
-            'Deutschland',
-          ],
+          lines: ['Lynn Kawqge', 'Deutschland'],
         },
         {
           title: 'Kontakt',
-          lines: ['E-Mail: lynnkawqge.ads@gmail.com', 'Telefon: [Telefonnummer]'],
+          lines: ['E-Mail: lynnkawqge.ads@gmail.com'],
         },
         {
           title: 'Umsatzsteuer-Identifikationsnummer',
           lines: [
-            'Umsatzsteuer-Identifikationsnummer gemäß § 27a UStG: [USt-IdNr. — oder Hinweis, dass keine erteilt wurde]',
+            'Eine Umsatzsteuer-Identifikationsnummer gemäß § 27a UStG ist beim Finanzamt beantragt und liegt noch nicht vor. Sie wird hier nachgetragen, sobald sie erteilt ist.',
           ],
         },
         {
           title: 'Verantwortlich für den Inhalt',
-          lines: ['Lynn Kawqge, Anschrift wie oben (§ 18 Abs. 2 MStV)'],
+          lines: ['Lynn Kawqge (§ 18 Abs. 2 MStV)'],
         },
       ],
       disputeTitle: 'Verbraucherstreitbeilegung',
@@ -320,7 +315,7 @@ export const de: Dictionary = {
         {
           title: 'Verantwortliche',
           body: [
-            'Lynn Kawqge, [Straße und Hausnummer], [PLZ und Ort], Deutschland. E-Mail: lynnkawqge.ads@gmail.com',
+            'Lynn Kawqge, Deutschland. E-Mail: lynnkawqge.ads@gmail.com'
           ],
         },
         {
