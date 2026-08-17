@@ -308,7 +308,7 @@ export const brands: Brand[] = [
  * in the dictionaries.
  */
 export const pricingTiers = [
-  { key: 'single', price: '€99', unit: 'from' },
-  { key: 'package', price: '€299', unit: 'from' },
-  { key: 'monthly', price: '€599', unit: 'customFrom' },
+  { key: 'starter', price: '€99', unit: 'from' },
+  { key: 'content', price: '€299', unit: 'from' },
+  { key: 'ads', price: '€599', unit: 'from' },
 ] as const

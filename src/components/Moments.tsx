@@ -6,20 +6,24 @@ import { useScrollProgress } from '../lib/useScrollProgress'
 
 /*
  * How each frame sits in the band: its share of the width, how far down it
- * starts, and how far it drifts as the page scrolls. The numbers are uneven on
- * purpose — five frames on one baseline is a contact sheet, and a contact sheet
- * is the opposite of the point.
+ * starts, and how far it drifts as the page scrolls.
+ *
+ * The sizes run medium · small · LARGE · small · medium — symmetrical around
+ * the middle frame, which is the one the eye lands on. The heights are not
+ * symmetrical, and that is what keeps it from looking like a diagram: five
+ * frames on one baseline is a contact sheet, and a contact sheet is the
+ * opposite of the point.
  *
  * `drift` is in rem and is multiplied by the band's scroll progress, so the
  * frames slide past each other slightly rather than moving as one block. The
  * outer two move most, which is what gives the band its depth.
  */
 const frames = [
-  { box: 'lg:w-[26%] lg:mt-[7rem]', ratio: 'aspect-[3/4]', drift: -3.5 },
-  { box: 'lg:w-[20%] lg:mt-[1rem]', ratio: 'aspect-[4/5]', drift: 1.5 },
-  { box: 'lg:w-[27%] lg:mt-[10rem]', ratio: 'aspect-[9/14]', drift: -2 },
-  { box: 'lg:w-[19%] lg:mt-[2.5rem]', ratio: 'aspect-[4/5]', drift: 2.5 },
-  { box: 'lg:w-[24%] lg:mt-[8rem]', ratio: 'aspect-[3/4]', drift: -4 },
+  /* medium */ { box: 'lg:w-[21%] lg:mt-[5rem]', ratio: 'aspect-[4/5]', drift: -3 },
+  /* small  */ { box: 'lg:w-[14%] lg:mt-[11rem]', ratio: 'aspect-[4/5]', drift: 2 },
+  /* large  */ { box: 'lg:w-[27%] lg:mt-0', ratio: 'aspect-[9/13]', drift: -1.5 },
+  /* small  */ { box: 'lg:w-[14%] lg:mt-[11rem]', ratio: 'aspect-[4/5]', drift: 2.5 },
+  /* medium */ { box: 'lg:w-[21%] lg:mt-[5rem]', ratio: 'aspect-[4/5]', drift: -3.5 },
 ]
 
 /**

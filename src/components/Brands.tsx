@@ -15,8 +15,8 @@ import { asset } from '../lib/asset'
  * At rest every tile is the same quiet grey, so a mixed set of marks — one
  * green, one pink, one navy — still reads as one row rather than a patchwork.
  * On hover the tile it belongs to comes to life in *that brand's own* colour:
- * the logo drops out of greyscale, the cell warms, and a soft glow in the same
- * tone lifts it off the page. One brand at a time, which is the whole point.
+ * the logo drops out of greyscale, the cell warms, and a short rule in the same
+ * tone draws itself underneath. One brand at a time, which is the whole point.
  *
  * The colour comes from `color` on the brand in `src/content/site.ts` and is
  * handed to CSS as a variable, so nothing here needs to know which brands
@@ -67,17 +67,36 @@ function BrandCell({ brand }: { brand: Brand }) {
     </span>
   )
 
+  /*
+   * The hover state, kept small on purpose.
+   *
+   * An earlier version put a ring around the whole cell and a wide glow under
+   * it, and a wide glow around a logo looks like the logo is on fire. What is
+   * left is quieter and does the same job: the cell lightens, and a short rule
+   * in the brand's colour draws itself under the mark. The colour is the
+   * signal; it does not need to be loud to be seen.
+   */
   const shared =
-    'group relative flex min-h-[8rem] items-center justify-center bg-sand px-6 py-8 transition-[background-color,box-shadow] duration-500 hover:bg-bone focus-visible:bg-bone hover:shadow-[inset_0_0_0_1px_var(--brand),0_18px_40px_-24px_var(--brand)] focus-visible:shadow-[inset_0_0_0_1px_var(--brand),0_18px_40px_-24px_var(--brand)] focus:outline-none'
+    'group relative flex min-h-[8rem] items-center justify-center bg-sand px-6 py-8 transition-colors duration-500 hover:bg-bone focus-visible:bg-bone focus:outline-none'
+
+  const body = (
+    <>
+      {inner}
+      <span
+        aria-hidden="true"
+        className="absolute inset-x-8 bottom-6 h-[2px] origin-center scale-x-0 bg-[var(--brand)] opacity-0 transition-all duration-500 ease-[var(--ease-soft)] group-hover:scale-x-100 group-hover:opacity-100 group-focus-visible:scale-x-100 group-focus-visible:opacity-100"
+      />
+    </>
+  )
 
   return (
     <li style={style} className="contents">
       {brand.href ? (
         <a href={brand.href} target="_blank" rel="noreferrer noopener" className={shared}>
-          {inner}
+          {body}
         </a>
       ) : (
-        <div className={shared}>{inner}</div>
+        <div className={shared}>{body}</div>
       )}
     </li>
   )

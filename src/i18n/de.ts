@@ -164,7 +164,6 @@ export const de: Dictionary = {
     title: 'Meine Leistungen und Preise.',
     lede: 'Einstiegspreise, damit du nicht raten musst. Das endgültige Angebot hängt davon ab, wie das Video genutzt wird.',
     from: 'ab',
-    customFrom: 'je nach Monat, ab',
     cta: 'Angebot anfragen',
     factorsTitle: 'Was den Preis verändert',
     factors: [
@@ -175,34 +174,37 @@ export const de: Dictionary = {
     ],
     note: 'Was in einem Paket steckt — Korrekturrunden, Formate, wo und wie lange du das Video nutzen darfst — legen wir gemeinsam fest, das ist von Projekt zu Projekt verschieden. Agenturen sind genauso willkommen: Wenn du für eigene Kunden produzierst, rechne ich das genauso ab.',
     tiers: {
-      single: {
-        name: 'Single Video',
-        body: 'Ein UGC-Video für ein Produkt — Idee, Skript, Dreh und Schnitt, fertig zum Posten.',
+      starter: {
+        name: 'Startpaket',
+        body: 'Ein Produkt, ein Video, eine klare Idee. Der schnellste Weg zu sehen, wie dein Produkt in echten Händen aussieht.',
         points: [
           '1 Hochkant-Video, 15 bis 30 Sekunden',
           'Hook, Skript und Schnitt von mir',
+          'Gedreht bei Tageslicht, zu Hause, so wie ich alles drehe',
           'Rohmaterial auf Wunsch',
           'Korrekturen und Nutzungsrechte nach Vereinbarung',
         ],
       },
-      package: {
+      content: {
         name: 'Content Paket',
-        body: 'Mehrere Videos für ein Produkt oder eine Kampagne, zusammen geplant, damit sie als Reihe funktionieren und nicht wie drei einzelne Clips wirken.',
+        body: 'Eine Reihe, kein Stapel. Mehrere Videos für ein Produkt, zusammen geplant: andere Einstiege, andere Hälften derselben Geschichte — und trotzdem sieht man, dass sie zusammengehören.',
         points: [
           '3 bis 5 UGC-Videos',
-          'Verschiedene Hooks und Einstiege, die man gegeneinander testen kann',
+          'Verschiedene Hooks, damit du siehst, welcher Einstieg hält',
           'Geschnitten für Reels, TikTok und Stories',
+          'Standbilder vom Dreh für deinen Feed',
           'Korrekturen und Nutzungsrechte nach Vereinbarung',
         ],
       },
-      monthly: {
-        name: 'Monthly Content',
-        body: 'Eine feste Anzahl Videos pro Monat, für Brands, die regelmäßig Content brauchen statt einmalig.',
+      ads: {
+        name: 'Ad Creative Paket',
+        body: 'Content, der Budget verträgt. Ein Produkt, mehrere Blickwinkel, jedes so geschrieben, dass die ersten zwei Sekunden die Arbeit machen — in einer Ad hast du nicht mehr.',
         points: [
-          '5 bis 10+ Videos im Monat',
-          'Ein Content-Plan für den Monat, zusammen mit meinem Team',
-          'Vorrang in meinem Kalender',
-          'Konditionen und Nutzungsrechte nach Vereinbarung',
+          '5 bis 8 Videos, gebaut als Ad Creatives',
+          'Mehrere Hooks pro Video, direkt zum Gegeneinandertesten',
+          'Formate für Meta und TikTok Ads',
+          'Voiceover auf Deutsch, Englisch oder Arabisch',
+          'Ad-Nutzungsrechte nach Vereinbarung',
         ],
       },
     },

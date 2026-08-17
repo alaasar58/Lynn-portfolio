@@ -184,7 +184,6 @@ export const en = {
     title: 'My services and prices.',
     lede: 'Starting points, so you do not have to guess. The final quote depends on how the video is used.',
     from: 'from',
-    customFrom: 'depends on the month, from',
     cta: 'Ask for a quote',
     factorsTitle: 'What changes the price',
     factors: [
@@ -195,34 +194,37 @@ export const en = {
     ],
     note: 'What each package covers — revisions, formats, how long and where you may use the video — we agree together, because it differs from project to project. Agencies are welcome: if you produce for your own clients, I quote it the same way.',
     tiers: {
-      single: {
-        name: 'Single Video',
-        body: 'One UGC video for one product — idea, script, shoot and edit, ready to post.',
+      starter: {
+        name: 'Startpaket',
+        body: 'One product, one video, one clear idea. The quickest way to see how your product looks in someone real\u2019s hands.',
         points: [
           '1 vertical video, 15 to 30 seconds',
           'Hook, script and edit by me',
+          'Filmed in daylight, at home, the way I film everything',
           'Raw footage on request',
           'Revisions and usage rights as agreed',
         ],
       },
-      package: {
-        name: 'Content Package',
-        body: 'Several videos for one product or campaign, planned together so they work as a set instead of three separate clips.',
+      content: {
+        name: 'Content Paket',
+        body: 'A set, not a stack. Several videos for one product, planned together so they open differently, tell different halves of the story and still look like they belong to each other.',
         points: [
           '3 to 5 UGC videos',
-          'Different hooks and openings to test against each other',
+          'Different hooks, so you can see which opening holds',
           'Cut for Reels, TikTok and Stories',
+          'Stills from the shoot for your feed',
           'Revisions and usage rights as agreed',
         ],
       },
-      monthly: {
-        name: 'Monthly Content',
-        body: 'A set number of videos every month, for brands that need Content regularly rather than once.',
+      ads: {
+        name: 'Ad Creative Paket',
+        body: 'Content built to be put behind a budget. Same product, several angles, each one written so the first two seconds do the work — because in an ad, that is all you get.',
         points: [
-          '5 to 10+ videos a month',
-          'A Content plan for the month, made with my team',
-          'Priority in my calendar',
-          'Terms and usage rights as agreed',
+          '5 to 8 videos, made as ad creatives',
+          'Several hooks per video, ready to test against each other',
+          'Formats for Meta and TikTok Ads',
+          'Voiceover in German, English or Arabic',
+          'Ad usage rights as agreed',
         ],
       },
     },
