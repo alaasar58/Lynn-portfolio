@@ -59,7 +59,15 @@ function BrandCell({ brand }: { brand: Brand }) {
       alt={brand.name}
       loading="lazy"
       decoding="async"
-      className="max-h-10 w-auto max-w-full opacity-70 grayscale transition-all duration-500 group-hover:opacity-100 group-hover:grayscale-0 group-focus-visible:opacity-100 group-focus-visible:grayscale-0"
+      /*
+       * Both dimensions are capped, not just the height. The three marks are a
+       * square bear, a wide wordmark and a small framed label — cap the height
+       * alone and the wide one runs off across the cell while the square one
+       * shrinks to a stamp. Bounding the box instead lets each fill it as far
+       * as its own shape allows, which is what makes a mixed set look evenly
+       * weighted rather than sorted by luck of proportion.
+       */
+      className="max-h-24 w-auto max-w-[78%] opacity-85 grayscale transition-all duration-500 group-hover:opacity-100 group-hover:grayscale-0 group-focus-visible:opacity-100 group-focus-visible:grayscale-0"
     />
   ) : (
     <span className="text-center font-display text-lg leading-snug text-ink-soft transition-colors duration-500 group-hover:text-[var(--brand)] group-focus-visible:text-[var(--brand)] sm:text-xl">

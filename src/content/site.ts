@@ -274,21 +274,39 @@ export type Brand = {
 }
 
 /*
- * TODO — still missing, and only Lynn can supply them:
- *   1. the logo file into public/media/brands/, then add `logo:` here
- *   2. the brand's colour into `color:`
- * The logos could not be downloaded from here: this machine reaches the
- * internet through a proxy that blocks all three shops. Until the files
- * arrive the tiles show the name set in the display face, which is a finished
- * look in its own right — no empty boxes, no placeholder logos.
- *
  * Names are spelled as the brands spell themselves: JBØRN with the slashed O,
  * StadtBäckerei with the capital B.
+ *
+ * The `.png` files are not what was uploaded. The uploads were JPEGs with a
+ * background baked in — black behind JBØRN, white behind Moonkie, and a slice
+ * of the shop's green banner behind Schacht — which on a sand tile is a black
+ * square, a white square and a green stripe. `scripts/media/logos.mjs` lifts
+ * the background off each one and writes the PNG; the originals are kept
+ * beside them in `brands/_original/`. Run that script after uploading a new
+ * logo.
+ *
+ * `color` is sampled from the logo itself, so the rule that appears under it on
+ * hover is the brand's own colour rather than an approximation of it.
  */
 export const brands: Brand[] = [
-  { name: 'JBØRN', href: 'https://j-born.eu/de' },
-  { name: 'Moonkie', href: 'https://moonkie.de' },
-  { name: 'StadtBäckerei Schacht', href: 'https://www.stadtbaeckerei-schacht.de/' },
+  {
+    name: 'JBØRN',
+    logo: '/media/brands/jborn.png',
+    color: '#8e6f68',
+    href: 'https://j-born.eu/de',
+  },
+  {
+    name: 'Moonkie',
+    logo: '/media/brands/moonkie.png',
+    color: '#4b4b4b',
+    href: 'https://moonkie.de',
+  },
+  {
+    name: 'StadtBäckerei Schacht',
+    logo: '/media/brands/schacht.png',
+    color: '#84b52d',
+    href: 'https://www.stadtbaeckerei-schacht.de/',
+  },
 ]
 
 /* -------------------------------------------------------------------------- */
