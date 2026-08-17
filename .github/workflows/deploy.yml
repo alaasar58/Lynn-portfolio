@@ -10,6 +10,10 @@ on:
     branches:
       - main
       - claude/lifestyle-creator-portfolio-ehmgc6
+      # Vorübergehend: baut den Zweig mit der Moschee-Seite, damit tsc und der
+      # Build vor dem Zusammenführen laufen. Die Veröffentlichung lehnt GitHub
+      # für diesen Zweig folgenlos ab, weil er nicht die Pages-Quelle ist.
+      - claude/moschee-angebotsseite
   workflow_dispatch:
 
 permissions:
