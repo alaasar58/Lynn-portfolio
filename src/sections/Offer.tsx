@@ -9,8 +9,9 @@ import { useI18n } from '../i18n'
  * cards, because a card is a border around something that did not need one, and
  * four of them in a row is the exact look the brief asked to avoid.
  *
- * Every figure comes from `pricingTiers` in `src/content/site.ts`. They are
- * still `€XXX` placeholders — no price is hard-coded here, and none is invented.
+ * Every figure comes from `pricingTiers` in `src/content/site.ts` — no price is
+ * hard-coded here, and each one is printed under the word "from", because they
+ * are starting points rather than quotes.
  */
 export function Offer() {
   const { t } = useI18n()

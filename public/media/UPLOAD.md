@@ -157,3 +157,21 @@ Die Datei muss am Ende `cover.jpg` bzw. `about.jpg` heißen.
 
 Dafür braucht es eine Zeile in `src/content/site.ts` und die Beschriftung in den
 drei Sprachdateien — sag mir Bescheid, das ist in zwei Minuten erledigt.
+
+---
+
+## Das Bilderband („Moments")
+
+Zwischen „Über mich" und „Zielgruppe" läuft ein Band aus **fünf Fotos** quer
+über die Seite — ohne Text, nur Bilder. Sie liegen auf verschiedenen Höhen und
+schieben sich beim Scrollen leicht gegeneinander.
+
+| Datei | |
+| ----- | - |
+| `moments/01.jpg` … `moments/05.jpg` | JPG, hochkant (4:5 oder 9:16) |
+
+Hochkant funktioniert am besten, weil die Rahmen hochkant sind. Die Bilder
+werden mittig zugeschnitten. Weniger als fünf geht auch — sag mir einfach, wie
+viele du hast.
+
+Gerade liegen dort noch gezeichnete Platzhalter.

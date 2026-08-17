@@ -100,6 +100,12 @@ export const en = {
   },
 
   /* ---------------------------------------------------------------- page 3 */
+  /* The picture band between the profile and the audience page. It carries no
+     visible text — this is the label a screen reader announces for it. */
+  moments: {
+    label: 'Moments from my content',
+  },
+
   audience: {
     eyebrow: 'Audience',
     title: 'Who is watching.',
@@ -190,19 +196,34 @@ export const en = {
     note: 'What each package covers — revisions, formats, how long and where you may use the video — we agree together, because it differs from project to project. Agencies are welcome: if you produce for your own clients, I quote it the same way.',
     tiers: {
       single: {
-        name: 'One video',
-        body: 'One short video: the idea, the filming, the edit and the final files.',
-        points: ['1 vertical video', 'Revisions as agreed', 'Usage rights as agreed'],
+        name: 'Single Video',
+        body: 'One UGC video for one product — idea, script, shoot and edit, ready to post.',
+        points: [
+          '1 vertical video, 15 to 30 seconds',
+          'Hook, script and edit by me',
+          'Raw footage on request',
+          'Revisions and usage rights as agreed',
+        ],
       },
       package: {
-        name: 'A package',
-        body: 'A few videos for one product or campaign, planned together so they work as a set.',
-        points: ['3 to 5 videos', 'Different angles and openings', 'Extras as agreed'],
+        name: 'Content Package',
+        body: 'Several videos for one product or campaign, planned together so they work as a set instead of three separate clips.',
+        points: [
+          '3 to 5 UGC videos',
+          'Different hooks and openings to test against each other',
+          'Cut for Reels, TikTok and Stories',
+          'Revisions and usage rights as agreed',
+        ],
       },
       monthly: {
-        name: 'Every month',
-        body: 'A set of videos every month, for brands who want content regularly.',
-        points: ['5 to 10+ videos a month', 'Planning and ideas with my team', 'Priority in my calendar'],
+        name: 'Monthly Content',
+        body: 'A set number of videos every month, for brands that need Content regularly rather than once.',
+        points: [
+          '5 to 10+ videos a month',
+          'A Content plan for the month, made with my team',
+          'Priority in my calendar',
+          'Terms and usage rights as agreed',
+        ],
       },
     },
   },

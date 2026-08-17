@@ -67,6 +67,38 @@ export const images = {
 
 /*
  * =============================================================================
+ *  THE MOMENTS BAND — five photos, no captions
+ * =============================================================================
+ *  A full-width strip of stills between the profile and the audience page. It
+ *  is the one place on the site that is pure image: no headline over it, no
+ *  text under it, nothing to read. That is the point — a media kit that is all
+ *  columns of type reads like a CV, and a creator's page has to show the work
+ *  looking like the work.
+ *
+ *  The five sit at different heights and drift at different speeds as the page
+ *  scrolls, so the band moves like a hand-laid spread rather than a row of
+ *  thumbnails. Order left to right.
+ *
+ *  REPLACING ONE: overwrite the file, keep the name. Portrait shots work best
+ *  (4:5 or 9:16); they are cropped to the frame from the centre. Anything
+ *  uploaded is recompressed on the way out, so the size does not matter.
+ *
+ *      public/media/moments/01.jpg … 05.jpg
+ *
+ *  Fewer than five is fine — delete a line and the band re-flows. More than
+ *  five is fine too.
+ * =============================================================================
+ */
+export const moments = [
+  '/media/moments/01.jpg',
+  '/media/moments/02.jpg',
+  '/media/moments/03.jpg',
+  '/media/moments/04.jpg',
+  '/media/moments/05.jpg',
+]
+
+/*
+ * =============================================================================
  *  FOLLOWER COUNTS — edit these two numbers and nothing else
  * =============================================================================
  *  Written as plain numbers, not text — the site formats them per language
@@ -242,17 +274,21 @@ export type Brand = {
 }
 
 /*
- * TODO — three things, all from Lynn:
- *   1. the exact spelling of each name (these came off a voice message)
- *   2. the logo file into public/media/brands/, then add `logo:` here
- *   3. the brand's colour into `color:`
- * Until then the tiles show the name set in the display face, which is a
- * finished look in its own right — no empty boxes, no placeholder logos.
+ * TODO — still missing, and only Lynn can supply them:
+ *   1. the logo file into public/media/brands/, then add `logo:` here
+ *   2. the brand's colour into `color:`
+ * The logos could not be downloaded from here: this machine reaches the
+ * internet through a proxy that blocks all three shops. Until the files
+ * arrive the tiles show the name set in the display face, which is a finished
+ * look in its own right — no empty boxes, no placeholder logos.
+ *
+ * Names are spelled as the brands spell themselves: JBØRN with the slashed O,
+ * StadtBäckerei with the capital B.
  */
 export const brands: Brand[] = [
-  { name: 'Gborn' },
-  { name: 'Monkia' },
-  { name: 'Stadtbäckerei Schaft' },
+  { name: 'JBØRN', href: 'https://j-born.eu/de' },
+  { name: 'Moonkie', href: 'https://moonkie.de' },
+  { name: 'StadtBäckerei Schacht', href: 'https://www.stadtbaeckerei-schacht.de/' },
 ]
 
 /* -------------------------------------------------------------------------- */
@@ -260,14 +296,19 @@ export const brands: Brand[] = [
 /* -------------------------------------------------------------------------- */
 
 /*
- * TODO: replace €XXX with the real starting prices.
+ * Starting prices, given by Lynn.
+ *
+ * Every one is a *starting* price — the word in front of it comes from `unit`,
+ * which is a key under `pricing` in the dictionaries. That matters: a number
+ * with no "from" in front of it is a quote, and a quote made before anyone has
+ * said how the video will be used is a quote you have to take back.
  *
  * Prices live here and nowhere else — no component hard-codes a figure. Tier
  * names, descriptions and bullet points are translated under `pricing.tiers`
  * in the dictionaries.
  */
 export const pricingTiers = [
-  { key: 'single', price: '€XXX', unit: 'from' },
-  { key: 'package', price: '€XXX', unit: 'from' },
-  { key: 'monthly', price: '€XXX', unit: 'customFrom' },
+  { key: 'single', price: '€99', unit: 'from' },
+  { key: 'package', price: '€299', unit: 'from' },
+  { key: 'monthly', price: '€599', unit: 'customFrom' },
 ] as const

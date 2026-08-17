@@ -137,6 +137,51 @@ const about = (d) => ({
     S.plant(4, 84, 12, 24),
 })
 
+/*
+ * The Moments band: five 4:5 stills, no captions over them. Each one is a
+ * different corner of the same flat — the band has to read as five moments from
+ * one life, not five stock pictures.
+ */
+const M45 = { vbW: 100, vbH: 125, floorY: 104 }
+const moments = [
+  () => ({
+    ...M45,
+    body:
+      S.window_(20, 26, 46, 54) + S.mug(34, M45.floorY, 15, 12) + S.plant(70, M45.floorY, 16, 32),
+  }),
+  () => ({
+    ...M45,
+    body:
+      S.ringLight(60, 40, 18, M45.floorY) +
+      S.phoneOnTripod(60, 78, 11, 18, M45.floorY) +
+      S.brushCup(20, M45.floorY, 16, 18),
+  }),
+  () => ({
+    ...M45,
+    body:
+      S.pumpBottle(16, M45.floorY, 16, 36, C.bone) +
+      S.jar(40, M45.floorY, 25, 17, C.sand) +
+      S.dropper(74, M45.floorY, 14, 29, C.blush) +
+      S.mirror(60, 42, 16),
+  }),
+  () => ({
+    ...M45,
+    body:
+      S.board(20, M45.floorY - 3, 50) +
+      S.roll(35, M45.floorY - 3, 21, C.clay) +
+      S.roll(56, M45.floorY - 3, 17, C.clayDeep) +
+      S.paperBag(76, M45.floorY, 20, 36) +
+      S.mug(6, M45.floorY, 14, 12),
+  }),
+  () => ({
+    ...M45,
+    body:
+      S.suitcase(14, M45.floorY, 54, 34) +
+      S.stack(74, M45.floorY, 20, 3) +
+      S.plant(6, M45.floorY - 34, 12, 24),
+  }),
+]
+
 /* ----------------------------------------------------------------- rendering */
 
 const jpeg = (svg, out, q = 84) =>
@@ -170,9 +215,18 @@ const only = process.argv.slice(2)
 const want = (name) => only.length === 0 || only.includes(name)
 
 mkdirSync(`${ROOT}/reels`, { recursive: true })
+mkdirSync(`${ROOT}/moments`, { recursive: true })
 
 if (want('cover')) await still(cover, { w: 1200, h: 1500 }, `${ROOT}/cover.jpg`, 11)
 if (want('about')) await still(about, { w: 1200, h: 960 }, `${ROOT}/about.jpg`, 12)
+
+if (want('moments')) {
+  for (const [i, fn] of moments.entries()) {
+    const name = String(i + 1).padStart(2, '0')
+    await still(fn, { w: 900, h: 1125 }, `${ROOT}/moments/${name}.jpg`, 40 + i)
+    console.log('moment', name)
+  }
+}
 
 let seed = 20
 for (const [id, fn] of Object.entries(reels)) {

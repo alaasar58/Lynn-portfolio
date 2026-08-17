@@ -86,6 +86,10 @@ export const de: Dictionary = {
       'Brands, die mir Produkte geschickt oder mich für bezahlte UGC gebucht haben. Eine Mischung aus beidem — nicht jeder Name hier ist eine bezahlte Kampagne.',
   },
 
+  moments: {
+    label: 'Momente aus meinem Content',
+  },
+
   audience: {
     eyebrow: 'Zielgruppe',
     title: 'Wer zuschaut.',
@@ -172,19 +176,34 @@ export const de: Dictionary = {
     note: 'Was in einem Paket steckt — Korrekturrunden, Formate, wo und wie lange du das Video nutzen darfst — legen wir gemeinsam fest, das ist von Projekt zu Projekt verschieden. Agenturen sind genauso willkommen: Wenn du für eigene Kunden produzierst, rechne ich das genauso ab.',
     tiers: {
       single: {
-        name: 'Ein Video',
-        body: 'Ein kurzes Video: Idee, Dreh, Schnitt und die fertigen Dateien.',
-        points: ['1 Hochkant-Video', 'Korrekturen nach Vereinbarung', 'Nutzungsrechte nach Vereinbarung'],
+        name: 'Single Video',
+        body: 'Ein UGC-Video für ein Produkt — Idee, Skript, Dreh und Schnitt, fertig zum Posten.',
+        points: [
+          '1 Hochkant-Video, 15 bis 30 Sekunden',
+          'Hook, Skript und Schnitt von mir',
+          'Rohmaterial auf Wunsch',
+          'Korrekturen und Nutzungsrechte nach Vereinbarung',
+        ],
       },
       package: {
-        name: 'Ein Paket',
-        body: 'Mehrere Videos für ein Produkt oder eine Kampagne, zusammen geplant, damit sie als Reihe funktionieren.',
-        points: ['3 bis 5 Videos', 'Verschiedene Ansätze und Einstiege', 'Extras nach Vereinbarung'],
+        name: 'Content Paket',
+        body: 'Mehrere Videos für ein Produkt oder eine Kampagne, zusammen geplant, damit sie als Reihe funktionieren und nicht wie drei einzelne Clips wirken.',
+        points: [
+          '3 bis 5 UGC-Videos',
+          'Verschiedene Hooks und Einstiege, die man gegeneinander testen kann',
+          'Geschnitten für Reels, TikTok und Stories',
+          'Korrekturen und Nutzungsrechte nach Vereinbarung',
+        ],
       },
       monthly: {
-        name: 'Jeden Monat',
-        body: 'Eine feste Anzahl Videos pro Monat, für Marken, die regelmäßig Inhalte brauchen.',
-        points: ['5 bis 10+ Videos im Monat', 'Planung und Ideen mit meinem Team', 'Vorrang in meinem Kalender'],
+        name: 'Monthly Content',
+        body: 'Eine feste Anzahl Videos pro Monat, für Brands, die regelmäßig Content brauchen statt einmalig.',
+        points: [
+          '5 bis 10+ Videos im Monat',
+          'Ein Content-Plan für den Monat, zusammen mit meinem Team',
+          'Vorrang in meinem Kalender',
+          'Konditionen und Nutzungsrechte nach Vereinbarung',
+        ],
       },
     },
   },

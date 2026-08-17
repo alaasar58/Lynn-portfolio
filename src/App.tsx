@@ -2,6 +2,7 @@ import { LanguageProvider, useI18n } from './i18n'
 import { Header } from './components/Header'
 import { Footer } from './components/Footer'
 import { LanguageModal } from './components/LanguageModal'
+import { Moments } from './components/Moments'
 import { Cover } from './sections/Cover'
 import { Profile } from './sections/Profile'
 import { Audience } from './sections/Audience'
@@ -44,6 +45,8 @@ function Site() {
         <main>
           <Cover />
           <Profile />
+          {/* A breath of pure image between the reading pages. */}
+          <Moments />
           <Audience />
           <Offer />
           <Contact />
