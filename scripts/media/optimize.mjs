@@ -129,10 +129,23 @@ const note = (file, before, after, what) =>
 /* ------------------------------------------------------------------ videos */
 
 /*
- * `scale` keeps the aspect ratio and never enlarges: `min(iw,720)` on the width
- * with `-2` on the height keeps both dimensions even, which H.264 requires.
+ * Fit inside 720 x 1280 without enlarging, and land on even numbers.
+ *
+ * H.264 with yuv420p cannot encode an odd dimension at all — it fails with
+ * "height not divisible by 2" and takes the whole deploy with it. That is not
+ * hypothetical: a clip uploaded at 1080x1838, scaled to width 720, gives a
+ * height of 1225, and the encoder refuses.
+ *
+ * `-2` asks ffmpeg for "whatever keeps the aspect ratio, rounded to even", but
+ * only for the dimension it is computing. So each stage pins the dimension it
+ * *sets* to an even number itself, and leaves the other one to `-2`. Between
+ * them both come out even, whatever went in.
+ *
+ * `force_original_aspect_ratio` is deliberately gone: it recomputes both
+ * dimensions after the fact, which is exactly how the odd height got through.
  */
-const scaleFilter = `scale='min(${MAX_W},iw)':-2:force_original_aspect_ratio=decrease,scale='if(gt(ih,${MAX_H}),-2,iw)':'min(${MAX_H},ih)'`
+const even = (expr) => `2*floor((${expr})/2)`
+const scaleFilter = `scale=w='${even(`min(${MAX_W},iw)`)}':h=-2,scale=w=-2:h='${even(`min(${MAX_H},ih)`)}'`
 
 function optimiseVideo(file, posterAt) {
   const before = statSync(file).size
@@ -185,7 +198,7 @@ function optimiseVideo(file, posterAt) {
    */
   run([
     '-i', mp4,
-    '-vf', `scale='min(${WEBM_W},iw)':-2:force_original_aspect_ratio=decrease`,
+    '-vf', `scale=w='${even(`min(${WEBM_W},iw)`)}':h=-2`,
     '-c:v', 'libvpx-vp9',
     '-crf', '44',
     '-b:v', '0',
@@ -217,11 +230,18 @@ function optimiseImage(file) {
   const before = statSync(file).size
   if (before <= SKIP_IMAGE_BYTES) return
 
-  const tmp = `${file}.tmp.jpg`
+  /*
+   * A PNG stays a PNG. ffmpeg picks its encoder from the output extension, so
+   * writing a .png through a .jpg temporary silently flattens the transparency
+   * — which is the entire reason a logo is a PNG. The quality flag only means
+   * anything to the JPEG encoder, so only JPEGs get it.
+   */
+  const isPng = /\.png$/i.test(file)
+  const tmp = isPng ? `${file}.tmp.png` : `${file}.tmp.jpg`
   run([
     '-i', file,
-    '-vf', `scale='min(${IMAGE_EDGE},iw)':-2:force_original_aspect_ratio=decrease`,
-    '-q:v', String(Math.round(31 - (IMAGE_QUALITY / 100) * 31)),
+    '-vf', `scale=w='${even(`min(${IMAGE_EDGE},iw)`)}':h=-2`,
+    ...(isPng ? [] : ['-q:v', String(Math.round(31 - (IMAGE_QUALITY / 100) * 31))]),
     '-map_metadata', '-1',
     tmp,
   ])
@@ -274,10 +294,16 @@ for (const name of readdirSync(root).filter((f) => /\.(jpe?g|png)$/i.test(f))) {
   optimiseImage(path.join(root, name))
 }
 
-const brands = path.join(root, 'brands')
-if (existsSync(brands)) {
-  for (const name of readdirSync(brands).filter((f) => /\.(jpe?g|png)$/i.test(f))) {
-    optimiseImage(path.join(brands, name))
+/*
+ * Every other folder of stills. `moments` in particular: those come off a phone
+ * at three or four megabytes each, and five of them unshrunk is a heavier page
+ * than all six clips put together.
+ */
+for (const folder of ['brands', 'moments']) {
+  const dir = path.join(root, folder)
+  if (!existsSync(dir)) continue
+  for (const name of readdirSync(dir).filter((f) => /\.(jpe?g|png)$/i.test(f))) {
+    optimiseImage(path.join(dir, name))
   }
 }
 

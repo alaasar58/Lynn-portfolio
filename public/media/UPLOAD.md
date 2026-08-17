@@ -26,7 +26,8 @@ umwandeln, kein Standbild machen.
 | `reels/travel.mp4` | Handy 4 — **Travel** | MP4, hochkant **9:16** |
 | `reels/lifestyle.mp4` | Handy 5 — **Lifestyle** | MP4, hochkant **9:16** |
 | `reels/food.mp4` | Handy 6 — **Food** | MP4, hochkant **9:16** |
-| `brands/…` | Die Logos deiner Brands | SVG oder PNG mit transparentem Hintergrund |
+| `moments/01.jpg` … `05.jpg` | Das Bilderband quer über die Seite | JPG, hochkant |
+| `media-src/brands/…` | Die Logos deiner Brands | SVG oder PNG, sonst siehe unten |
 
 **Der Dateiname ist das Thema.** Was `motherhood.mp4` heißt, landet unter der
 Überschrift „Motherhood" — du musst mir nichts sagen, leg die Datei einfach
@@ -174,4 +175,26 @@ Hochkant funktioniert am besten, weil die Rahmen hochkant sind. Die Bilder
 werden mittig zugeschnitten. Weniger als fünf geht auch — sag mir einfach, wie
 viele du hast.
 
-Gerade liegen dort noch gezeichnete Platzhalter.
+Deine fünf Fotos liegen dort bereits.
+
+---
+
+## Die Logos deiner Brands — was ich damit gemacht habe
+
+Deine drei Dateien waren JPGs, und ein JPG kann keinen durchsichtigen
+Hintergrund. Deshalb kam bei JBØRN ein **schwarzes Quadrat** mit, bei Moonkie
+ein weißes, und bei Schacht ein Stück vom **grünen Banner** der Website.
+
+Ich habe den Hintergrund bei allen dreien herausgerechnet und sie als PNG
+gespeichert — das Weiß *innerhalb* des Schacht-Kastens und das weiße Bärenauge
+bleiben dabei erhalten. Deine Originale liegen unverändert in
+`media-src/brands/`.
+
+**Wenn du später ein Logo austauschst:** Datei nach `media-src/brands/` legen und
+mir Bescheid sagen. Ein Schritt in einem kleinen Skript entscheidet, was
+Hintergrund ist und was nicht — das kann kein Automatismus raten, ohne dass
+irgendwann ein halbes Logo verschwindet.
+
+**Am besten wäre**, du fragst bei den drei Brands kurz nach dem Logo als **SVG
+oder PNG mit transparentem Hintergrund**. Presse- oder Media-Kits haben das
+meistens fertig liegen, und dann ist es gestochen scharf statt herausgerechnet.
