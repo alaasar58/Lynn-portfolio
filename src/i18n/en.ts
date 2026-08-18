@@ -262,6 +262,8 @@ export const en = {
     sending: 'Sending…',
     success: 'Thank you, your message is on its way. I usually reply within two working days.',
     error: 'Something went wrong. You can email me directly at',
+    fallback:
+      'Direct sending did not work, so your email program is opening with everything already filled in — please press send there.',
     preferEmail: 'Prefer email?',
     helpfulTitle: 'Helpful to know',
     helpful: [

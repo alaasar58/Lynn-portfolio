@@ -241,6 +241,8 @@ export const de: Dictionary = {
     success:
       'Danke, deine Nachricht ist unterwegs. Ich antworte meistens innerhalb von zwei Werktagen.',
     error: 'Da ist etwas schiefgelaufen. Du kannst mir auch direkt schreiben:',
+    fallback:
+      'Der direkte Versand hat nicht geklappt — dein E-Mail-Programm öffnet sich jetzt mit allen Angaben. Bitte dort einmal auf Senden drücken.',
     preferEmail: 'Lieber per E-Mail?',
     helpfulTitle: 'Gut zu wissen',
     helpful: [

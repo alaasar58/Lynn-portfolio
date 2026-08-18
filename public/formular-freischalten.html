@@ -1,0 +1,115 @@
+<!doctype html>
+<!--
+  A one-time page for Lynn, not part of the site.
+
+  FormSubmit only forwards enquiries once the receiving address has been
+  confirmed, and it sends that confirmation mail in response to a normal form
+  POST. The contact form on the site posts by fetch instead, so it cannot be
+  relied on to start that handshake — which is why the first real enquiry came
+  back as an error.
+
+  This page does the plain POST. Lynn opens it once, presses the button, gets
+  the mail from FormSubmit, clicks the link inside, and the contact form works
+  from then on. Nothing links here; the address is meant to be typed once and
+  forgotten.
+-->
+<html lang="de">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Kontaktformular freischalten</title>
+    <style>
+      :root {
+        color-scheme: light;
+      }
+      body {
+        margin: 0;
+        min-height: 100vh;
+        display: grid;
+        place-items: center;
+        padding: 2rem 1.25rem;
+        background: #f2ebe3;
+        color: #221f1c;
+        font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
+        line-height: 1.6;
+      }
+      main {
+        max-width: 34rem;
+        background: #faf7f3;
+        border-radius: 1.25rem;
+        padding: clamp(1.75rem, 5vw, 2.75rem);
+        box-shadow: 0 24px 60px -40px rgba(34, 31, 28, 0.5);
+      }
+      h1 {
+        margin: 0 0 0.75rem;
+        font-size: 1.5rem;
+        line-height: 1.25;
+      }
+      p {
+        margin: 0 0 1rem;
+      }
+      ol {
+        margin: 0 0 1.5rem;
+        padding-inline-start: 1.25rem;
+      }
+      li {
+        margin-bottom: 0.5rem;
+      }
+      button {
+        font: inherit;
+        font-weight: 600;
+        cursor: pointer;
+        border: 0;
+        border-radius: 999px;
+        padding: 0.85rem 1.75rem;
+        background: #221f1c;
+        color: #faf7f3;
+      }
+      button:hover {
+        background: #a4655e;
+      }
+      small {
+        display: block;
+        margin-top: 1.5rem;
+        color: #6b625a;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>Kontaktformular einmal freischalten</h1>
+
+      <p>
+        Diese Seite brauchst du genau einmal. Danach kommt jede Anfrage vom
+        Kontaktformular automatisch als E-Mail bei dir an.
+      </p>
+
+      <ol>
+        <li>Unten auf den Knopf drücken.</li>
+        <li>
+          Du bekommst eine E-Mail von <strong>FormSubmit</strong> an
+          <strong>lynnkawqge.ads@gmail.com</strong> — auch im Spam-Ordner
+          nachsehen.
+        </li>
+        <li>In dieser E-Mail auf den Bestätigungslink klicken. Fertig.</li>
+      </ol>
+
+      <!--
+        A plain form POST, deliberately: this is the request FormSubmit answers
+        with the confirmation mail. `_captcha=false` skips the interstitial.
+      -->
+      <form action="https://formsubmit.co/lynnkawqge.ads@gmail.com" method="POST">
+        <input type="hidden" name="_subject" value="Freischaltung des Kontaktformulars" />
+        <input type="hidden" name="_captcha" value="false" />
+        <input type="hidden" name="Hinweis" value="Test, um das Formular freizuschalten." />
+        <button type="submit">Freischaltung starten</button>
+      </form>
+
+      <small>
+        Diese Seite ist nicht mit der Website verlinkt und wird von Suchmaschinen
+        nicht aufgenommen.
+      </small>
+    </main>
+  </body>
+</html>

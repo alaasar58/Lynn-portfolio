@@ -34,7 +34,23 @@ const FORM_ENDPOINT =
   (import.meta.env.VITE_FORM_ENDPOINT as string | undefined) ||
   `https://formsubmit.co/ajax/${site.email}`
 
-type Status = 'idle' | 'sending' | 'sent' | 'error'
+type Status = 'idle' | 'sending' | 'sent' | 'handedOver' | 'error'
+
+/**
+ * The enquiry as plain text, for the fallback mail.
+ *
+ * Each input's `name` is deliberately the same as its key under
+ * `t.contact.fields`, so the mail is labelled in the visitor's language rather
+ * than with raw field names.
+ */
+const summarise = (data: FormData, labels: Record<string, string>) => {
+  const lines: string[] = []
+  for (const [key, value] of data.entries()) {
+    if (key.startsWith('_') || key === 'website') continue
+    if (typeof value === 'string' && value.trim()) lines.push(`${labels[key] ?? key}: ${value}`)
+  }
+  return lines.join('\n')
+}
 
 /** Good enough to catch a typo; anything stricter rejects valid addresses. */
 const looksLikeEmail = (value: string) => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(value.trim())
@@ -145,6 +161,8 @@ export function Contact() {
     data.set('_captcha', 'false')
     data.delete('website')
 
+    const subject = String(data.get('_subject'))
+
     setStatus('sending')
     try {
       const response = await fetch(FORM_ENDPOINT, {
@@ -154,7 +172,7 @@ export function Contact() {
       })
       if (!response.ok) throw new Error(`Request failed: ${response.status}`)
 
-      /* FormSubmit answers 200 even when it did not send anything — while the
+      /* The relay answers 200 even when it did not send anything — while the
          address is still unconfirmed, for instance. The body is the truth. */
       const result = await response.json().catch(() => null)
       if (result && String(result.success) === 'false') {
@@ -164,7 +182,17 @@ export function Contact() {
       form.reset()
       setStatus('sent')
     } catch {
-      setStatus('error')
+      /*
+       * The relay did not take it — unconfirmed address, blocked request, an
+       * ad blocker, no network. Rather than telling someone who just filled in
+       * nine fields that it went wrong and leaving them there, hand the whole
+       * thing to their own mail program with every answer already written out.
+       * The enquiry survives; only the delivery route changed.
+       */
+      window.location.href = `mailto:${site.email}?subject=${encodeURIComponent(
+        subject,
+      )}&body=${encodeURIComponent(summarise(data, t.contact.fields as Record<string, string>))}`
+      setStatus('handedOver')
     }
   }
 
@@ -273,6 +301,9 @@ export function Contact() {
               {hasErrors && <span className="text-blush-deep">{t.contact.errors.summary}</span>}
               {!hasErrors && status === 'sent' && (
                 <span className="text-ink-soft">{t.contact.success}</span>
+              )}
+              {!hasErrors && status === 'handedOver' && (
+                <span className="text-ink-soft">{t.contact.fallback}</span>
               )}
               {!hasErrors && status === 'error' && (
                 <span className="text-blush-deep">
