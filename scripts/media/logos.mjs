@@ -14,13 +14,17 @@
  *
  * So each one is cropped to the mark and the background is lifted off:
  *
- *   - flood fill inwards from the four edges, following only background-
- *     coloured pixels, and make what it reaches transparent. Flooding from the
- *     edges rather than replacing every matching pixel is the whole trick — it
- *     cannot reach the white *inside* Schacht's label box or the white of the
- *     bear's eye, so those stay as the designer drew them.
- *   - the edge of the fill is feathered over a few shades, because a JPEG has
- *     no hard edges left to cut along.
+ *   - `holes: true` clears every background-coloured pixel, wherever it sits.
+ *     Closed shapes need this: the counters of Moonkie's two o's and its e, and
+ *     the insides of JBØRN's outlined B, Ø, R and N, are all background that no
+ *     fill coming from the edge can ever reach. Left alone they read as solid
+ *     white ovals and solid black letters — which is exactly what they looked
+ *     like before this option existed.
+ *   - `holes: false` floods inwards from the four edges instead, so enclosed
+ *     background survives. Schacht needs that: the white inside its label box
+ *     is the logo, not the background behind it.
+ *   - either way the edge is feathered over a few shades, because a JPEG has no
+ *     hard edges left to cut along.
  *
  * The results are written as PNG, which is the only format here with an alpha
  * channel. The uploads themselves stay in `media-src/brands/`, outside
@@ -56,11 +60,12 @@ const TO = path.join(HERE, 'public/media/brands')
  *  crop      pixels to keep, when the upload is a slice of a web page rather
  *            than the logo on its own
  *  on        'white' or 'black' — what the background flattened to
+ *  holes     true when enclosed background must go too (see above)
  *  out       the file the site points at
  */
 const jobs = [
-  { src: 'j-born.jpg', out: 'jborn.png', on: 'black' },
-  { src: 'Moonkie.jpg', out: 'moonkie.png', on: 'white' },
+  { src: 'j-born.jpg', out: 'jborn.png', on: 'black', holes: true },
+  { src: 'Moonkie.jpg', out: 'moonkie.png', on: 'white', holes: true },
   {
     src: 'stadtbaeckerei-schacht.jpg',
     out: 'schacht.png',
@@ -77,13 +82,18 @@ const lum = (r, g, b) => 0.299 * r + 0.587 * g + 0.114 * b
 /*
  * Where the background definitely is, where it definitely is not, and the band
  * between the two that becomes a soft edge.
+ *
+ * The black band is tight for a reason. JBØRN's background is dead black
+ * (brightness 0 to 3 across 708,000 pixels) while the bear's pupil sits at 32.
+ * A generous threshold would take the pupil with it and leave the bear
+ * blank-eyed — so the cut-off is 16, well clear of both.
  */
 const BANDS = {
   white: { clear: 238, solid: 205 },
-  black: { clear: 18, solid: 52 },
+  black: { clear: 4, solid: 16 },
 }
 
-async function lift({ src, out, on, crop }) {
+async function lift({ src, out, on, crop, holes = false }) {
   const file = path.join(FROM, src)
   if (!existsSync(file)) {
     console.log(`skip ${src} — not there`)
@@ -101,37 +111,45 @@ async function lift({ src, out, on, crop }) {
     return on === 'white' ? l >= band.solid : l <= band.solid
   }
 
-  /*
-   * Flood from the border inwards. A stack rather than recursion: a 1000×1000
-   * logo is a million pixels and recursion runs out of stack long before it
-   * runs out of picture.
-   */
   const seen = new Uint8Array(width * height)
-  const stack = []
-  for (let x = 0; x < width; x++) {
-    stack.push(x, x + (height - 1) * width)
-  }
-  for (let y = 0; y < height; y++) {
-    stack.push(y * width, width - 1 + y * width)
-  }
 
-  while (stack.length) {
-    const p = stack.pop()
-    if (seen[p]) continue
-    const i = p * channels
-    if (!isBackground(i)) continue
-    seen[p] = 1
+  if (holes) {
+    // Background is background wherever it is, enclosed or not.
+    for (let p = 0; p < width * height; p++) {
+      if (isBackground(p * channels)) seen[p] = 1
+    }
+  } else {
+    /*
+     * Flood from the border inwards, so enclosed background survives. A stack
+     * rather than recursion: a 1000×1000 logo is a million pixels, and
+     * recursion runs out of stack long before it runs out of picture.
+     */
+    const stack = []
+    for (let x = 0; x < width; x++) {
+      stack.push(x, x + (height - 1) * width)
+    }
+    for (let y = 0; y < height; y++) {
+      stack.push(y * width, width - 1 + y * width)
+    }
 
-    const x = p % width
-    const y = (p - x) / width
-    if (x > 0) stack.push(p - 1)
-    if (x < width - 1) stack.push(p + 1)
-    if (y > 0) stack.push(p - width)
-    if (y < height - 1) stack.push(p + width)
+    while (stack.length) {
+      const p = stack.pop()
+      if (seen[p]) continue
+      const i = p * channels
+      if (!isBackground(i)) continue
+      seen[p] = 1
+
+      const x = p % width
+      const y = (p - x) / width
+      if (x > 0) stack.push(p - 1)
+      if (x < width - 1) stack.push(p + 1)
+      if (y > 0) stack.push(p - width)
+      if (y < height - 1) stack.push(p + width)
+    }
   }
 
   /*
-   * Only pixels the flood actually reached lose their alpha, and they lose it
+   * Only pixels marked as background lose their alpha, and they lose it
    * on a ramp: fully transparent at the background's own brightness, fully
    * opaque by the time the mark begins.
    */

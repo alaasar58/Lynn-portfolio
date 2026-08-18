@@ -142,10 +142,13 @@ Die Datei muss am Ende `cover.jpg` bzw. `about.jpg` heißen.
 
 - Sie starten **von selbst und stumm**, sobald man zu ihnen scrollt, und laufen
   in Schleife. Anders erlauben es die Browser nicht.
-- **Maus drüber → Ton an**, Maus weg → Ton aus. Ehrlicherweise: manche Browser
-  lassen das erst zu, nachdem der Besucher irgendwo einmal geklickt hat, und auf
-  dem Handy gibt es kein „Maus drüber". Deshalb sitzt unten rechts in jedem
-  Handy ein kleiner Lautsprecher-Knopf, der immer funktioniert.
+- **Ton nur auf Knopfdruck.** Unten rechts in jedem Handy sitzt ein
+  Lautsprecher-Knopf — der ist immer sichtbar und der einzige Weg zum Ton. Maus
+  drüberfahren macht nichts mehr. Verlässt das Video den Bildschirm, ist es
+  wieder stumm.
+- **Die Lautstärke ist fest auf der Hälfte** und wird jedes Mal neu gesetzt,
+  wenn ein Video wieder ins Bild kommt. Damit ist es egal, dass deine Clips
+  unterschiedlich laut aufgenommen sind.
 - **Klick auf ein Handy** öffnet das Video groß, mit Ton und Steuerung.
 - Wer in seinem System „weniger Bewegung" eingestellt hat, sieht das Standbild
   mit einem Abspielknopf. Das ist Absicht.
@@ -198,3 +201,25 @@ irgendwann ein halbes Logo verschwindet.
 **Am besten wäre**, du fragst bei den drei Brands kurz nach dem Logo als **SVG
 oder PNG mit transparentem Hintergrund**. Presse- oder Media-Kits haben das
 meistens fertig liegen, und dann ist es gestochen scharf statt herausgerechnet.
+
+
+---
+
+## Wichtig: das Kontaktformular einmal freischalten
+
+Das Formular schickt dir jede Anfrage als **E-Mail an lynnkawqge.ads@gmail.com**.
+Damit das läuft, ist **ein einziger Klick von dir nötig** — und zwar einmalig:
+
+1. Füll das Formular auf der Seite selbst einmal testweise aus und schick es ab.
+2. Du bekommst eine E-Mail von **FormSubmit** mit einem Bestätigungslink.
+   (Schau auch im Spam-Ordner nach.)
+3. Auf den Link klicken. Fertig — ab dann kommt jede Anfrage automatisch bei dir
+   an, ohne dass du noch etwas tun musst.
+
+**Vorher wird nichts weitergeleitet.** Wenn du den Link nicht klickst, sieht der
+Absender zwar „Danke, deine Nachricht ist unterwegs", aber bei dir kommt nichts
+an. Bitte mach diesen einen Test.
+
+Gespeichert wird nirgends etwas: keine Tabelle, keine Datenbank, kein Konto. Die
+Anfrage existiert nur als E-Mail in deinem Postfach. Das steht so auch in der
+Datenschutzerklärung.

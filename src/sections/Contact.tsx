@@ -6,35 +6,56 @@ import { useI18n } from '../i18n'
 import { InstagramGlyph, TikTokGlyph } from '../components/Glyphs'
 
 /*
- * Where the form posts.
+ * Where an enquiry goes.
  *
- * Set VITE_FORM_ENDPOINT (e.g. a Formspree / Getform / Basin URL) in a `.env`
- * file or in the hosting provider's environment settings and inquiries are sent
- * straight through. With no endpoint configured the form falls back to opening
- * a pre-filled email to the address in `site.email`, so it is never a dead end.
+ * This site is static — GitHub Pages serves files and runs nothing — so a form
+ * cannot send an email by itself. Something has to relay it, and that relay is
+ * FormSubmit: the browser posts the fields, FormSubmit emails them to the
+ * address below. No account, no key, and no database anywhere; the enquiry
+ * exists as an email in Lynn's inbox and nowhere else. That is the whole point
+ * of picking it over a spreadsheet or a form builder.
+ *
+ * ONE-TIME STEP, AND ONLY LYNN CAN DO IT: the very first enquiry makes
+ * FormSubmit send *her* a confirmation email with an activation link. Until she
+ * clicks it, nothing is forwarded. After that it is silent and permanent.
+ *
+ * `VITE_FORM_ENDPOINT` still overrides this if the relay is ever swapped for
+ * another one — it must be a URL that accepts a POST of form data and answers
+ * with CORS allowed.
+ *
+ * !! THE PRIVACY POLICY DESCRIBES THIS !!
+ *
+ * Form data now leaves the visitor's browser and passes through a processor.
+ * The "contact form" section of `legal.privacy` says so in all three
+ * dictionaries — who receives it, what is sent, on what basis, how long it is
+ * kept. Change the relay and that section has to change with it.
  */
-/*
- * !! PRIVACY POLICY DEPENDS ON THIS !!
- *
- * With no endpoint set — the state today — the form never talks to a server:
- * it opens the visitor's own mail client, and `legal.privacy` says exactly
- * that in all three dictionaries.
- *
- * The moment VITE_FORM_ENDPOINT is set, form data starts going to a third
- * party and that section becomes untrue. Update the "contact form" section in
- * en.ts, de.ts and ar.ts in the same change: who the processor is, what is
- * transmitted, on what legal basis and for how long it is kept.
- */
-const FORM_ENDPOINT = import.meta.env.VITE_FORM_ENDPOINT as string | undefined
+const FORM_ENDPOINT =
+  (import.meta.env.VITE_FORM_ENDPOINT as string | undefined) ||
+  `https://formsubmit.co/ajax/${site.email}`
 
 type Status = 'idle' | 'sending' | 'sent' | 'error'
+
+/** Good enough to catch a typo; anything stricter rejects valid addresses. */
+const looksLikeEmail = (value: string) => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(value.trim())
 
 export function Contact() {
   const { t } = useI18n()
   const [status, setStatus] = useState<Status>('idle')
+  /* Which fields are currently wrong, by field name. Empty until a first
+     submit: telling someone their email is invalid while they are still
+     halfway through typing it is a nuisance, not help. */
+  const [errors, setErrors] = useState<Record<string, string>>({})
+  const hasErrors = Object.keys(errors).length > 0
 
   const textFields = [
-    { name: 'name', label: t.contact.fields.name, type: 'text', required: true, autoComplete: 'name' },
+    {
+      name: 'name',
+      label: t.contact.fields.name,
+      type: 'text',
+      required: true,
+      autoComplete: 'name',
+    },
     {
       name: 'company',
       label: t.contact.fields.company,
@@ -42,35 +63,56 @@ export function Contact() {
       required: true,
       autoComplete: 'organization',
     },
-    { name: 'email', label: t.contact.fields.email, type: 'email', required: true, autoComplete: 'email' },
+    {
+      name: 'email',
+      label: t.contact.fields.email,
+      type: 'email',
+      required: true,
+      autoComplete: 'email',
+    },
     { name: 'product', label: t.contact.fields.product, type: 'text', required: true },
     { name: 'link', label: t.contact.fields.link, type: 'url', required: false },
   ]
 
+  /* All three are required. An enquiry that says neither what kind of video,
+     nor how many, nor when, cannot be answered without a second email — and
+     the second email is where enquiries go quiet. */
   const selects = [
     { name: 'contentType', label: t.contact.fields.contentType, options: t.contact.contentTypes },
     { name: 'videoCount', label: t.contact.fields.videoCount, options: t.contact.videoCounts },
-    { name: 'timeline', label: t.contact.fields.timeline, options: t.contact.timelines, wide: true },
+    {
+      name: 'timeline',
+      label: t.contact.fields.timeline,
+      options: t.contact.timelines,
+      wide: true,
+    },
   ]
 
-  /*
-   * Builds the body of the fallback email.
+  /** Every field that must be filled in, in the order they appear. */
+  const requiredNames = [
+    ...textFields.filter((field) => field.required).map((field) => field.name),
+    ...selects.map((select) => select.name),
+    'brief',
+  ]
+
+  /**
+   * Checks every required field and reports all of them at once.
    *
-   * Each input's `name` attribute is deliberately identical to its key under
-   * `t.contact.fields`, so the mail is labelled in the visitor's language
-   * instead of with raw field names. Renaming one without the other silently
-   * falls back to the raw name.
+   * Not one at a time: a form that reveals its next objection only after you
+   * have fixed the last is the reason people give up on forms.
    */
-  const buildSummary = (data: FormData) => {
-    const labels = t.contact.fields as Record<string, string>
-    const lines: string[] = []
-    for (const [key, value] of data.entries()) {
-      if (key === 'website') continue // the honeypot never belongs in the mail
-      if (typeof value === 'string' && value.trim()) {
-        lines.push(`${labels[key] ?? key}: ${value}`)
-      }
+  const validate = (data: FormData) => {
+    const found: Record<string, string> = {}
+
+    for (const name of requiredNames) {
+      const value = String(data.get(name) ?? '').trim()
+      if (!value) found[name] = t.contact.errors.required
     }
-    return lines.join('\n')
+
+    const email = String(data.get('email') ?? '').trim()
+    if (email && !looksLikeEmail(email)) found.email = t.contact.errors.email
+
+    return found
   }
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
@@ -78,17 +120,30 @@ export function Contact() {
     const form = event.currentTarget
     const data = new FormData(form)
 
-    // Honeypot: a real person never fills a hidden field.
+    // Honeypot: a real person never fills a hidden field. Nothing is said about
+    // it either — a bot told why it failed is a bot that comes back fixed.
     if (data.get('website')) return
 
-    if (!FORM_ENDPOINT) {
-      const subject = `${t.contact.mailSubject} — ${data.get('company') || data.get('name')}`
-      window.location.href = `mailto:${site.email}?subject=${encodeURIComponent(
-        subject,
-      )}&body=${encodeURIComponent(buildSummary(data))}`
-      setStatus('sent')
+    const found = validate(data)
+    setErrors(found)
+    if (Object.keys(found).length > 0) {
+      setStatus('idle')
+      // Put the cursor in the first thing that needs attention.
+      const first = requiredNames.find((name) => found[name]) ?? Object.keys(found)[0]
+      form.querySelector<HTMLElement>(`[name="${first}"]`)?.focus()
       return
     }
+
+    /*
+     * What the relay itself reads. `_subject` is the subject line of the mail
+     * that lands in Lynn's inbox, `_template=table` lays the answers out as a
+     * table rather than a run of lines, and `_captcha=false` skips the
+     * interstitial — the honeypot above is doing that job already.
+     */
+    data.set('_subject', `${t.contact.mailSubject} — ${data.get('company') || data.get('name')}`)
+    data.set('_template', 'table')
+    data.set('_captcha', 'false')
+    data.delete('website')
 
     setStatus('sending')
     try {
@@ -98,6 +153,14 @@ export function Contact() {
         body: data,
       })
       if (!response.ok) throw new Error(`Request failed: ${response.status}`)
+
+      /* FormSubmit answers 200 even when it did not send anything — while the
+         address is still unconfirmed, for instance. The body is the truth. */
+      const result = await response.json().catch(() => null)
+      if (result && String(result.success) === 'false') {
+        throw new Error(String(result.message ?? 'rejected'))
+      }
+
       form.reset()
       setStatus('sent')
     } catch {
@@ -108,7 +171,10 @@ export function Contact() {
   return (
     <Section id="contact" eyebrow={t.contact.eyebrow} title={t.contact.title} lede={t.contact.lede}>
       <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
-        <form onSubmit={handleSubmit} className="relative min-w-0 lg:col-span-7">
+        {/* noValidate: the browser's own bubbles appear in the browser's
+            language, not the one the visitor picked on this page. The checks
+            below say the same things in all three. */}
+        <form onSubmit={handleSubmit} noValidate className="relative min-w-0 lg:col-span-7">
           <div className="grid gap-5 sm:grid-cols-2">
             {textFields.map((field) => (
               <div
@@ -117,7 +183,9 @@ export function Contact() {
               >
                 <label className="field-label" htmlFor={field.name}>
                   {field.label}
-                  {!field.required && (
+                  {field.required ? (
+                    <RequiredMark />
+                  ) : (
                     <span className="text-ink-muted"> ({t.contact.optional})</span>
                   )}
                 </label>
@@ -127,8 +195,11 @@ export function Contact() {
                   type={field.type}
                   required={field.required}
                   autoComplete={field.autoComplete}
-                  className="field"
+                  aria-invalid={errors[field.name] ? true : undefined}
+                  aria-describedby={errors[field.name] ? `${field.name}-error` : undefined}
+                  className={fieldClass(errors[field.name])}
                 />
+                <FieldError name={field.name} message={errors[field.name]} />
               </div>
             ))}
 
@@ -136,8 +207,17 @@ export function Contact() {
               <div key={select.name} className={`min-w-0 ${select.wide ? 'sm:col-span-2' : ''}`}>
                 <label className="field-label" htmlFor={select.name}>
                   {select.label}
+                  <RequiredMark />
                 </label>
-                <select id={select.name} name={select.name} className="field" defaultValue="">
+                <select
+                  id={select.name}
+                  name={select.name}
+                  required
+                  defaultValue=""
+                  aria-invalid={errors[select.name] ? true : undefined}
+                  aria-describedby={errors[select.name] ? `${select.name}-error` : undefined}
+                  className={fieldClass(errors[select.name])}
+                >
                   <option value="" disabled>
                     {t.contact.select}
                   </option>
@@ -147,14 +227,25 @@ export function Contact() {
                     </option>
                   ))}
                 </select>
+                <FieldError name={select.name} message={errors[select.name]} />
               </div>
             ))}
 
             <div className="min-w-0 sm:col-span-2">
               <label className="field-label" htmlFor="brief">
                 {t.contact.fields.brief}
+                <RequiredMark />
               </label>
-              <textarea id="brief" name="brief" rows={5} required className="field resize-y" />
+              <textarea
+                id="brief"
+                name="brief"
+                rows={5}
+                required
+                aria-invalid={errors.brief ? true : undefined}
+                aria-describedby={errors.brief ? 'brief-error' : undefined}
+                className={`${fieldClass(errors.brief)} resize-y`}
+              />
+              <FieldError name="brief" message={errors.brief} />
             </div>
 
             <div className="min-w-0 sm:col-span-2">
@@ -172,13 +263,18 @@ export function Contact() {
             <input id="website" name="website" type="text" tabIndex={-1} autoComplete="off" />
           </div>
 
-          <div className="mt-8 flex flex-wrap items-center gap-4">
+          <p className="mt-6 text-sm text-ink-muted">{t.contact.requiredNote}</p>
+
+          <div className="mt-4 flex flex-wrap items-center gap-4">
             <button type="submit" className="btn-primary" disabled={status === 'sending'}>
               {status === 'sending' ? t.contact.sending : t.contact.submit}
             </button>
             <p aria-live="polite" className="text-sm">
-              {status === 'sent' && <span className="text-ink-soft">{t.contact.success}</span>}
-              {status === 'error' && (
+              {hasErrors && <span className="text-blush-deep">{t.contact.errors.summary}</span>}
+              {!hasErrors && status === 'sent' && (
+                <span className="text-ink-soft">{t.contact.success}</span>
+              )}
+              {!hasErrors && status === 'error' && (
                 <span className="text-blush-deep">
                   {t.contact.error}{' '}
                   <a className="underline underline-offset-4" href={`mailto:${site.email}`}>
@@ -250,3 +346,27 @@ export function Contact() {
     </Section>
   )
 }
+
+/** The asterisk on a required label, and in the note that explains it. */
+function RequiredMark() {
+  return (
+    <span aria-hidden="true" className="text-blush-deep">
+      {' '}
+      *
+    </span>
+  )
+}
+
+/** One line under one field. Nothing at all when the field is fine. */
+function FieldError({ name, message }: { name: string; message?: string }) {
+  if (!message) return null
+  return (
+    <p id={`${name}-error`} className="mt-1.5 text-xs text-blush-deep">
+      {message}
+    </p>
+  )
+}
+
+/** A field, plus the ring it wears while it is the one in the way. */
+const fieldClass = (error?: string) =>
+  error ? 'field border-blush-deep ring-1 ring-blush-deep' : 'field'

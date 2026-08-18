@@ -252,6 +252,12 @@ export const en = {
     },
     optional: 'optional',
     select: 'Please choose',
+    requiredNote: 'Fields marked * are required.',
+    errors: {
+      required: 'Please fill this in.',
+      email: 'Please check this email address.',
+      summary: 'Please complete the highlighted fields.',
+    },
     submit: 'Send',
     sending: 'Sending…',
     success: 'Thank you, your message is on its way. I usually reply within two working days.',
@@ -374,7 +380,8 @@ export const en = {
         {
           title: 'Getting in touch',
           body: [
-            'The contact form sends nothing to a server — pressing send opens your own email program with the text filled in, and nothing leaves your device until you send it yourself.',
+            'When you press send, the form transmits what you entered to FormSubmit (Sagitta Studio LLC, USA), which forwards it to me as an email. FormSubmit is the postman here and keeps no copy for me — no database, no spreadsheet, no account of any kind. Transmitted are: your name, company, email address, product and link, the three answers you chose, your brief, and any note you added.',
+            'Legal basis: Art. 6 (1) (b) GDPR where a contract is involved, otherwise (f) — my interest in receiving enquiries at all. The transfer includes the USA. If you would rather not use the form, write to lynnkawqge.ads@gmail.com directly; the address is on this page and works just as well.',
             'When you do write to me, I process what is in your message in order to answer it: Art. 6 (1) (b) GDPR where a contract is involved, otherwise Art. 6 (1) (f). I keep it as long as the enquiry and any resulting work require, then delete it. My mailbox is provided by Google Ireland Limited.',
           ],
         },
