@@ -10,29 +10,30 @@ import { InstagramGlyph, TikTokGlyph } from '../components/Glyphs'
  *
  * This site is static — GitHub Pages serves files and runs nothing — so a form
  * cannot send an email by itself. Something has to relay it, and that relay is
- * FormSubmit: the browser posts the fields, FormSubmit emails them to the
- * address below. No account, no key, and no database anywhere; the enquiry
- * exists as an email in Lynn's inbox and nowhere else. That is the whole point
- * of picking it over a spreadsheet or a form builder.
+ * FormSubmit: the browser posts the fields, FormSubmit emails them to Lynn. No
+ * account, no key, and no store of any kind. The enquiry exists as an email in
+ * her inbox and nowhere else, which is the whole reason it was picked over a
+ * spreadsheet or a form builder.
  *
- * ONE-TIME STEP, AND ONLY LYNN CAN DO IT: the very first enquiry makes
- * FormSubmit send *her* a confirmation email with an activation link. Until she
- * clicks it, nothing is forwarded. After that it is silent and permanent.
+ * The string below is the token FormSubmit issued for
+ * lynnkawqge.ads@gmail.com once she confirmed the address. It is meant to be
+ * public — its entire purpose is to stand in for the address so that a
+ * plain-text email is not sitting in the page source for every scraper that
+ * walks past. It routes to her inbox and to nothing else.
  *
- * `VITE_FORM_ENDPOINT` still overrides this if the relay is ever swapped for
- * another one — it must be a URL that accepts a POST of form data and answers
- * with CORS allowed.
+ * `VITE_FORM_ENDPOINT` overrides it if the relay is ever swapped out. It must
+ * be a URL that accepts a POST of form data and allows CORS.
  *
  * !! THE PRIVACY POLICY DESCRIBES THIS !!
  *
- * Form data now leaves the visitor's browser and passes through a processor.
- * The "contact form" section of `legal.privacy` says so in all three
- * dictionaries — who receives it, what is sent, on what basis, how long it is
- * kept. Change the relay and that section has to change with it.
+ * Form data leaves the visitor's browser and passes through a processor. The
+ * "contact form" section of `legal.privacy` says so in all three dictionaries —
+ * who receives it, which fields, on what basis, how long it is kept. Change the
+ * relay and that section changes with it.
  */
 const FORM_ENDPOINT =
   (import.meta.env.VITE_FORM_ENDPOINT as string | undefined) ||
-  `https://formsubmit.co/ajax/${site.email}`
+  'https://formsubmit.co/ajax/678e0f9b29d2a1e34cd4aa2b62b10002'
 
 type Status = 'idle' | 'sending' | 'sent' | 'handedOver' | 'error'
 

@@ -205,24 +205,23 @@ meistens fertig liegen, und dann ist es gestochen scharf statt herausgerechnet.
 
 ---
 
-## Wichtig: das Kontaktformular einmal freischalten
+## Das Kontaktformular — erledigt
 
-Das Formular schickt dir jede Anfrage als **E-Mail an lynnkawqge.ads@gmail.com**.
-Dafür muss die Adresse einmal bestätigt werden — **einmalig, danach nie wieder**:
+Jede Anfrage kommt als **E-Mail an lynnkawqge.ads@gmail.com**. Die Adresse ist
+freigeschaltet; du musst nichts mehr tun.
 
-1. Diese Seite öffnen:
-   **https://alaasar58.github.io/Lynn-portfolio/formular-freischalten.html**
-2. Auf **„Freischaltung starten"** drücken.
-3. Du bekommst eine E-Mail von **FormSubmit** — auch im **Spam-Ordner**
-   nachsehen. Darin auf den Bestätigungslink klicken. Fertig.
+Deine E-Mail-Adresse steht dabei **nicht** mehr im Quelltext des Formulars —
+dort steht nur noch ein Code, der zu deinem Postfach führt. Das schützt vor
+Adress-Sammlern.
 
-Ab dann landet jede Anfrage automatisch in deinem Postfach.
-
-**Und wenn du es nicht machst, geht trotzdem nichts verloren:** Klappt der
-direkte Versand nicht, öffnet sich beim Absender das eigene E-Mail-Programm mit
-allen Angaben fertig ausgefüllt, und er drückt dort einmal auf Senden. Die
-Anfrage kommt bei dir an — nur eben auf dem Umweg.
+**Falls doch einmal etwas klemmt**, geht nichts verloren: Klappt der direkte
+Versand nicht, öffnet sich beim Absender das eigene E-Mail-Programm mit allen
+Angaben fertig ausgefüllt, und er drückt dort einmal auf Senden.
 
 Gespeichert wird nirgends etwas: keine Tabelle, keine Datenbank, kein Konto. Die
 Anfrage existiert nur als E-Mail in deinem Postfach. Das steht so auch in der
 Datenschutzerklärung.
+
+**Wenn du die Empfänger-Adresse einmal änderst**, sag mir Bescheid — dann läuft
+die Freischaltung einmal neu über
+`https://alaasar58.github.io/Lynn-portfolio/formular-freischalten.html`.

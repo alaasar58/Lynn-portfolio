@@ -1,17 +1,20 @@
 <!doctype html>
 <!--
-  A one-time page for Lynn, not part of the site.
+  A one-time page for Lynn, not part of the site. Its job is done.
 
   FormSubmit only forwards enquiries once the receiving address has been
   confirmed, and it sends that confirmation mail in response to a normal form
-  POST. The contact form on the site posts by fetch instead, so it cannot be
+  POST. The contact form on the site posts by fetch instead, so it could not be
   relied on to start that handshake — which is why the first real enquiry came
   back as an error.
 
-  This page does the plain POST. Lynn opens it once, presses the button, gets
-  the mail from FormSubmit, clicks the link inside, and the contact form works
-  from then on. Nothing links here; the address is meant to be typed once and
-  forgotten.
+  This page did the plain POST that produced the confirmation mail. It is kept
+  because the same handshake is needed again if the receiving address ever
+  changes: swap the address in the action below, open this page, press the
+  button, click the link in the mail, and put the new token into
+  src/sections/Contact.tsx.
+
+  Nothing links here, and it is noindex.
 -->
 <html lang="de">
   <head>
@@ -78,11 +81,12 @@
   </head>
   <body>
     <main>
-      <h1>Kontaktformular einmal freischalten</h1>
+      <h1>Kontaktformular freischalten</h1>
 
       <p>
-        Diese Seite brauchst du genau einmal. Danach kommt jede Anfrage vom
-        Kontaktformular automatisch als E-Mail bei dir an.
+        <strong>Das ist bereits erledigt.</strong> Diese Seite wird nur wieder
+        gebraucht, wenn sich die Empfänger-Adresse einmal ändert — dann sag mir
+        Bescheid, ich trage die neue ein.
       </p>
 
       <ol>
