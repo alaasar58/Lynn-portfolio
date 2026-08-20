@@ -1,4 +1,5 @@
 # Build and deploy the Vite/React portfolio to GitHub Pages
+# MAIN DEPLOYMENT: this workflow intentionally runs only from main.
 name: Deploy portfolio to Pages
 
 on:
