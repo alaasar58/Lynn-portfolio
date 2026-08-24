@@ -224,4 +224,4 @@ Datenschutzerklärung.
 
 **Wenn du die Empfänger-Adresse einmal änderst**, sag mir Bescheid — dann läuft
 die Freischaltung einmal neu über
-`https://alaasar58.github.io/Lynn-portfolio/formular-freischalten.html`.
+`https://lynn-portfolio.com/formular-freischalten.html`.

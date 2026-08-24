@@ -244,7 +244,7 @@ A hidden honeypot field filters out basic spam bots.
 
 ### GitHub Pages (no custom domain needed)
 
-The site is live at **https://alaasar58.github.io/Lynn-portfolio/**
+The site is live at **https://lynn-portfolio.com/**
 
 `.github/workflows/deploy.yml` builds and publishes automatically on every push.
 

@@ -18,8 +18,9 @@ export const site = {
   /** Full name, used in the hero wordmark and the footer. */
   fullName: 'Lynn Kawqge',
   email: 'lynnkawqge.ads@gmail.com',
-  // TODO: only needs changing if a custom domain is added.
-  url: 'https://alaasar58.github.io/Lynn-portfolio/',
+  /* The custom domain. Was a github.io project URL until lynn-portfolio.com
+     was connected; the build's base path had to follow (see deploy.yml). */
+  url: 'https://lynn-portfolio.com/',
   socials: [
     {
       label: 'Instagram',
