@@ -1,6 +1,6 @@
 <!doctype html>
 <!--
-  A one-time page for Lynn, not part of the site. Its job is done.
+  A one-time page for Lynn, not part of the site.
 
   FormSubmit only forwards enquiries once the receiving address has been
   confirmed, and it sends that confirmation mail in response to a normal form
@@ -8,11 +8,11 @@
   relied on to start that handshake — which is why the first real enquiry came
   back as an error.
 
-  This page did the plain POST that produced the confirmation mail. It is kept
-  because the same handshake is needed again if the receiving address ever
-  changes: swap the address in the action below, open this page, press the
-  button, click the link in the mail, and put the new token into
-  src/sections/Contact.tsx.
+  This page does the plain POST that produces the confirmation mail. It is
+  needed again every time the receiving address changes — as it just did, from
+  the gmail address to hello@lynn-portfolio.com. Open it, press the button,
+  click the link in the mail, then put the new token into
+  src/sections/Contact.tsx in place of the address.
 
   Nothing links here, and it is noindex.
 -->
@@ -84,16 +84,16 @@
       <h1>Kontaktformular freischalten</h1>
 
       <p>
-        <strong>Das ist bereits erledigt.</strong> Diese Seite wird nur wieder
-        gebraucht, wenn sich die Empfänger-Adresse einmal ändert — dann sag mir
-        Bescheid, ich trage die neue ein.
+        Deine E-Mail-Adresse ist jetzt <strong>hello@lynn-portfolio.com</strong>.
+        Damit Anfragen wieder ankommen, muss diese neue Adresse einmal bestätigt
+        werden — das dauert eine Minute.
       </p>
 
       <ol>
         <li>Unten auf den Knopf drücken.</li>
         <li>
           Du bekommst eine E-Mail von <strong>FormSubmit</strong> an
-          <strong>lynnkawqge.ads@gmail.com</strong> — auch im Spam-Ordner
+          <strong>hello@lynn-portfolio.com</strong> — auch im Spam-Ordner
           nachsehen.
         </li>
         <li>In dieser E-Mail auf den Bestätigungslink klicken. Fertig.</li>
@@ -103,7 +103,7 @@
         A plain form POST, deliberately: this is the request FormSubmit answers
         with the confirmation mail. `_captcha=false` skips the interstitial.
       -->
-      <form action="https://formsubmit.co/lynnkawqge.ads@gmail.com" method="POST">
+      <form action="https://formsubmit.co/hello@lynn-portfolio.com" method="POST">
         <input type="hidden" name="_subject" value="Freischaltung des Kontaktformulars" />
         <input type="hidden" name="_captcha" value="false" />
         <input type="hidden" name="Hinweis" value="Test, um das Formular freizuschalten." />

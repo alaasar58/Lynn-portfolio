@@ -290,7 +290,7 @@ export const de: Dictionary = {
         },
         {
           title: 'Kontakt',
-          lines: ['E-Mail: lynnkawqge.ads@gmail.com'],
+          lines: ['E-Mail: hello@lynn-portfolio.com'],
         },
         {
           title: 'Umsatzsteuer-Identifikationsnummer',
@@ -323,7 +323,7 @@ export const de: Dictionary = {
         {
           title: 'Verantwortliche',
           body: [
-            'Lynn Kawqge, Deutschland. E-Mail: lynnkawqge.ads@gmail.com'
+            'Lynn Kawqge, Deutschland. E-Mail: hello@lynn-portfolio.com'
           ],
         },
         {
@@ -344,7 +344,7 @@ export const de: Dictionary = {
           title: 'Kontaktaufnahme',
           body: [
             'Beim Absenden überträgt das Formular deine Eingaben an FormSubmit (Sagitta Studio LLC, USA), das sie mir als E-Mail weiterleitet. FormSubmit ist hier der Bote und legt für mich keine Kopie an — keine Datenbank, keine Tabelle, kein Konto. Übertragen werden: Name, Firma, E-Mail-Adresse, Produkt und Link, deine drei ausgewählten Antworten, dein Briefing und eine eventuelle Anmerkung.',
-            'Rechtsgrundlage: Art. 6 Abs. 1 lit. b DSGVO, soweit ein Vertrag betroffen ist, sonst lit. f — mein Interesse, Anfragen überhaupt empfangen zu können. Die Übermittlung erfolgt auch in die USA. Wenn du das Formular nicht nutzen möchtest, schreib mir direkt an lynnkawqge.ads@gmail.com; die Adresse steht auf dieser Seite und funktioniert genauso.',
+            'Rechtsgrundlage: Art. 6 Abs. 1 lit. b DSGVO, soweit ein Vertrag betroffen ist, sonst lit. f — mein Interesse, Anfragen überhaupt empfangen zu können. Die Übermittlung erfolgt auch in die USA. Wenn du das Formular nicht nutzen möchtest, schreib mir direkt an hello@lynn-portfolio.com; die Adresse steht auf dieser Seite und funktioniert genauso.',
             'Wenn du mir schreibst, verarbeite ich den Inhalt deiner Nachricht, um sie zu beantworten — Art. 6 Abs. 1 lit. b DSGVO, soweit ein Vertrag betroffen ist, sonst lit. f. Ich bewahre sie so lange auf, wie die Anfrage und eine daraus entstehende Zusammenarbeit es erfordern, und lösche sie danach. Anbieterin meines Postfachs ist die Google Ireland Limited.',
           ],
         },

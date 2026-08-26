@@ -205,23 +205,25 @@ meistens fertig liegen, und dann ist es gestochen scharf statt herausgerechnet.
 
 ---
 
-## Das Kontaktformular — erledigt
+## Das Kontaktformular — einmal neu freischalten
 
-Jede Anfrage kommt als **E-Mail an lynnkawqge.ads@gmail.com**. Die Adresse ist
-freigeschaltet; du musst nichts mehr tun.
+Deine Adresse ist jetzt **hello@lynn-portfolio.com**. Weil FormSubmit jede
+Empfänger-Adresse einzeln bestätigen lässt, muss die neue einmal freigeschaltet
+werden — sonst kämen Anfragen weiter beim alten Postfach an:
 
-Deine E-Mail-Adresse steht dabei **nicht** mehr im Quelltext des Formulars —
-dort steht nur noch ein Code, der zu deinem Postfach führt. Das schützt vor
-Adress-Sammlern.
+1. Diese Seite öffnen:
+   **https://lynn-portfolio.com/formular-freischalten.html**
+2. Auf **„Freischaltung starten"** drücken.
+3. E-Mail von **FormSubmit** abwarten (auch im **Spam-Ordner** nachsehen) und
+   auf den Bestätigungslink klicken.
+4. In dieser E-Mail steht ein Code („random-like string"). **Schick mir den**,
+   dann trage ich ihn ein — danach steht deine Adresse nicht mehr im
+   Seitenquelltext.
 
-**Falls doch einmal etwas klemmt**, geht nichts verloren: Klappt der direkte
-Versand nicht, öffnet sich beim Absender das eigene E-Mail-Programm mit allen
-Angaben fertig ausgefüllt, und er drückt dort einmal auf Senden.
+**Bis dahin geht trotzdem nichts verloren:** Klappt der direkte Versand nicht,
+öffnet sich beim Absender das eigene E-Mail-Programm mit allen Angaben fertig
+ausgefüllt, und er drückt dort einmal auf Senden.
 
 Gespeichert wird nirgends etwas: keine Tabelle, keine Datenbank, kein Konto. Die
 Anfrage existiert nur als E-Mail in deinem Postfach. Das steht so auch in der
 Datenschutzerklärung.
-
-**Wenn du die Empfänger-Adresse einmal änderst**, sag mir Bescheid — dann läuft
-die Freischaltung einmal neu über
-`https://lynn-portfolio.com/formular-freischalten.html`.

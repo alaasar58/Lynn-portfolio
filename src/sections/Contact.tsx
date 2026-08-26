@@ -15,11 +15,13 @@ import { InstagramGlyph, TikTokGlyph } from '../components/Glyphs'
  * her inbox and nowhere else, which is the whole reason it was picked over a
  * spreadsheet or a form builder.
  *
- * The string below is the token FormSubmit issued for
- * lynnkawqge.ads@gmail.com once she confirmed the address. It is meant to be
- * public — its entire purpose is to stand in for the address so that a
- * plain-text email is not sitting in the page source for every scraper that
- * walks past. It routes to her inbox and to nothing else.
+ * THE ADDRESS CHANGED, so the relay has to be confirmed again. FormSubmit
+ * forwards nothing to an address it has not verified, and the token it issues
+ * belongs to one address only — the old token would have kept delivering to
+ * the old inbox, which is worse than an error. So this is back to posting at
+ * the address itself until the new one is confirmed and its token replaces it:
+ * open /formular-freischalten.html, press the button, click the link in the
+ * mail, then put the token here in place of the address.
  *
  * `VITE_FORM_ENDPOINT` overrides it if the relay is ever swapped out. It must
  * be a URL that accepts a POST of form data and allows CORS.
@@ -33,7 +35,7 @@ import { InstagramGlyph, TikTokGlyph } from '../components/Glyphs'
  */
 const FORM_ENDPOINT =
   (import.meta.env.VITE_FORM_ENDPOINT as string | undefined) ||
-  'https://formsubmit.co/ajax/678e0f9b29d2a1e34cd4aa2b62b10002'
+  `https://formsubmit.co/ajax/${site.email}`
 
 type Status = 'idle' | 'sending' | 'sent' | 'handedOver' | 'error'
 
