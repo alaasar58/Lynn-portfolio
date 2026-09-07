@@ -91,9 +91,15 @@ function BrandCell({ brand }: { brand: Brand }) {
           className="max-h-full max-w-full scale-[var(--logo-scale)] object-contain transition-transform duration-500 ease-[var(--ease-soft)] group-hover:scale-[calc(var(--logo-scale)*1.04)] group-focus-visible:scale-[calc(var(--logo-scale)*1.04)]"
         />
       ) : (
-        /* No logo yet. The name is set at the size a logo would occupy, so the
-           tile carries the same weight as the ones beside it. */
-        <span className="text-center font-display text-xl leading-snug text-ink-soft transition-colors duration-500 group-hover:text-[var(--brand)] group-focus-visible:text-[var(--brand)] sm:text-2xl">
+        /*
+         * No logo yet, so the name has to stand in for one — and it is set to
+         * look like a wordmark rather than like a line of text: uppercase and
+         * tracked, at the size a mark would occupy, so the tile carries the
+         * same weight as the ones beside it. Every brand here happens to set
+         * its own name in caps; a future one that does not can carry its logo
+         * file instead, which is the real fix in any case.
+         */
+        <span className="text-center font-display text-xl uppercase leading-snug tracking-[0.06em] text-ink-soft transition-colors duration-500 group-hover:text-[var(--brand)] group-focus-visible:text-[var(--brand)] sm:text-[1.5rem]">
           {brand.name}
         </span>
       )}
