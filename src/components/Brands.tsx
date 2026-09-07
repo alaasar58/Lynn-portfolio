@@ -4,6 +4,21 @@ import type { Brand } from '../content/site'
 import { useI18n } from '../i18n'
 import { asset } from '../lib/asset'
 
+/*
+ * How many across on a wide screen, so the last row is never a single tile
+ * stranded on its own. Four brands read as two rows of two or one row of four;
+ * three across would leave the fourth alone under the others, which looks like
+ * a mistake rather than a list.
+ *
+ * Written as whole class names because Tailwind reads the source as text and
+ * never sees a class that is assembled at runtime.
+ */
+function columnsFor(count: number) {
+  if (count % 4 === 0) return 'lg:grid-cols-4'
+  if (count % 3 === 0) return 'sm:grid-cols-3'
+  return 'sm:grid-cols-2 lg:grid-cols-3'
+}
+
 /**
  * Brands worked with.
  *
@@ -37,7 +52,7 @@ export function Brands() {
         {t.work.brandsHeading}
       </h3>
 
-      <ul className="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-3 sm:gap-6">
+      <ul className={`mt-8 grid grid-cols-2 gap-4 sm:gap-6 ${columnsFor(brands.length)}`}>
         {brands.map((brand) => (
           <BrandCell key={brand.name} brand={brand} />
         ))}

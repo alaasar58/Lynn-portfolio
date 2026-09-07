@@ -308,6 +308,14 @@ export const brands: Brand[] = [
     color: '#84b52d',
     href: 'https://www.stadtbaeckerei-schacht.de/',
   },
+  /*
+   * No logo yet — this machine cannot reach twistshake.com to fetch one, so the
+   * file has to come from Lynn. Drop it into media-src/brands/, run
+   * scripts/media/logos.mjs, then add `logo` and `color` here like the three
+   * above. Until then the tile shows the name in the display face, which is a
+   * finished look rather than an empty box.
+   */
+  { name: 'Twistshake', href: 'https://twistshake.com/eu/' },
 ]
 
 /* -------------------------------------------------------------------------- */

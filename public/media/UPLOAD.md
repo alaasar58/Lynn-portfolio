@@ -63,6 +63,11 @@ Das sieht fertig aus, kein leerer Kasten.
 oder für die du bezahlte UGC gemacht hast. Ein Name auf einem Media-Kit ist eine
 Aussage, die eine Agentur mit einer einzigen Nachricht prüfen kann.
 
+**Offen:** Von **Twistshake** fehlt noch das Logo. Leg die Datei nach
+`media-src/brands/` und sag mir Bescheid, dann rechne ich den Hintergrund
+heraus und trage sie ein — bis dahin steht dort der Name in der Schrift der
+Seite.
+
 ---
 
 ## Wo die Themen stehen, wenn du sie ändern willst
