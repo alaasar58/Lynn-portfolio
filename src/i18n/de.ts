@@ -103,11 +103,12 @@ export const de: Dictionary = {
     men: 'Männer und andere',
     genderNote: 'Aus den Instagram-Insights, gerundet.',
     ageTitle: 'Alter',
-    ageValue: 'Meist zwischen 18 und 35',
+    ageValue: '80 % zwischen 19 und 34',
     ageScale: ['13', '25', '35', '45', '65+'],
-    ageNote: 'Das ist die Spanne, in der meine Zielgruppe liegt. Feiner habe ich es nicht ausgewertet, und raten möchte ich nicht.',
+    ageNote:
+      'Das ist mit Abstand die größte Gruppe bei mir. Feiner als das habe ich es nicht ausgewertet, und die restlichen 20 % möchte ich nicht raten.',
     reachTitle: 'Wo sie sind',
-    regions: ['Deutschland', 'Arabischsprachige Länder'],
+    regions: ['Deutschland', 'Frankreich', 'Arabischsprachige Länder'],
     reachNote: 'Prozente pro Land auf Anfrage.',
     pendingTitle: 'Auf Anfrage',
     pendingLede:

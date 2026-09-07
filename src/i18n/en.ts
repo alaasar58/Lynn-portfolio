@@ -120,12 +120,13 @@ export const en = {
     men: 'Men and other',
     genderNote: 'From Instagram Insights, rounded.',
     ageTitle: 'Age',
-    ageValue: 'Mostly 18 to 35',
+    ageValue: '80% between 19 and 34',
     /* Tick labels under the age band. Numerals, but still on-screen text. */
     ageScale: ['13', '25', '35', '45', '65+'],
-    ageNote: 'The band my audience sits in. I have not broken it down further, so I am not going to guess at brackets.',
+    ageNote:
+      'By far the largest group I have. I have not broken it down finer than that, and I am not going to guess at the other 20%.',
     reachTitle: 'Where they are',
-    regions: ['Germany', 'Arabic-speaking countries'],
+    regions: ['Germany', 'France', 'Arabic-speaking countries'],
     reachNote: 'Country-level percentages on request.',
     /** Heading over the metrics that have no verified figure yet. */
     pendingTitle: 'Available on request',

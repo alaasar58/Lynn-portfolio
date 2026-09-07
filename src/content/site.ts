@@ -111,8 +111,8 @@ export const moments = [
  * =============================================================================
  */
 export const socialStats = {
-  instagramFollowers: 27200,
-  tiktokFollowers: 1200,
+  instagramFollowers: 27925,
+  tiktokFollowers: 1356,
 }
 
 /*
@@ -130,9 +130,23 @@ export const socialStats = {
  */
 export const audienceFacts = {
   /** Share of the audience that is women, from Instagram Insights. Rounded. */
-  womenPercent: 98,
-  /** Month the follower counts and the split above were last read off Insights. */
-  updated: '2026-08',
+  womenPercent: 91,
+
+  /*
+   * The age band, and how much of the audience sits inside it.
+   *
+   * These three numbers draw the marker on the age scale — the component works
+   * out where it starts and how wide it is, so changing the band here moves the
+   * bar and nothing has to be measured by hand. The scale it is drawn against
+   * is `audience.ageScale` in the dictionaries; keep the two in step.
+   */
+  ageFrom: 19,
+  ageTo: 34,
+  /** Share of the audience inside that band. From Instagram Insights. */
+  ageSharePercent: 80,
+
+  /** Month the figures above were last read off Insights. */
+  updated: '2026-09',
 }
 
 /** Section anchors. Labels come from `nav` in the dictionaries. */

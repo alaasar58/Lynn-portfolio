@@ -54,6 +54,24 @@ export function Audience() {
   const women = audienceFacts.womenPercent
   const others = 100 - women
 
+  /*
+   * Where the age marker sits, worked out from the numbers rather than measured
+   * by hand. The scale under it is `ageScale` in the dictionaries: five evenly
+   * spaced marks, so each gap is a quarter of the width. `at` finds an age's
+   * position by interpolating inside whichever gap it falls in — which is what
+   * keeps the bar honest when the band changes, instead of leaving a marker
+   * drawn for last month's numbers.
+   */
+  const ticks = t.audience.ageScale.map((tick) => Number.parseInt(tick, 10))
+  const at = (age: number) => {
+    const last = ticks.length - 1
+    const i = Math.min(Math.max(ticks.findIndex((tick) => age <= tick) - 1, 0), last - 1)
+    const share = (age - ticks[i]) / (ticks[i + 1] - ticks[i])
+    return ((i + Math.min(Math.max(share, 0), 1)) / last) * 100
+  }
+  const ageStart = at(audienceFacts.ageFrom)
+  const ageWidth = at(audienceFacts.ageTo) - ageStart
+
   const followers = [
     { label: t.audience.instagram, count: socialStats.instagramFollowers },
     { label: t.audience.tiktok, count: socialStats.tiktokFollowers },
@@ -90,7 +108,7 @@ export function Audience() {
               </p>
             </div>
 
-            {/* One bar, two parts. A pie chart for a 98/2 split is decoration. */}
+            {/* One bar, two parts. A pie chart for a split this lopsided is decoration. */}
             <div
               className="mt-4 flex h-2 w-full overflow-hidden rounded-full bg-sand-deep"
               role="img"
@@ -118,9 +136,7 @@ export function Audience() {
                 <span
                   aria-hidden="true"
                   className="absolute inset-y-0 rounded-full bg-blush-deep"
-                  /* The scale below is five evenly spaced marks: 13, 25, 35,
-                     45, 65+. 18 falls at ~13% of that width and 35 at 50%. */
-                  style={{ insetInlineStart: '13%', width: '37%' }}
+                  style={{ insetInlineStart: `${ageStart}%`, width: `${ageWidth}%` }}
                 />
               </div>
               <div className="mt-2 flex justify-between text-[0.68rem] text-ink-muted">
