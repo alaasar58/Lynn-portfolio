@@ -256,6 +256,13 @@ export const reelUrl = (code: string) => `https://www.instagram.com/reel/${code}
  *
  *     { name: 'Your Brand', logo: '/media/brands/your-brand.svg', color: '#0a7b3c' },
  *
+ * `scale` is optical sizing, and it is the reason it exists at all: these marks
+ * have wildly different shapes — a tall bear at 0.77 wide-to-high, a wordmark at
+ * 4.38, a framed label at 1.50 — and a box that fits each one exactly makes the
+ * wide one look enormous and the tall one look tiny. There is no formula for
+ * "same size" across shapes like these; the numbers below were set by eye until
+ * the four read as equals. 1 means untouched.
+ *
  * `color` is that brand's own colour, and it is what the tile lights up in
  * when the pointer is over it — the logo comes out of grey into full colour and
  * the cell takes a soft glow in the same tone. Leave it out and the tile uses
@@ -269,6 +276,8 @@ export const reelUrl = (code: string) => `https://www.instagram.com/reel/${code}
 export type Brand = {
   name: string
   logo?: string
+  /** Optical size correction, around 1. See the note above. */
+  scale?: number
   /** The brand's own colour, e.g. '#0a7b3c'. Used for the hover glow. */
   color?: string
   href?: string
@@ -293,18 +302,21 @@ export const brands: Brand[] = [
   {
     name: 'JBØRN',
     logo: '/media/brands/jborn.png',
+    scale: 1.1,
     color: '#8e6f68',
     href: 'https://j-born.eu/de',
   },
   {
     name: 'Moonkie',
     logo: '/media/brands/moonkie.png',
+    scale: 0.7,
     color: '#4b4b4b',
     href: 'https://moonkie.de',
   },
   {
     name: 'StadtBäckerei Schacht',
     logo: '/media/brands/schacht.png',
+    scale: 0.82,
     color: '#84b52d',
     href: 'https://www.stadtbaeckerei-schacht.de/',
   },

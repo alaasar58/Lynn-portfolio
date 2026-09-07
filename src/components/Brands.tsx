@@ -70,26 +70,34 @@ function BrandCell({ brand }: { brand: Brand }) {
     '--brand': brand.color ?? 'var(--color-blush-deep)',
   } as CSSProperties
 
-  const inner = brand.logo ? (
-    <img
-      src={asset(brand.logo)}
-      alt={brand.name}
-      loading="lazy"
-      decoding="async"
-      /*
-       * Both dimensions are capped, not just the height. The three marks are a
-       * square bear, a wide wordmark and a small framed label — cap the height
-       * alone and the wide one runs off across the cell while the square one
-       * shrinks to a stamp. Bounding the box instead lets each fill it as far
-       * as its own shape allows, which is what makes a mixed set look evenly
-       * weighted rather than sorted by luck of proportion.
-       */
-      className="max-h-24 w-auto max-w-[78%] transition-transform duration-500 ease-[var(--ease-soft)] group-hover:scale-[1.04] group-focus-visible:scale-[1.04]"
-    />
-  ) : (
-    <span className="text-center font-display text-lg leading-snug text-ink-soft transition-colors duration-500 group-hover:text-[var(--brand)] group-focus-visible:text-[var(--brand)] sm:text-xl">
-      {brand.name}
-    </span>
+  /*
+   * Every mark gets the same box, and `object-contain` fits it inside without
+   * distorting it. The box is what makes four different shapes sit on one
+   * baseline at one size; `scale` then corrects what the box alone cannot —
+   * see the note in src/content/site.ts.
+   */
+  const inner = (
+    <div className="flex h-20 w-full items-center justify-center">
+      {brand.logo ? (
+        <img
+          src={asset(brand.logo)}
+          alt={brand.name}
+          loading="lazy"
+          decoding="async"
+          /* The base size is a variable rather than an inline transform, so the
+             hover lift can multiply it instead of replacing it — an inline
+             transform beats the class and would kill the hover entirely. */
+          style={{ '--logo-scale': brand.scale ?? 1 } as CSSProperties}
+          className="max-h-full max-w-full scale-[var(--logo-scale)] object-contain transition-transform duration-500 ease-[var(--ease-soft)] group-hover:scale-[calc(var(--logo-scale)*1.04)] group-focus-visible:scale-[calc(var(--logo-scale)*1.04)]"
+        />
+      ) : (
+        /* No logo yet. The name is set at the size a logo would occupy, so the
+           tile carries the same weight as the ones beside it. */
+        <span className="text-center font-display text-xl leading-snug text-ink-soft transition-colors duration-500 group-hover:text-[var(--brand)] group-focus-visible:text-[var(--brand)] sm:text-2xl">
+          {brand.name}
+        </span>
+      )}
+    </div>
   )
 
   /*
